@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ credentials: true, origin: "http://localhost:5000" })),
+app.use(cors()), //{ credentials: true, origin: "http://localhost:5000" }
   app.get("/api/keys/paypal", (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || "sb");
   });
