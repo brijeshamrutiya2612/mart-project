@@ -14,6 +14,7 @@ import sellerOrderRouter from "./routes/SellerOrderRoute";
 import bodyParser from "body-parser";
 
 dotenv.config();
+app.use(cors()),
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -28,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors()),
   app.get("/api/keys/paypal", (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || "sb");
   });
