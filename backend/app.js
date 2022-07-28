@@ -2,7 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import router from "./routes/user-routes";
-import cors from "cors";
+import cors from "cors"
 import prodRouter from "./routes/products-routes";
 import productRouter from "./routes/userProducts-routes";
 import path from "path";
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ credentials: true, origin: "https://mart-app.herokuapp.com/" })),
+app.use(cors()),
   app.get("/api/keys/paypal", (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || "sb");
   });
