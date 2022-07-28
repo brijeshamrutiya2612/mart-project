@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "monospace",
 }
 
 .App-logo {
@@ -12,7 +13,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.site-container{
+  min-height: 100vh;
+}
+main{
+  flex: 1;
+}
+.btn-c{
+  background-color: #BFD3E2;
+  color: #000000;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -36,3 +46,4 @@
     transform: rotate(360deg);
   }
 }
+
