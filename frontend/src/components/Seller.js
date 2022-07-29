@@ -83,7 +83,7 @@ function Seller() {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id,dispatch]);
 
   const [student, setStudents] = useState([]);
   const [all, setAll] = useState([]);
@@ -438,7 +438,7 @@ function Seller() {
                                       .map((val, i) => {
                                         return (
                                           <>
-                                            {val ? (
+                                            {val = 1 ? (
                                               <>
                                                 <div key={i} className="p-4">
                                                   {user
@@ -571,11 +571,19 @@ function Seller() {
                                                               color: "black",
                                                             }}
                                                           >
+                                                            <Rating
+                                                              ratingValue={
+                                                                val.rating * 20
+                                                              }
+                                                              size={15}
+                                                            ></Rating>
                                                             <Card.Title
                                                               style={{
                                                                 textAlign:
                                                                   "center",
                                                                 color: "black",
+                                                                fontSize:
+                                                                  "20px",
                                                               }}
                                                             >
                                                               {val.itemName.substring(
@@ -593,15 +601,6 @@ function Seller() {
                                                               &#x20B9;{" "}
                                                               {val.itemPrice}
                                                             </Card.Title>
-                                                            <Card.Text
-                                                              style={{
-                                                                textAlign:
-                                                                  "center",
-                                                                color: "black",
-                                                              }}
-                                                            >
-                                                              {val.itemCategory.toUpperCase()}
-                                                            </Card.Text>
                                                             <Button
                                                               className="btn-sm btn-c"
                                                               variant="dark"
@@ -688,10 +687,17 @@ function Seller() {
                                                           color: "black",
                                                         }}
                                                       >
+                                                        <Rating
+                                                          ratingValue={
+                                                            val.rating * 20
+                                                          }
+                                                          size={15}
+                                                        ></Rating>
                                                         <Card.Title
                                                           style={{
                                                             textAlign: "center",
                                                             color: "black",
+                                                            fontSize: "20px",
                                                           }}
                                                         >
                                                           {val.itemName.substring(
@@ -708,14 +714,7 @@ function Seller() {
                                                           &#x20B9;{" "}
                                                           {val.itemPrice}
                                                         </Card.Title>
-                                                        <Card.Text
-                                                          style={{
-                                                            textAlign: "center",
-                                                            color: "black",
-                                                          }}
-                                                        >
-                                                          {val.itemCategory.toUpperCase()}
-                                                        </Card.Text>
+
                                                         <Button
                                                           className="btn-sm btn-c"
                                                           variant="dark"
