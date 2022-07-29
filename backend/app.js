@@ -16,9 +16,12 @@ import bodyParser from "body-parser";
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    `mongodb+srv://brijesh:brijesh@cluster0.qe9bgqk.mongodb.net/eCommerse?retryWrites=true&w=majority`
+  )
   .then(() => {
-    console.log(`Database is Connected! Listening to localhost 5000`);
+    app.listen(5000);
+    console.log("Database is Connected! Listening to localhost 5000");
   })
   .catch((err) => console.log(err));
 
@@ -50,7 +53,4 @@ app.use((err, req, res, next) => {
   res.status(500).send({ mesage: err.message });
 });
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`serve at http://localhost:${port}`);
-});
+

@@ -33,6 +33,8 @@ import SellerHome from "./Seller/SellerHome";
 import SellerProducts from "./Seller/SellerProducts";
 import SellerEditProducts from "./Seller/SellerEditProducts";
 import SellerManageOrder from "./Seller/SellerManageOrder";
+import Display from "./Display/Display";
+import Props from "./Display/Props";
 
 function App() {
   const { state } = useContext(Store);
@@ -80,6 +82,8 @@ function App() {
               }
             ></Route>
             <Route path="/Seller/:id" element={<Seller />}></Route>
+            <Route path="/display" element={<Display />}></Route>
+            <Route path="/props" element={<Props />}></Route>
             <Route path="/Admin" element={<Admin />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route

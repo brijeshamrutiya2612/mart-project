@@ -260,7 +260,7 @@ function Seller() {
 
                                     <div
                                       key={getProd._id}
-                                      className="col justify-content-center"
+                                      className="col pt-5 justify-content-center"
                                     >
                                       <h2>
                                         <u>{getProd.itemName}</u>
