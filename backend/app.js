@@ -20,7 +20,6 @@ mongoose
     `mongodb+srv://brijesh:brijesh@cluster0.qe9bgqk.mongodb.net/eCommerse?retryWrites=true&w=majority`
   )
   .then(() => {
-    app.listen(5000);
     console.log("Database is Connected! Listening to localhost 5000");
   })
   .catch((err) => console.log(err));
@@ -54,3 +53,6 @@ app.use((err, req, res, next) => {
 });
 
 
+app.listen(process.env.PORT || 5000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
