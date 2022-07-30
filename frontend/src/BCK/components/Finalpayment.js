@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../store/Context";
 import CheckOutSteps from "./CheckOutSteps";
 import { toast } from "react-toastify";
-import Axios from "axios";
+import axios from "axios";
 import { Helmet } from "react-helmet";
 
 const reducer = (state, action) => {
@@ -48,11 +48,11 @@ function Finalpayment() {
     }
   }, [paymentMethod, navigate]);
 
+  
   const handleSubmit = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
-      const { data } = await Axios.post(
-        "http://localhost:5000/api/orders",
+      const { data } = await axios.post("http://localhost:5000/api/products/orders",
         {
           orderItems: cartItems,
           shippingAddress: shippingAddress,
@@ -68,13 +68,30 @@ function Finalpayment() {
           },
         }
       );
+      // const { sellerData } = await axios.post(
+      //   "http://localhost:5000/api/sellerorders",
+      //   {
+      //     orderItems: cartItems,
+      //     shippingAddress: shippingAddress,
+      //     paymentMethod: paymentMethod,
+      //     itemPrice: cartItems.itemPrice,
+      //     shippingPrice: cartItems.shippingPrice,
+      //     taxPrice: cartItems.taxPrice,
+      //     totalPrice: cartItems.totalPrice,
+      //   },
+      //   {
+      //     headers: {
+      //       authorization: `Bearer ${userInfo.token}`,
+      //     },
+      //   }
+      // );
       ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREATE_SUCCESS" });
       localStorage.removeItem("cartItems");
       navigate(`/order/${data.order._id}`);
     } catch (err) {
+      toast.error("Some Error");
       dispatch({ type: "CREATE_FAIL" });
-      toast.error(err);
     }
   };
 

@@ -83,7 +83,7 @@ function Seller() {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, dispatch]);
 
   const [student, setStudents] = useState([]);
   const [all, setAll] = useState([]);
@@ -223,8 +223,8 @@ function Seller() {
                         height: "auto",
                       }}
                     >
-                      <div style={{ marginTop: "4em" }} />
-                      <div className="my-4 mt-3">
+                      <div style={{ marginTop: "0em" }} />
+                      <div className="my-4 mt-1">
                         <div>
                           <div className="container col-lg-12 mt-5">
                             {search == "" ? (
@@ -233,7 +233,7 @@ function Seller() {
                                   className="container d-flex"
                                   style={{
                                     backgroundColor: "white",
-                                    paddingTop: "8em",
+                                    paddingTop: "5em",
                                   }}
                                 >
                                   <div className="row">
@@ -260,7 +260,7 @@ function Seller() {
 
                                     <div
                                       key={getProd._id}
-                                      className="col justify-content-center"
+                                      className="col pt-5 justify-content-center"
                                     >
                                       <h2>
                                         <u>{getProd.itemName}</u>
@@ -438,33 +438,10 @@ function Seller() {
                                       .map((val, i) => {
                                         return (
                                           <>
-                                            {val ? (
-                                              <>
-                                                <div key={i} className="p-4">
-                                                  {user
-                                                    .filter((t) => {
-                                                      if (t._id === val.user) {
-                                                        return t;
-                                                      }
-                                                    })
-                                                    .map((g, i) => {
-                                                      return (
-                                                        <Avatar
-                                                          key={i}
-                                                          className="mr-2"
-                                                          sx={{
-                                                            background: "black",
-                                                            float: "left",
-                                                          }}
-                                                          alt={g.firstname}
-                                                          src="/static/images/avatar/2.jpg"
-                                                        />
-                                                      );
-                                                    })}
-                                                  <Typography
-                                                    className="p-1"
-                                                    variant="h6"
-                                                  >
+                                            {
+                                              val ? (
+                                                <>
+                                                  <div key={i} className="p-4">
                                                     {user
                                                       .filter((t) => {
                                                         if (
@@ -473,28 +450,56 @@ function Seller() {
                                                           return t;
                                                         }
                                                       })
-                                                      .map((g) => {
+                                                      .map((g, i) => {
                                                         return (
-                                                          g.firstname +
-                                                          " " +
-                                                          g.lastname
+                                                          <Avatar
+                                                            key={i}
+                                                            className="mr-2"
+                                                            sx={{
+                                                              background:
+                                                                "black",
+                                                              float: "left",
+                                                            }}
+                                                            alt={g.firstname}
+                                                            src="/static/images/avatar/2.jpg"
+                                                          />
                                                         );
                                                       })}
-                                                  </Typography>
-                                                  <Rating
-                                                    ratingValue={
-                                                      val.rating * 20
-                                                    }
-                                                    size="20"
-                                                  />
-                                                  <Typography className="p-1">
-                                                    {val.comment}
-                                                  </Typography>
-                                                </div>
-                                              </>
-                                            ) : (
-                                              "No Coustomer Review Yet"
-                                            )}
+                                                    <Typography
+                                                      className="p-1"
+                                                      variant="h6"
+                                                    >
+                                                      {user
+                                                        .filter((t) => {
+                                                          if (
+                                                            t._id === val.user
+                                                          ) {
+                                                            return t;
+                                                          }
+                                                        })
+                                                        .map((g) => {
+                                                          return (
+                                                            g.firstname +
+                                                            " " +
+                                                            g.lastname
+                                                          );
+                                                        })}
+                                                    </Typography>
+                                                    <Rating
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      size="20"
+                                                    />
+                                                    <Typography className="p-1">
+                                                      {val.comment}
+                                                    </Typography>
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                "No Coustomer Review Yet"
+                                              )
+                                            }
                                           </>
                                         );
                                       })}
@@ -571,11 +576,19 @@ function Seller() {
                                                               color: "black",
                                                             }}
                                                           >
+                                                            <Rating
+                                                              ratingValue={
+                                                                val.rating * 20
+                                                              }
+                                                              size={15}
+                                                            ></Rating>
                                                             <Card.Title
                                                               style={{
                                                                 textAlign:
                                                                   "center",
                                                                 color: "black",
+                                                                fontSize:
+                                                                  "20px",
                                                               }}
                                                             >
                                                               {val.itemName.substring(
@@ -593,15 +606,6 @@ function Seller() {
                                                               &#x20B9;{" "}
                                                               {val.itemPrice}
                                                             </Card.Title>
-                                                            <Card.Text
-                                                              style={{
-                                                                textAlign:
-                                                                  "center",
-                                                                color: "black",
-                                                              }}
-                                                            >
-                                                              {val.itemCategory.toUpperCase()}
-                                                            </Card.Text>
                                                             <Button
                                                               className="btn-sm btn-c"
                                                               variant="dark"
@@ -641,7 +645,6 @@ function Seller() {
                                             <Link to={`/Seller/${val._id}`}>
                                               <Card
                                                 className="card card-item"
-                                                key={i}
                                                 style={{
                                                   overflow: "hidden",
                                                   width: "250px",
@@ -688,10 +691,17 @@ function Seller() {
                                                           color: "black",
                                                         }}
                                                       >
+                                                        <Rating
+                                                          ratingValue={
+                                                            val.rating * 20
+                                                          }
+                                                          size={15}
+                                                        ></Rating>
                                                         <Card.Title
                                                           style={{
                                                             textAlign: "center",
                                                             color: "black",
+                                                            fontSize: "20px",
                                                           }}
                                                         >
                                                           {val.itemName.substring(
@@ -708,14 +718,7 @@ function Seller() {
                                                           &#x20B9;{" "}
                                                           {val.itemPrice}
                                                         </Card.Title>
-                                                        <Card.Text
-                                                          style={{
-                                                            textAlign: "center",
-                                                            color: "black",
-                                                          }}
-                                                        >
-                                                          {val.itemCategory.toUpperCase()}
-                                                        </Card.Text>
+
                                                         <Button
                                                           className="btn-sm btn-c"
                                                           variant="dark"
@@ -763,14 +766,13 @@ function Seller() {
                                       <>
                                         {val ? (
                                           <>
-                                            <div className="col-lg-15 ml-5 my-3 d-flex justify-content-center">
-                                              <Link
-                                                key={i}
-                                                to={`/Seller/${val._id}`}
-                                              >
+                                            <div
+                                              key={i}
+                                              className="col-lg-15 ml-5 my-3 d-flex justify-content-center"
+                                            >
+                                              <Link to={`/Seller/${val._id}`}>
                                                 <Card
                                                   className="card card-item"
-                                                  key={i}
                                                   style={{
                                                     overflow: "hidden",
                                                     width: "250px",

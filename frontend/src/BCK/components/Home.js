@@ -12,7 +12,9 @@ import {
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 import { AppBar, Typography } from "@mui/material";
-import {Helmet} from "react-helmet"
+import { Helmet } from "react-helmet";
+import { Rating } from "react-simple-star-rating";
+import Display from "../Display/Display";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -27,7 +29,7 @@ const reducer = (state, action) => {
   }
 };
 
-function Home() {
+function Home(props) {
   const [{ loading, error, getProd }, dispatch] = useReducer(reducer, {
     getProd: [],
     loading: true,
@@ -35,12 +37,15 @@ function Home() {
   });
   const [search, setSearch] = useState([]);
   const [index, setIndex] = useState(0);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get(
+          "http://localhost:5000/api/products",
+          {}
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
@@ -58,11 +63,11 @@ function Home() {
     console.log(search);
     setSearch("");
   };
- 
+
   return (
     <>
       <div>
-      <Helmet>
+        <Helmet>
           <title>Welcome to MART</title>
         </Helmet>
         {loading ? (
@@ -102,11 +107,12 @@ function Home() {
                     </div>
                   </div>
                 </AppBar>
-                <div style={{marginTop:"7em"}}/>
+                <div style={{ marginTop: "7em" }} />
                 <div className="my-4 mt-3">
                   <div>
                     <div className="container col-lg-12 mt-5">
-                      {search == "" ? (
+                    
+                    {search == "" ? (
                         <>
                           <Carousel
                             fade
@@ -133,8 +139,7 @@ function Home() {
                                     <Carousel.Caption
                                       style={{ color: "black" }}
                                     >
-                                      <h3>{item.itemName}</h3>
-                                      <h3>{item.itemCategory.toUpperCase()}</h3>
+                                      <h3 style={{fontSize:"20px"}}>{item.itemName}</h3>
                                     </Carousel.Caption>
                                   </Link>
                                 </Carousel.Item>
@@ -212,10 +217,12 @@ function Home() {
                                                     color: "black",
                                                   }}
                                                 >
+                                                  <Rating ratingValue={val.rating * 20} size={15}></Rating>
                                                   <Card.Title
                                                     style={{
                                                       textAlign: "center",
                                                       color: "black",
+                                                      fontSize:"20px"
                                                     }}
                                                   >
                                                     {val.itemName.substring(
@@ -231,19 +238,11 @@ function Home() {
                                                   >
                                                     &#x20B9; {val.itemPrice}
                                                   </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    {val.itemCategory.toUpperCase()}
-                                                  </Card.Text>
                                                   <Button
                                                     className="btn-sm btn-c"
                                                     variant="dark"
                                                   >
-                                                    Shop now &#x2192;
+                                                    <strong>Shop now</strong> &#x2192;
                                                   </Button>
                                                 </Card.Body>
                                               </Col>
@@ -327,6 +326,7 @@ function Home() {
                                                     color: "black",
                                                   }}
                                                 >
+                                                  <Rating ratingValue={val.rating * 20} size={15}></Rating>
                                                   <Card.Title
                                                     style={{
                                                       textAlign: "center",
@@ -346,14 +346,6 @@ function Home() {
                                                   >
                                                     &#x20B9; {val.itemPrice}
                                                   </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    {val.itemCategory.toUpperCase()}
-                                                  </Card.Text>
                                                   <Button
                                                     className="btn-sm btn-c"
                                                     variant="dark"
@@ -442,6 +434,7 @@ function Home() {
                                                     color: "black",
                                                   }}
                                                 >
+                                                  <Rating ratingValue={val.rating * 20} size={15}></Rating>
                                                   <Card.Title
                                                     style={{
                                                       textAlign: "center",
@@ -461,14 +454,6 @@ function Home() {
                                                   >
                                                     &#x20B9; {val.itemPrice}
                                                   </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    {val.itemCategory.toUpperCase()}
-                                                  </Card.Text>
                                                   <Button
                                                     className="btn-sm btn-c"
                                                     variant="dark"
@@ -557,6 +542,7 @@ function Home() {
                                                     color: "black",
                                                   }}
                                                 >
+                                                  <Rating ratingValue={val.rating * 20} size={15}></Rating>
                                                   <Card.Title
                                                     style={{
                                                       textAlign: "center",
@@ -576,14 +562,6 @@ function Home() {
                                                   >
                                                     &#x20B9; {val.itemPrice}
                                                   </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    {val.itemCategory.toUpperCase()}
-                                                  </Card.Text>
                                                   <Button
                                                     className="btn-sm btn-c"
                                                     variant="dark"
@@ -672,6 +650,7 @@ function Home() {
                                                     color: "black",
                                                   }}
                                                 >
+                                                  <Rating ratingValue={val.rating * 20} size={15}></Rating>
                                                   <Card.Title
                                                     style={{
                                                       textAlign: "center",
@@ -691,14 +670,6 @@ function Home() {
                                                   >
                                                     &#x20B9; {val.itemPrice}
                                                   </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    {val.itemCategory.toUpperCase()}
-                                                  </Card.Text>
                                                   <Button
                                                     className="btn-sm btn-c"
                                                     variant="dark"
@@ -787,6 +758,7 @@ function Home() {
                                                     color: "black",
                                                   }}
                                                 >
+                                                  <Rating ratingValue={val.rating * 20} size={15}></Rating>
                                                   <Card.Title
                                                     style={{
                                                       textAlign: "center",
@@ -806,14 +778,6 @@ function Home() {
                                                   >
                                                     &#x20B9; {val.itemPrice}
                                                   </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    {val.itemCategory.toUpperCase()}
-                                                  </Card.Text>
                                                   <Button
                                                     className="btn-sm btn-c"
                                                     variant="dark"
@@ -833,7 +797,7 @@ function Home() {
                           </div>
                         </>
                       ) : (
-                        <div className="row" style={{ background: "#D8E4E6" }}>
+                        <div className="row">
                           {getProd
                             .filter((itm) => {
                               if (search == "") {
@@ -862,18 +826,18 @@ function Home() {
                                     <>
                                       <div className="col-lg-15 ml-5 my-3 d-flex justify-content-center">
                                         <Link key={i} to={`/Seller/${val._id}`}>
-                                          <Card
-                                            className="card card-item"
-                                            key={i}
-                                            style={{
-                                              overflow: "hidden",
-                                              width: "250px",
-                                              maxWidth: "500px",
-                                              background: "#FFFFFF",
-                                              transitionDuration: "1s",
-                                              border:"5px solid #557794"
-                                            }}
-                                          >
+                                        <Card
+                                          className="card card-item"
+                                          key={i}
+                                          style={{
+                                            overflow: "hidden",
+                                            width: "250px",
+                                            maxWidth: "500px",
+                                            background: "#FFFFFF",
+                                            transitionDuration: "1s",
+                                            border: "5px solid #BFD3E2",
+                                          }}
+                                        >
                                             <Container>
                                               <Row>
                                                 <Col
@@ -911,6 +875,7 @@ function Home() {
                                                       color: "black",
                                                     }}
                                                   >
+                                                    <Rating ratingValue={val.rating * 20} size={20}>{val.rating}</Rating>
                                                     <Card.Title
                                                       style={{
                                                         textAlign: "center",
@@ -930,14 +895,6 @@ function Home() {
                                                     >
                                                       &#x20B9; {val.itemPrice}
                                                     </Card.Title>
-                                                    <Card.Text
-                                                      style={{
-                                                        textAlign: "center",
-                                                        color: "black",
-                                                      }}
-                                                    >
-                                                      {val.itemCategory.toUpperCase()}
-                                                    </Card.Text>
                                                     <Button
                                                       className="btn-sm btn-c"
                                                       variant="dark"
@@ -964,6 +921,8 @@ function Home() {
                             })}
                         </div>
                       )}
+                      
+                    
                     </div>
                   </div>
                 </div>

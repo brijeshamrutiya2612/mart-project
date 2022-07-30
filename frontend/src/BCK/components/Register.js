@@ -102,9 +102,8 @@ const Register = () => {
       toast.error("Age is Require");
     }
     toast.success("Sucessfull Register");
-    localStorage.removeItem("cartItems")
     sendRequest().then(() => sign("/login"));
-    // localStorage.setItem("user", JSON.stringify(registers));
+    localStorage.setItem("user", JSON.stringify(registers));
   };
 
   return (

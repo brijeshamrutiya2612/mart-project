@@ -33,10 +33,12 @@ import SellerHome from "./Seller/SellerHome";
 import SellerProducts from "./Seller/SellerProducts";
 import SellerEditProducts from "./Seller/SellerEditProducts";
 import SellerManageOrder from "./Seller/SellerManageOrder";
+import Display from "./Display/Display";
+import Props from "./Display/Props";
 
 function App() {
   const { state } = useContext(Store);
-  const { userInfo,sellerInfo } = state;
+  const { userInfo, sellerInfo } = state;
   return (
     <React.Fragment>
       <div
@@ -44,7 +46,7 @@ function App() {
           margin: "auto",
         }}
       >
-        <ToastContainer position="top-center" limit={1}/>
+        <ToastContainer position="top-center" limit={1} />
         <header>
           <Container>
             <Header />
@@ -54,34 +56,85 @@ function App() {
           <Routes>
             <Route index path="/" element={<Home />}></Route>
             {userInfo && <Route index path="/" element={<Home />}></Route>}{" "}
-            {sellerInfo && <Route index path="/SellerHome" element={<SellerHome />}></Route>}{" "}
+            {sellerInfo && (
+              <Route index path="/SellerHome" element={<SellerHome />}></Route>
+            )}{" "}
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
-            <Route
-              path="/search"
-              element={<Search />}
-            ></Route>
+            <Route path="/search" element={<Search />}></Route>
             <Route path="/addToCart" element={<Addtocart />}></Route>
             <Route path="/Finalpayment" element={<Finalpayment />}></Route>
             <Route path="/shipping" element={<ShippingAddress />}></Route>
-            <Route path="/Payment" element={<ProtectedRouter><Payment /></ProtectedRouter>}></Route>
-            <Route path="/order/:id" element={<ProtectedRouter><OrderScreen /></ProtectedRouter>}></Route>
+            <Route
+              path="/Payment"
+              element={
+                <ProtectedRouter>
+                  <Payment />
+                </ProtectedRouter>
+              }
+            ></Route>
+            <Route
+              path="/order/:id"
+              element={
+                <ProtectedRouter>
+                  <OrderScreen />
+                </ProtectedRouter>
+              }
+            ></Route>
             <Route path="/Seller/:id" element={<Seller />}></Route>
+            <Route path="/display" element={<Display />}></Route>
+            <Route path="/props" element={<Props />}></Route>
             <Route path="/Admin" element={<Admin />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
-            <Route path="/NewSellerRegister" element={<NewSellerRegister />}></Route>
-            <Route path="/SellerAddProduct" element={<SellerAddProduct />}></Route>
+            <Route
+              path="/NewSellerRegister"
+              element={<NewSellerRegister />}
+            ></Route>
+            <Route
+              path="/SellerAddProduct"
+              element={<SellerAddProduct />}
+            ></Route>
             <Route path="/SellerProducts" element={<SellerProducts />}></Route>
-            <Route path="/SellerEditProducts/:id" element={<SellerEditProducts />}></Route>
+            <Route
+              path="/SellerEditProducts/:id"
+              element={<SellerEditProducts />}
+            ></Route>
             <Route path="/SellerHome" element={<SellerHome />}></Route>
-            <Route path="/SellerManageOrder" element={<SellerManageOrder />}></Route>
+            <Route
+              path="/SellerManageOrder"
+              element={<SellerManageOrder />}
+            ></Route>
             <Route path="/addproducts" element={<AddProducts />}></Route>
             <Route path="/productview" element={<ProductView />}></Route>
-            <Route path="/productAction/:id" element={<ProductAction />}></Route>
+            <Route
+              path="/productAction/:id"
+              element={<ProductAction />}
+            ></Route>
             <Route path="/user" element={<User />}></Route>
-            <Route path="/ud/:id" element={<ProtectedRouter><UserDashboard /></ProtectedRouter>}></Route>
-            <Route path="/user/:id" element={<ProtectedRouter><Userprofile /></ProtectedRouter>}></Route>
-            <Route path="/u_purchase/:id" element={<ProtectedRouter><UserPurchase /></ProtectedRouter>}></Route>
+            <Route
+              path="/ud/:id"
+              element={
+                <ProtectedRouter>
+                  <UserDashboard />
+                </ProtectedRouter>
+              }
+            ></Route>
+            <Route
+              path="/user/:id"
+              element={
+                <ProtectedRouter>
+                  <Userprofile />
+                </ProtectedRouter>
+              }
+            ></Route>
+            <Route
+              path="/u_purchase/:id"
+              element={
+                <ProtectedRouter>
+                  <UserPurchase />
+                </ProtectedRouter>
+              }
+            ></Route>
           </Routes>
         </main>
         <header>
