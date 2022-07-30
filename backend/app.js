@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import router from "./routes/user-routes";
 import cors from "cors"
 import prodRouter from "./routes/products-routes";
+import path from 'path'
 import productRouter from "./routes/userProducts-routes";
 import dotenv from 'dotenv'
 import orderRouter from "./routes/orderRoutes.js";
@@ -34,6 +35,11 @@ app.use("/api/orders", orderRouter);
 app.use("/api/sellerorders", sellerOrderRouter);
 app.use("/api/rating",  ratingRouter);
 
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.get('*', (req, res)=>
+res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+)
 app.unsubscribe((err, req, res, next)=>{
   res.status(500).send({mesage: err.message})
 })
