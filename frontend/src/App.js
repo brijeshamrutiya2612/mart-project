@@ -51,7 +51,6 @@ function App() {
           </Container>
         </header>
         <main className="pt-5">
-          <h1>Helo</h1>
           <Routes>
             <Route index path="/" element={<Home />}></Route>
             {userInfo && <Route index path="/" element={<Home />}></Route>}{" "}
