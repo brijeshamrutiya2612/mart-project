@@ -106,6 +106,64 @@ const Userdashboard = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              <Typography variant="h5" className="my-4">
+                  Orders Summary
+                </Typography>
+                <Paper sx={{ width: "100%", overflow: "hidden", mt: 5 }}>
+                    <TableContainer sx={{ maxHeight: 640 }}>
+                      <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                      <TableRow>
+                        <TableCell>#</TableCell>
+                        <TableCell>Product Name</TableCell>
+                        <TableCell>Price</TableCell>
+                        <TableCell>Date</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {orders.length !== 0 ? (
+                        orders.map((item, i) => {
+                          return (
+                            <TableRow
+                              style={{
+                                borderRight: "none",
+                              }}
+                            >
+                              <TableCell>{i + 1}</TableCell>
+                              {item.orderItems.map((itm) => {
+                                return (
+                                  <>
+                                    <TableRow>
+                                      <TableCell>{itm.itemName}</TableCell>
+                                    </TableRow>
+                                  </>
+                                );
+                              })}
+                              <TableCell>
+                                {Math.ceil(item.totalPrice)}
+                              </TableCell>
+                              <TableCell>{item.createdAt}</TableCell>
+                            </TableRow>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <TableRow>
+                            <TableCell colSpan={4}>
+                              <Typography
+                                variant="h6"
+                                style={{ textAlign: "center" }}
+                              >
+                                You have a no any Products Purchase Yet
+                              </Typography>
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                </Paper>
             </div>
           </Col>
         </Row>
