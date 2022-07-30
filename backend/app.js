@@ -20,7 +20,6 @@ app.use(bodyParser.json())
 app.use(express.urlencoded({extended:true}));
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000"} )),
-app.use(cors({ credentials: true, origin: "https://mart-app.herokuapp.com"} )),
 
 app.get('/api/keys/paypal', (req, res)=>{
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
