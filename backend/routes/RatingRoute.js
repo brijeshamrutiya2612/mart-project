@@ -1,7 +1,7 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
-import Rating from "../model/Rating";
-import { isAuth } from "../utils";
+import Rating from "../model/Rating.js";
+import { isAuth } from "../utils.js";
 
 const ratingRouter = express.Router();
 

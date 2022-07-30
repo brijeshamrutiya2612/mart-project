@@ -1,8 +1,8 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
-import { generateSellerToken } from "../utils";
-import Seller from "../model/Seller";
+import { generateSellerToken } from "../utils.js";
+import Seller from "../model/Seller.js";
 
 const SellerRoute = express.Router();
 

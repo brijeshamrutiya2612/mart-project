@@ -1,9 +1,9 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
-import { getUser, login, logout, signup } from "../controllers/user-controller";
-import User from "../model/User";
-import { generateToken, isAuth } from "../utils";
+import { getUser, login, logout, signup } from "../controllers/user-controller.js";
+import User from "../model/User.js";
+import { generateToken, isAuth } from "../utils.js";
 
 const router = express.Router();
 

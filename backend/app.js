@@ -1,16 +1,16 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-import router from "./routes/user-routes";
+import router from "./routes/user-routes.js";
 import cors from "cors"
-import prodRouter from "./routes/products-routes";
+import prodRouter from "./routes/products-routes.js";
 import path from 'path'
-import productRouter from "./routes/userProducts-routes";
+import productRouter from "./routes/userProducts-routes.js";
 import dotenv from 'dotenv'
 import orderRouter from "./routes/orderRoutes.js";
-import SellerRoute from "./routes/SellerRoute";
-import  ratingRouter from "./routes/RatingRoute";
-import sellerOrderRouter from "./routes/SellerOrderRoute";
+import SellerRoute from "./routes/SellerRoute.js";
+import  ratingRouter from "./routes/RatingRoute.js";
+import sellerOrderRouter from "./routes/SellerOrderRoute.js";
 import bodyParser from 'body-parser'
 
 dotenv.config();

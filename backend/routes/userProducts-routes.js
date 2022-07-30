@@ -5,7 +5,7 @@ import {
   getAllUserProduct,
   getByUserId,
   updateProducts,
-} from "../controllers/userProducts-controll";
+} from "../controllers/userProducts-controll.js";
 
 const productRouter = express.Router();
 

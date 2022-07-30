@@ -5,10 +5,10 @@ import {
   getAllProducts,
   getById,
   updateProducts,
-} from "../controllers/products-controllers";
+} from "../controllers/products-controllers.js";
 import expressAsyncHandler from "express-async-handler";
 import Products from "../model/Products.js";
-import { isAuth } from "../utils";
+import { isAuth } from "../utils.js";
 
 const prodRouter = express.Router();
 

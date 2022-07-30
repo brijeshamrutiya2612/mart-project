@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import User from "../model/User";
-import UserProduct from "../model/UserProduct";
+import User from "../model/User.js";
+import UserProduct from "../model/UserProduct.js";
 
 export const getAllUserProduct = async (req, res, next) => {
   let UserProducts;
