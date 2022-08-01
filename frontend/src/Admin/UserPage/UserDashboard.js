@@ -6,6 +6,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   Typography,
 } from "@mui/material";
@@ -31,13 +32,23 @@ function reducer(state, action) {
 const Userdashboard = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const navigate = useNavigate();
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
-  console.log(userInfo.token)
   useEffect(() => {
     const fetchdata = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -68,106 +79,133 @@ const Userdashboard = () => {
     padding: "2em",
     color: theme.palette.text.secondary,
   }));
-  console.log(orders);
   return (
     <>
-      <div className="my-5">
-        <Row>
-          <Col md={2}>
-            <SideBar></SideBar>
-          </Col>
-          <Col lg={10}>
-            <div className="col-lg-11">
-              <Typography variant="h4">Dashboard</Typography>
-              <Typography variant="h5" className="my-4">
-                Profile Summary
-              </Typography>
-              <TableContainer component={Paper} className="container">
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableBody>
-                    <TableRow
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell component="th" scope="row">
-                        <strong>
-                          {userInfo.firstname} {userInfo.lastname}
-                        </strong>
-                        <br />
-                        {userInfo.address1}
-                        <br />
-                        {userInfo.address2}
-                        <br />
-                        {userInfo.address3}
-                      </TableCell>
-                      <TableCell align="right"></TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <Typography variant="h5" className="my-4">
-                  Orders Summary
+      {loading ? (
+        <div className="container">
+          <Spinner animation="border" role="status"></Spinner>
+        </div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <div className="my-5">
+          <Row>
+            <Col md={2}>
+              <SideBar></SideBar>
+            </Col>
+            <Col lg={10}>
+              <div className="col-lg-11">
+                <Typography variant="h4">Dashboard</Typography>
+                <Typography variant="h5" className="my-4">
+                  Profile Summary
                 </Typography>
-                <Paper sx={{ width: "100%", overflow: "hidden", mt: 5 }}>
-                    <TableContainer sx={{ maxHeight: 640 }}>
-                      <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                      <TableRow>
-                        <TableCell>#</TableCell>
-                        <TableCell>Product Name</TableCell>
-                        <TableCell>Price</TableCell>
-                        <TableCell>Date</TableCell>
-                      </TableRow>
-                    </TableHead>
+                <TableContainer component={Paper} className="container">
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableBody>
-                      {orders.length !== 0 ? (
-                        orders.map((item, i) => {
-                          return (
-                            <TableRow
-                              style={{
-                                borderRight: "none",
-                              }}
-                            >
-                              <TableCell>{i + 1}</TableCell>
-                              {item.orderItems.map((itm) => {
-                                return (
-                                  <>
-                                    <TableRow>
-                                      <TableCell>{itm.itemName}</TableCell>
-                                    </TableRow>
-                                  </>
-                                );
-                              })}
-                              <TableCell>
-                                {Math.ceil(item.totalPrice)}
-                              </TableCell>
-                              <TableCell>{item.createdAt}</TableCell>
-                            </TableRow>
-                          );
-                        })
-                      ) : (
-                        <>
-                          <TableRow>
-                            <TableCell colSpan={4}>
-                              <Typography
-                                variant="h6"
-                                style={{ textAlign: "center" }}
-                              >
-                                You have a no any Products Purchase Yet
-                              </Typography>
-                            </TableCell>
-                          </TableRow>
-                        </>
-                      )}
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          <strong>
+                            {userInfo.firstname} {userInfo.lastname}
+                          </strong>
+                          <br />
+                          {userInfo.address1}
+                          <br />
+                          {userInfo.address2}
+                          <br />
+                          {userInfo.address3}
+                        </TableCell>
+                        <TableCell align="right"></TableCell>
+                      </TableRow>
                     </TableBody>
                   </Table>
                 </TableContainer>
+                <Typography variant="h5" className="my-4">
+                  Orders Summary
+                </Typography>
+                <Paper sx={{ width: "100%", overflow: "hidden", mt: 5 }}>
+                  <TableContainer sx={{ maxHeight: 640 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>#</TableCell>
+                          <TableCell colSpan={2}>Products Brief</TableCell>
+                          <TableCell>Product Price</TableCell>
+                        </TableRow>
+                      </TableHead>
+                        <TableBody>
+                          {orders
+                            .slice(
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
+                            .map((row, i) => {
+                              return (
+                                <>
+                                    {row.orderItems.map((item, i) => {
+                                      return (
+                                        <>
+                                          <TableRow>
+                                          <TableCell
+                                              style={{ borderBottom: "none" }}
+                                            >{i+1}</TableCell>
+                                          
+                                            <TableCell
+                                              style={{ borderBottom: "none" }}
+                                            >
+                                              <img
+                                                style={{
+                                                  width: "100px",
+                                                }}
+                                                src={item.image}
+                                              />
+                                            </TableCell>
+                                            <TableCell
+                                                style={{
+                                                  borderBottom: "none",
+                                                }}
+                                              >
+                                                <Typography>
+                                                  {item.itemName}
+                                                </Typography>
+                                              </TableCell>
+                                              <TableCell
+                                                style={{
+                                                  borderBottom: "none",
+                                                }}
+                                              >
+                                                <Typography>
+                                                  &#x20B9; {item.itemPrice}
+                                                </Typography>
+                                              </TableCell>
+                                          </TableRow>
+                                        </>
+                                      );
+                                    })}
+                                 </>
+                              );
+                            })}
+                        </TableBody>
+                    </Table>
+                  </TableContainer>
+                  <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={orders.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                  />
                 </Paper>
-            </div>
-          </Col>
-        </Row>
-      </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      )}
     </>
   );
 };

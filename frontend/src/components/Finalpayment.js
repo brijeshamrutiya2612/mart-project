@@ -157,7 +157,7 @@ function Finalpayment() {
                           <span className="mx-2">{item.quantity}</span>
                         </td>
                         <td style={{ textAlign: "right" }}>
-                          ${item.itemPrice * item.quantity}
+                        &#x20B9; {item.itemPrice * item.quantity}
                         </td>
                       </tr>
                     );

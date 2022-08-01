@@ -30,25 +30,26 @@ function Footer() {
           <Container>
             <Navbar.Brand className="container d-flex justify-content-center">
               <ShoppingBag
-                sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+                sx={{ display: { xs: "none", md: "flex", color:"#FFFFFF" }, mr: 1 }}
               />
               <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                MART
-              </Typography>
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+              color:"#FFFFFF"
+            }}
+          >
+            MART
+          </Typography>
             </Navbar.Brand>
           </Container>
         </Navbar>

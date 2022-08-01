@@ -103,7 +103,7 @@ const Login = () => {
               }}
             >
               <h2 className="container text-center" variant="contained">
-                <ShoppingBag style={{ fontSize: "50px", color: "#14657C" }} />
+                <ShoppingBag style={{ fontSize: "50px", color: "#48657c" }} />
               </h2>
               <h2 className="container my-4 text-center">Sign In</h2>
 
@@ -133,7 +133,7 @@ const Login = () => {
                   <Button
                     className="container col-md-11 justify-content-center"
                     variant="contained"
-                    style={{ backgroundColor: "#14657C" }}
+                    style={{ backgroundColor: "#557794" }}
                     onClick={handleSubmit}
                   >
                     LOGIN
@@ -141,13 +141,13 @@ const Login = () => {
                 </div>
                 <p>
                   Not a member?{" "}
-                  <Link to={`/register?redirect=${redirect}`}>
+                  <Link to={`/register?redirect=${redirect}`} style={{color:"#48657c"}}>
                     Create Your Account
                   </Link>
                 </p>
                 <p>
                   You want sell your Product?{" "}
-                  <Link to={`/NewSellerRegister?redirect=${redirect}`}>
+                  <Link to={`/NewSellerRegister?redirect=${redirect}`} style={{color:"#48657c"}}>
                     Create Seller Account
                   </Link>
                 </p>

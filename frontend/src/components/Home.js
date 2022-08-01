@@ -154,7 +154,7 @@ function Home() {
                           <div className="row">
                             {getProd
                               .filter((itm) => {
-                                if (itm.itemCategory === "men's clothing") {
+                                if (itm.itemCategory === "men") {
                                   return itm;
                                 }
                               })
@@ -267,7 +267,7 @@ function Home() {
                           <div className="row">
                             {getProd
                               .filter((itm) => {
-                                if (itm.itemCategory === "women's clothing") {
+                                if (itm.itemCategory === "women") {
                                   return itm;
                                 }
                               })

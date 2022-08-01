@@ -136,9 +136,7 @@ const OrderScreen = () => {
     }
   }, [order, userInfo, orderId, navigate, paypalDispatch, successPay]);
 
-  console.log(order.orderItems);
-  console.log(order.shippingAddress);
-
+  
   return loading ? (
     <div className="container pt-5">
       <Spinner animation="border" role="status"></Spinner>
@@ -229,7 +227,7 @@ const OrderScreen = () => {
                         <span className="mx-2">{item.quantity}</span>
                       </td>
                       <td style={{ textAlign: "right" }}>
-                        ${item.itemPrice * item.quantity}
+                      &#x20B9; {item.itemPrice * item.quantity}
                       </td>
                     </tr>
                   );

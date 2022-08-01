@@ -6,13 +6,13 @@ import CheckOutSteps from './CheckOutSteps'
 import {Helmet} from "react-helmet"
 
 const Payment = () => {
+  const navigate = useNavigate();
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const {
         cart:{
             shippingAddress, paymentMethod
         },
     } = state;
-    const navigate = useNavigate();
     const [paymentMethodName, setPaymentMethod] = useState(
         paymentMethod || 'PayPal'
     )
@@ -20,13 +20,13 @@ const Payment = () => {
         if(!shippingAddress.address1){
             navigate('/shipping')
         }
-    },[shippingAddress.registers,navigate])
+    },[shippingAddress, navigate])
     const submitHandler = (e) =>{
         e.preventDefault();
         ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName})
         localStorage.setItem('paymentMethod', paymentMethodName)
         navigate('/Finalpayment')
-    }
+    } 
   return (
     <div>
        <Helmet>
