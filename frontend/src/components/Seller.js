@@ -67,15 +67,15 @@ function Seller() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${id}`
+          `https://shopping-mart-react-app.herokuapp.com/api/products/${id}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
         const all = await axios.get(
-          "http://localhost:5000/api/rating/getrating"
+          "https://shopping-mart-react-app.herokuapp.com/api/rating/getrating"
         );
         dispatch({ type: "FETCH_RATING_SUCCESS", payload: all.data });
 
-        const user = await axios.get("http://localhost:5000/api/users");
+        const user = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/users");
         const userData = user.data.users;
         setUser(userData);
       } catch (err) {
@@ -95,12 +95,12 @@ function Seller() {
     async function getAllStudent() {
       try {
         const student = await axios.get(
-          `http://localhost:5000/api/products/${id}`
+          `https://shopping-mart-react-app.herokuapp.com/api/products/${id}`
         );
         setStudents(student.data);
-        const product = await axios.get("http://localhost:5000/api/products/");
+        const product = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/products/");
         setProduct(product.data);
-        const all = await axios.get("http://localhost:5000/api/products/");
+        const all = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/products/");
 
         setAll(all.data);
         const Product = all.data;
@@ -140,7 +140,7 @@ function Seller() {
       toast.success("Thank You... For Given Rating & Comments");
       try {
           const res = await axios.post(
-            "http://localhost:5000/api/rating/addrating",
+            "https://shopping-mart-react-app.herokuapp.com/api/rating/addrating",
             {
               productRating: getProd,
               user: userInfo,
@@ -155,7 +155,7 @@ function Seller() {
           );
           
           const resUpdate = await axios.put(
-            `http://localhost:5000/api/products/update/${id}`,
+            `https://shopping-mart-react-app.herokuapp.com/api/products/update/${id}`,
             {
               itemCategory: student.itemCategory,
               itemName: student.itemName,
@@ -192,7 +192,7 @@ function Seller() {
     <>
       <Helmet>
         <title>Product Summary</title>
-        
+
       </Helmet>
       {loading ? (
         <div className="container">

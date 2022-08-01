@@ -43,7 +43,7 @@ const NewSellerRegister = () => {
   // console.log(registers);
   const sendRequest = async () => {
     const res = await axios
-      .post("http://localhost:5000/api/seller/register", {
+      .post("https://shopping-mart-react-app.herokuapp.com/api/seller/register", {
         firstname: registers.firstname,
         lastname: registers.lastname,
         mnfName: registers.mnfName,
@@ -120,7 +120,7 @@ const NewSellerRegister = () => {
       toast.error("Password do not match");
     }
 
-    const res = await axios.get("http://localhost:5000/api/seller/sellerlogin");
+    const res = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/seller/sellerlogin");
 
     if (res.data.sellers.find((user) => user.GSTIN === registers.gstin)) {
       toast.error("This GST No. Already Register");

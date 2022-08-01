@@ -99,7 +99,7 @@ const UserPurchase = () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/orders/mine`,
+          `https://shopping-mart-react-app.herokuapp.com/api/orders/mine`,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }
@@ -113,7 +113,7 @@ const UserPurchase = () => {
     const fetchProductId = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/products`);
+        const { data } = await axios.get(`https://shopping-mart-react-app.herokuapp.com/api/products`);
         setId(data);
       } catch (err) {
         console.log(err);

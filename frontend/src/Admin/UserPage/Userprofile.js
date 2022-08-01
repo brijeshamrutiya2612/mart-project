@@ -80,7 +80,7 @@ const Userprofile = () => {
 
     try {
       const { data } = await axios.put(
-        "http://localhost:5000/api/profile",
+        "https://shopping-mart-react-app.herokuapp.com/api/profile",
         {
           firstname,
           lastname,

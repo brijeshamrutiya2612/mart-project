@@ -35,7 +35,7 @@ const SellerManageOrder = () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/sellerorders/mine`
+          `https://shopping-mart-react-app.herokuapp.com/api/sellerorders/mine`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {

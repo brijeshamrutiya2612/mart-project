@@ -43,10 +43,10 @@ const Userdashboard = () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/orders/mine`,
-          // {
-          //   headers: { authorization: `Bearer ${userInfo.token}` },
-          // }
+          `https://shopping-mart-react-app.herokuapp.com/api/orders/mine`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {

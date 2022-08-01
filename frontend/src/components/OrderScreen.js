@@ -72,7 +72,7 @@ const OrderScreen = () => {
       try {
         dispatch({ type: "PAY_REQUEST" });
         const { data } = await axios.put(
-          `http://localhost:5000/api/orders/${order._id}/pay`,
+          `https://shopping-mart-react-app.herokuapp.com/api/orders/${order._id}/pay`,
           details,
           {
             headers: {
@@ -97,7 +97,7 @@ const OrderScreen = () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `http://localhost:5000/api/orders/${orderId}`,
+          `https://shopping-mart-react-app.herokuapp.com/api/orders/${orderId}`,
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }
@@ -118,7 +118,7 @@ const OrderScreen = () => {
     } else {
       const loadPayPalScript = async () => {
         const { data: clientId } = await axios.get(
-          "http://localhost:5000/api/keys/paypal",
+          "https://shopping-mart-react-app.herokuapp.com/api/keys/paypal",
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }

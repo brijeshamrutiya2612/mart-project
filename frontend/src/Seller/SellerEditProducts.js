@@ -49,7 +49,7 @@ const SellerEditProducts = () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${id}`
+          `https://shopping-mart-react-app.herokuapp.com/api/products/${id}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (err) {
@@ -79,7 +79,7 @@ const SellerEditProducts = () => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/products/update/${id}`,
+        `https://shopping-mart-react-app.herokuapp.com/api/products/update/${id}`,
         {
           itemCategory: category,
           itemName: itemName,

@@ -17,9 +17,9 @@ dotenv.config();
 
 const app = express();
 app.use(cors()),
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(bodyParser.json())
-// app.use(express.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(express.urlencoded({extended:true}));
 
 
 //{ credentials: true, origin: "https://localhost:3000"} )), app.use(cors({ credentials: true, origin: "https://shopping-mart-react-app.herokuapp.com/"} 

@@ -52,7 +52,7 @@ function Finalpayment() {
     try {
       dispatch({ type: "CREATE_REQUEST" });
       const { data } = await Axios.post(
-        "http://localhost:5000/api/orders",
+        "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
           shippingAddress: shippingAddress,

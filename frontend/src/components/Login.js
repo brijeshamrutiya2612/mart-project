@@ -27,7 +27,7 @@ const Login = () => {
   }, [nav, redirect, userInfo]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await axios.get("http://localhost:5000/api/users");
+    const user = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/users");
     const userData = user.data.users;
 
     const checkUserEmail = userData.filter((e) => {
@@ -35,7 +35,7 @@ const Login = () => {
     });
 
     const seller = await axios.get(
-      "http://localhost:5000/api/seller/sellerlogin"
+      "https://shopping-mart-react-app.herokuapp.com/api/seller/sellerlogin"
     );
     const sellerData = seller.data.sellers;
 
@@ -45,7 +45,7 @@ const Login = () => {
 
     if (checkUserEmail.length === 1) {
       try {
-        const res = await axios.post("http://localhost:5000/api/login", {
+        const res = await axios.post("https://shopping-mart-react-app.herokuapp.com/api/login", {
           email: emails.email,
           password: emails.password,
         });
@@ -59,7 +59,7 @@ const Login = () => {
       }
     } else if (checkSellerEmail.length === 1) {
       try {
-        const res = await axios.post("http://localhost:5000/api/seller/login", {
+        const res = await axios.post("https://shopping-mart-react-app.herokuapp.com/api/seller/login", {
           email: emails.email,
           password: emails.password,
         });

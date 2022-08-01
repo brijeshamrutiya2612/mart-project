@@ -22,7 +22,7 @@ export const getData = createAsyncThunk(
   "getProd/getData",
   async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/products");
+      const response = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/products");
       // console.log(response.data)
       return response.data.products;
     } catch (error) {

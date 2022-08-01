@@ -28,7 +28,7 @@ const Addtocart = () => {
   const nav = useNavigate();
   const onPlus = async (item,quantity) => {
     const student = await axios.get(
-      `http://localhost:5000/api/products/${item._id}`,
+      `https://shopping-mart-react-app.herokuapp.com/api/products/${item._id}`,
     );
     console.log(student.data.quantity)
     if(student.data.quantity < quantity){

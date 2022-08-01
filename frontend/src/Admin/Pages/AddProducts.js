@@ -32,7 +32,7 @@ function AddProducts() {
 
   const sendRequest = async () => {
     const res = await axios
-      .post("http://localhost:5000/api/products/add", {
+      .post("https://shopping-mart-react-app.herokuapp.com/api/products/add", {
         itemCategory: category,
         itemName: itemName,
         itemPrice: itemPrice,

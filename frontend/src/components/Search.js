@@ -102,7 +102,7 @@ const Search = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/products/search?page=${page}&query=${searching}&itemCategory=${itemCategory}&itemPrice=${itemPrice}&rating=${rating}&order=${order}`
+          `https://shopping-mart-react-app.herokuapp.com/api/products/search?page=${page}&query=${searching}&itemCategory=${itemCategory}&itemPrice=${itemPrice}&rating=${rating}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
@@ -121,10 +121,10 @@ const Search = () => {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/products/categories"
+          "https://shopping-mart-react-app.herokuapp.com/api/products/categories"
         );
         setCategories(data);
-        const product = await axios.get("http://localhost:5000/api/products/");
+        const product = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/products/");
         setProduct(product.data);
       } catch (error) {
         console.log("Problem");

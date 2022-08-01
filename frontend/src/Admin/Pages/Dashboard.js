@@ -41,7 +41,7 @@ function Dashboard() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/products");
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });

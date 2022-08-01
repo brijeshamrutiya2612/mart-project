@@ -27,7 +27,7 @@ const Register = () => {
   // console.log(registers);
   const sendRequest = async () => {
     const res = await axios
-      .post("http://localhost:5000/api/signup", {
+      .post("https://shopping-mart-react-app.herokuapp.com/api/signup", {
         firstname: registers.firstname,
         lastname: registers.lastname,
         email: registers.email,
