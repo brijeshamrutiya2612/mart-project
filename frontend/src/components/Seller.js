@@ -122,44 +122,61 @@ function Seller() {
   const handleChange = (event) => {
     setUserRating(event.target.value);
   };
-
+  
   const ratingAndCommentAdd = async () => {
     if (!userInfo) {
       final("/Login");
+    } 
+    if (
+      getRating.find((user) => {
+        return user.user === userInfo._id;
+      }) &&
+      getRating.find((item) => {
+        return item.productRating === getProd._id;
+      })
+    ) {
+      toast.error("You are an already give rating on this products");
     } else {
+      toast.success("Thank You... For Given Rating & Comments");
       try {
-        const res = await axios.post(
-          "http://localhost:5000/api/rating/addrating",
-          {
-            productRating: getProd,
-            user: userInfo,
-            rating: userRating,
-            comment: comment,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${userInfo.token}`,
+          const res = await axios.post(
+            "http://localhost:5000/api/rating/addrating",
+            {
+              productRating: getProd,
+              user: userInfo,
+              rating: userRating,
+              comment: comment,
             },
-          }
-        );
-        const data = await res.data;
-        return data;
-      } catch (err) {
-        toast.error(err);
-      }
+            {
+              headers: {
+                authorization: `Bearer ${userInfo.token}`,
+              },
+            }
+          );
+          
+          const resUpdate = await axios.put(
+            `http://localhost:5000/api/products/update/${id}`,
+            {
+              itemCategory: student.itemCategory,
+              itemName: student.itemName,
+              itemPrice: student.itemPrice,
+              mnfName: student.mnfName,
+              quantity: student.quantity,
+              rating: userRating,
+              itemUnit: student.itemUnit,
+              itemDescription: student.itemDescription,
+              image: student.image,
+            }
+          );
+          const data = await res.data;
+          return data;
 
-      try {
-        const addProductRateing = await axios.put(
-          `http://localhost:5000/api/products/update/${id}`,
-          {
-            rating: (userRating += 1),
-          }
-        );
-      } catch (err) {
-        toast.error(err);
-      }
+        } catch (err) {
+          toast.error(err);
+        }
     }
   };
+
   const send = () => {
     const existItem = cart.cartItems.find((x) => x._id === getProd._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
