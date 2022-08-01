@@ -192,6 +192,7 @@ function Seller() {
     <>
       <Helmet>
         <title>Product Summary</title>
+        
       </Helmet>
       {loading ? (
         <div className="container">
