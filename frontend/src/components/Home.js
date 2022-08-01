@@ -12,7 +12,7 @@ import {
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 import { AppBar, Typography } from "@mui/material";
-import {Helmet} from "react-helmet"
+import { Helmet } from "react-helmet";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -35,12 +35,14 @@ function Home() {
   });
   const [search, setSearch] = useState([]);
   const [index, setIndex] = useState(0);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get(
+          "https://shopping-mart-react-app.herokuapp.com/api/products"
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
@@ -58,11 +60,11 @@ function Home() {
     console.log(search);
     setSearch("");
   };
- 
+
   return (
     <>
       <div>
-      <Helmet>
+        <Helmet>
           <title>Welcome to MART</title>
         </Helmet>
         {loading ? (
@@ -102,7 +104,7 @@ function Home() {
                     </div>
                   </div>
                 </AppBar>
-                <div style={{marginTop:"7em"}}/>
+                <div style={{ marginTop: "7em" }} />
                 <div className="my-4 mt-3">
                   <div>
                     <div className="container col-lg-12 mt-5">
@@ -149,9 +151,7 @@ function Home() {
                               MEN
                             </Typography>
                           </div>
-                          <div
-                            className="row"
-                          >
+                          <div className="row">
                             {getProd
                               .filter((itm) => {
                                 if (itm.itemCategory === "men's clothing") {
@@ -264,9 +264,7 @@ function Home() {
                               WOMEN
                             </Typography>
                           </div>
-                          <div
-                            className="row"
-                          >
+                          <div className="row">
                             {getProd
                               .filter((itm) => {
                                 if (itm.itemCategory === "women's clothing") {
@@ -379,9 +377,7 @@ function Home() {
                               JEWELERY
                             </Typography>
                           </div>
-                          <div
-                            className="row"
-                          >
+                          <div className="row">
                             {getProd
                               .filter((itm) => {
                                 if (itm.itemCategory === "jewelery") {
@@ -494,9 +490,7 @@ function Home() {
                               SPORTS
                             </Typography>
                           </div>
-                          <div
-                            className="row"
-                          >
+                          <div className="row">
                             {getProd
                               .filter((itm) => {
                                 if (itm.itemCategory === "Sports") {
@@ -609,9 +603,7 @@ function Home() {
                               FOODS
                             </Typography>
                           </div>
-                          <div
-                            className="row"
-                          >
+                          <div className="row">
                             {getProd
                               .filter((itm) => {
                                 if (itm.itemCategory === "Food") {
@@ -724,9 +716,7 @@ function Home() {
                               ELECTRONICS
                             </Typography>
                           </div>
-                          <div
-                            className="row"
-                          >
+                          <div className="row">
                             {getProd
                               .filter((itm) => {
                                 if (itm.itemCategory === "electronics") {
@@ -871,7 +861,7 @@ function Home() {
                                               maxWidth: "500px",
                                               background: "#FFFFFF",
                                               transitionDuration: "1s",
-                                              border:"5px solid #557794"
+                                              border: "5px solid #557794",
                                             }}
                                           >
                                             <Container>

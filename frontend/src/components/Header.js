@@ -52,7 +52,7 @@ const Header = () => {
     async function getAllStudent() {
       try {
         const listProduct = await axios.get(
-          "http://localhost:5000/api/products"
+          "https://shopping-mart-react-app.herokuapp.com/api/products"
         );
         setList(listProduct.data);
       } catch (error) {
