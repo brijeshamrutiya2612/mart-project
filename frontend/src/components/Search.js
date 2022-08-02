@@ -1,5 +1,5 @@
 import { CurrencyRupee } from "@mui/icons-material";
-import { AppBar, Typography } from "@mui/material";
+import { AppBar, Skeleton, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useReducer, useState } from "react";
 import {
@@ -17,6 +17,7 @@ import { getError } from "../utils";
 import "./Home.css";
 import RatingStart from "./RatingStart";
 import { Rating } from "react-simple-star-rating";
+import Loading from "./Loading";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -145,13 +146,11 @@ const Search = () => {
   return (
     <>
       <div>
-        {loading ? (
-          <div className="container pt-5">
-            <Spinner animation="border" role="status"></Spinner>
-          </div>
+        {/* {loading ? (
+         <></>
         ) : error ? (
           <div>{error}</div>
-        ) : (
+        ) : ( */}
           <>
             <div>
               <div
@@ -198,6 +197,43 @@ const Search = () => {
                         >
                           <Typography variant="h6">Category</Typography>
                           <div>
+                          {loading ? (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                          </Stack>
+                        </>
+                      ) : error ? (
+                        <div className="container pt-5">{error}</div>
+                      ) : (
+                        <>
                             <ul style={{ listStyleType: "none" }}>
                               <li>
                                 <Link
@@ -234,9 +270,39 @@ const Search = () => {
                                 );
                               })}
                             </ul>
+                            </>)}
                           </div>
                           <Typography variant="h6">Price</Typography>
                           <div>
+                          {loading ? (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton
+                              variant="text"
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                          </Stack>
+                        </>
+                      ) : error ? (
+                        <div className="container pt-5">{error}</div>
+                      ) : (
+                        <>
                             <ul style={{ listStyleType: "none" }}>
                               <li>
                                 <Link
@@ -277,11 +343,41 @@ const Search = () => {
                                 );
                               })}
                             </ul>
+                            </>)}
                           </div>
                           <Typography variant="h6">
                             Avg. Customer Review
                           </Typography>
                           <div>
+                          {loading ? (
+                        <>
+                          <Stack spacing={1}>
+                            <Skeleton
+                              variant="text"
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                            <Skeleton
+                              variant="text"  
+                              width="40%"
+                            />
+                          </Stack>
+                        </>
+                      ) : error ? (
+                        <div className="container pt-5">{error}</div>
+                      ) : (
+                        <>
                             <ul style={{ listStyleType: "none" }}>
                               {ratings.map((r) => (
                                 <li key={r.name}>
@@ -322,6 +418,8 @@ const Search = () => {
                                 </Link>
                               </li>
                             </ul>
+                            </>
+                            )}
                           </div>
                         </Col>
                         <Col lg={10} className="p-3" style={{ width: "100%" }}>
@@ -706,7 +804,7 @@ const Search = () => {
               </div>
             </div>
           </>
-        )}
+        {/* )} */}
       </div>
     </>
   );

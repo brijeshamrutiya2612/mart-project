@@ -63,7 +63,7 @@ const Addtocart = () => {
           <title>Your Cart</title>
         </Helmet>
       <CheckOutSteps step1></CheckOutSteps>
-      <div className="pl-5 pr-5" style={{ background: "#D3DDE5" }}>
+      <div className="pl-5 pr-5">
         <div className="pt-3">
           <Button variant="light" className="btn" onClick={home}>
             <strong>&#x2190;Continue Shopping</strong>

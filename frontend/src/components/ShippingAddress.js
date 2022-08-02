@@ -55,15 +55,14 @@ const ShippingAddress = () => {
           <title>Shipping Address</title>
         </Helmet>
       </div>
-      <CheckOutSteps step1 step2></CheckOutSteps>
       <div
         style={{
-          background: "#D3DDE5",
           width: "auto",
           height: "auto",
         }}
       >
-        <div className="container col-lg-8 pt-3 pb-3 justify-content-center">
+        <div className="container col-lg-8 pt-2 pb-3 justify-content-center">
+        <CheckOutSteps step1 step2></CheckOutSteps>
           <h1 className="my-3">Shipping Address</h1>
           <div className="my-2">
             <form>

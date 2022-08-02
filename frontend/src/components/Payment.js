@@ -32,15 +32,14 @@ const Payment = () => {
        <Helmet>
           <title>Payment Mode</title>
         </Helmet>
-      <CheckOutSteps step1 step2 step3></CheckOutSteps>
       <div 
         style={{
-          background: "#D3DDE5",
           width: "auto",
           height: "auto",
         }}
       >
         <div className='container col-lg-15 pt-3 pb-3 justify-content-center'>
+        <CheckOutSteps step1 step2 step3></CheckOutSteps>
         <h1 className='my-3'>Payment Method</h1>
         <Form onSubmit={submitHandler}>
             <Form.Check

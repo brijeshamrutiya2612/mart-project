@@ -83,15 +83,14 @@ function Finalpayment() {
       <Helmet>
           <title>Final Payment</title>
         </Helmet>
-      <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
       <div
         style={{
-          background: "#D3DDE5",
           width: "auto",
           height: "auto",
         }}
       >
          <div className='container col-lg-8 pt-3 pb-3 justify-content-center'>
+        <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
           <h2 className="pt-3">Order Summary</h2>
           <Row>
             <Col>
