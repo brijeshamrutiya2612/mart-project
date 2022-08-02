@@ -22,7 +22,7 @@ function SellerAddProduct() {
     setCategory(event.target.value);
   };
 
-  const [itemName, setItemName] = useState("");
+  const [itemName, setItemName] = useState();
   const [itemPrice, setItemPrice] = useState("");
   const [itemQuantity, setQuantity] = useState("");
   const [rating, setRating] = useState("");
@@ -64,12 +64,11 @@ function SellerAddProduct() {
       toast.error("Description is Required");
     } else if (image === "") {
       toast.error("Image is Required");
+    } else {
+      sendRequest();
+      nav("/SellerProducts");
     }
-    sendRequest();
-    nav("/SellerProduct");
-    setItemName("");
   };
-
   return (
     <>
       <div className="my-5">
@@ -81,8 +80,6 @@ function SellerAddProduct() {
             <div
               style={{
                 border: "none",
-                background: "#D8E4E6",
-                boxShadow: "5px 5px 15px #888888",
                 borderRadius: "20px",
                 width: "100%",
                 height: "100%",

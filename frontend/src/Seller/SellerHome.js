@@ -18,8 +18,6 @@ const SellerHome = () => {
           <div
             style={{
               border: "none",
-              background: "#D8E4E6",
-              boxShadow: "5px 5px 15px #888888",
               borderRadius: "20px",
               width: "100%",
               height: "100%",

@@ -64,7 +64,7 @@ function Home() {
 
   return (
     <>
-      <div>
+      <div className="container col-lg-8">
         <Helmet>
           <title>Welcome to MART</title>
         </Helmet>

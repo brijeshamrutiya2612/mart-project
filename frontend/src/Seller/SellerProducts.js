@@ -38,7 +38,9 @@ function SellerProducts() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/products");
+        const response = await axios.get(
+          "https://shopping-mart-react-app.herokuapp.com/api/products"
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
@@ -63,7 +65,7 @@ function SellerProducts() {
           },
         }
       );
-      navigate("/productView");
+      navigate("/SellerProducts");
     } catch (err) {
       toast.error(err);
     }
@@ -82,8 +84,6 @@ function SellerProducts() {
             <div
               style={{
                 border: "none",
-                background: "#D8E4E6",
-                boxShadow: "5px 5px 15px #888888",
                 borderRadius: "20px",
                 width: "100%",
                 height: "100%",
@@ -97,7 +97,7 @@ function SellerProducts() {
               ) : error ? (
                 <div>{error}</div>
               ) : (
-                <div className="row" style={{ background: "#D8E4E6" }}>
+                <div className="row">
                   <div
                     className="mr-4 pt-3"
                     style={{
@@ -126,6 +126,7 @@ function SellerProducts() {
                                 maxWidth: "500px",
                                 background: "#FFFFFF",
                                 transitionDuration: "1s",
+                                border: "5px solid #BFD3E2",
                               }}
                             >
                               <Container>

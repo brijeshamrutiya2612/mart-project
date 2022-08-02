@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import { Store } from "../store/Context";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { search } = useLocation();
@@ -25,12 +25,14 @@ const Login = () => {
       nav(redirect);
     }
   }, [nav, redirect, userInfo]);
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/users");
+    const user = await axios.get(
+      "https://shopping-mart-react-app.herokuapp.com/api/users"
+    );
     const userData = user.data.users;
 
-    const checkUserEmail = userData.filter((e) => {
+    const checkUserEmail = userData.find((e) => {
       return e.email === emails.email;
     });
 
@@ -43,26 +45,44 @@ const Login = () => {
       return e.email === emails.email;
     });
 
-    if (checkUserEmail.length === 1) {
+    e.preventDefault();
+    const { email, password } = emails;
+
+    if (email === "") {
+      toast.error("Email Is Required");
+    } else if (email.length < 3) {
+      toast.error("Invalid Email");
+    } else if (password === "") {
+      toast.error("Password Is Required");
+    }
+
+    if (checkUserEmail) {
       try {
-        const res = await axios.post("https://shopping-mart-react-app.herokuapp.com/api/login", {
-          email: emails.email,
-          password: emails.password,
-        });
+        const res = await axios.post(
+          "https://shopping-mart-react-app.herokuapp.com/api/login",
+          {
+            email: emails.email,
+            password: emails.password,
+          }
+        );
         const data = await res.data;
         ctxDispatch({ type: "USER_SIGNIN", payload: data });
         localStorage.setItem("userInfo", JSON.stringify(data));
         nav(redirect || "/");
         return data;
+        
       } catch (err) {
-        toast.error("Invalid email or password");
+        toast.error("Some Problem With Login");
       }
-    } else if (checkSellerEmail.length === 1) {
+    } else if (checkSellerEmail) {
       try {
-        const res = await axios.post("https://shopping-mart-react-app.herokuapp.com/api/seller/login", {
-          email: emails.email,
-          password: emails.password,
-        });
+        const res = await axios.post(
+          "https://shopping-mart-react-app.herokuapp.com/api/seller/login",
+          {
+            email: emails.email,
+            password: emails.password,
+          }
+        );
         const data = await res.data;
         ctxDispatch({ type: "SELLER_SIGNIN", payload: data });
         localStorage.setItem("sellerInfo", JSON.stringify(data));
@@ -72,9 +92,12 @@ const Login = () => {
         nav("/SellerHome");
         return data;
       } catch (err) {
-        toast.error("Invalid email or password");
+        toast.error("Some Problem With Login");
       }
+    } else {
+      toast.error("Invalid email or password");
     }
+
     //sendRequest().then((data)=>localStorage.setItem("userId", data._id)).then(()=>dispatch(loginActions.login())).then(()=>nav("/")).then(data=>console.log(data))
   };
 
@@ -141,13 +164,19 @@ const Login = () => {
                 </div>
                 <p>
                   Not a member?{" "}
-                  <Link to={`/register?redirect=${redirect}`} style={{color:"#48657c"}}>
+                  <Link
+                    to={`/register?redirect=${redirect}`}
+                    style={{ color: "#48657c" }}
+                  >
                     Create Your Account
                   </Link>
                 </p>
                 <p>
                   You want sell your Product?{" "}
-                  <Link to={`/NewSellerRegister?redirect=${redirect}`} style={{color:"#48657c"}}>
+                  <Link
+                    to={`/NewSellerRegister?redirect=${redirect}`}
+                    style={{ color: "#48657c" }}
+                  >
                     Create Seller Account
                   </Link>
                 </p>

@@ -33,6 +33,8 @@ import SellerHome from "./Seller/SellerHome";
 import SellerProducts from "./Seller/SellerProducts";
 import SellerEditProducts from "./Seller/SellerEditProducts";
 import SellerManageOrder from "./Seller/SellerManageOrder";
+import SellerProfile from "./Seller/SellerProfile";
+import SellerProtectedRouter from "./components/SellerProtectedRouter";
 
 function App() {
   const { state } = useContext(Store);
@@ -70,11 +72,12 @@ function App() {
             <Route path="/Admin" element={<Admin />}></Route>
             <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route path="/NewSellerRegister" element={<NewSellerRegister />}></Route>
-            <Route path="/SellerAddProduct" element={<SellerAddProduct />}></Route>
-            <Route path="/SellerProducts" element={<SellerProducts />}></Route>
-            <Route path="/SellerEditProducts/:id" element={<SellerEditProducts />}></Route>
-            <Route path="/SellerHome" element={<SellerHome />}></Route>
-            <Route path="/SellerManageOrder" element={<SellerManageOrder />}></Route>
+            <Route path="/SellerAddProduct" element={<SellerProtectedRouter><SellerAddProduct /></SellerProtectedRouter>}></Route>
+            <Route path="/SellerProducts" element={<SellerProtectedRouter><SellerProducts /></SellerProtectedRouter>}></Route>
+            <Route path="/SellerEditProducts/:id" element={<SellerProtectedRouter><SellerEditProducts /></SellerProtectedRouter>}></Route>
+            <Route path="/SellerHome" element={<SellerProtectedRouter><SellerHome /></SellerProtectedRouter>}></Route>
+            <Route path="/SellerManageOrder" element={<SellerProtectedRouter><SellerManageOrder /></SellerProtectedRouter>}></Route>
+            <Route path="/SellerProfile" element={<SellerProtectedRouter><SellerProfile /></SellerProtectedRouter>}></Route>
             <Route path="/addproducts" element={<AddProducts />}></Route>
             <Route path="/productview" element={<ProductView />}></Route>
             <Route path="/productAction/:id" element={<ProductAction />}></Route>

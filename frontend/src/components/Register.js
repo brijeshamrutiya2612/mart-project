@@ -100,10 +100,11 @@ const Register = () => {
       toast.error("Plz Enter Mobile No. Must be < 5");
     } else if (age === "") {
       toast.error("Age is Require");
+    } else{
+      localStorage.removeItem("cartItems")
+      sendRequest().then(() => sign("/login"));
+      toast.success("Sucessfull Register");
     }
-    toast.success("Sucessfull Register");
-    localStorage.removeItem("cartItems")
-    sendRequest().then(() => sign("/login"));
     // localStorage.setItem("user", JSON.stringify(registers));
   };
 
@@ -111,12 +112,11 @@ const Register = () => {
     <>
       <div
         style={{
-          background: "#D8E4E6",
           width: "auto",
           height: "auto",
         }}
       >
-        <div className="container col-lg-4 pt-3 pb-3 justify-content-center">
+        <div className="container col-lg-7 pt-5 pb-3 justify-content-center">
           <form>
             <Container className="pt-1 justify-content-center">
               <div
@@ -257,7 +257,7 @@ const Register = () => {
                       variant="contained"
                       onClick={signIn}
                       style={{
-                        backgroundColor: "#96B5BA",
+                        backgroundColor: "#557794",
                         border: "none",
                         borderRadius: "50px",
                       }}
@@ -266,7 +266,7 @@ const Register = () => {
                     </Button>
                   </div>
                   <p>
-                    Have an account? <Link to="/Login">Log in</Link>
+                    Have an account? <Link to="/Login" style={{color:"#48657c"}}>Log in</Link>
                   </p>
                 </div>
               </div>

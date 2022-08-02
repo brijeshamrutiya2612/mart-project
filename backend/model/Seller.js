@@ -41,10 +41,6 @@ const SellerSchema = Schema({
         unique:true,
         require: true
     },
-    Age:{
-        type: Number,
-        require: true
-    },
     GSTIN:{
         type: String,
         require: true,

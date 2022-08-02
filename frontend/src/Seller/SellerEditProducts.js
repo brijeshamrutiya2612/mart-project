@@ -106,8 +106,6 @@ const SellerEditProducts = () => {
             <div
               style={{
                 border: "none",
-                background: "#D8E4E6",
-                boxShadow: "5px 5px 15px #888888",
                 borderRadius: "20px",
                 width: "100%",
                 height: "100%",
@@ -275,6 +273,13 @@ const SellerEditProducts = () => {
                               onClick={updateProducts}
                             >
                               Update Product
+                            </Button>
+                            <Button
+                              className="ml-3"
+                              variant="danger"
+                              onClick={updateProducts}
+                            >
+                              Cancel
                             </Button>
                           </Box>
                         </form>

@@ -34,7 +34,6 @@ const NewSellerRegister = () => {
     address2: "",
     address3: "",
     phone: "",
-    age: "",
     gstin: "",
     panno: "",
     showPassword: false,
@@ -43,20 +42,22 @@ const NewSellerRegister = () => {
   // console.log(registers);
   const sendRequest = async () => {
     const res = await axios
-      .post("https://shopping-mart-react-app.herokuapp.com/api/seller/register", {
-        firstname: registers.firstname,
-        lastname: registers.lastname,
-        mnfName: registers.mnfName,
-        email: registers.email,
-        password: registers.password,
-        address1: registers.address1,
-        address2: registers.address2,
-        address3: registers.address3,
-        Mobile: registers.phone,
-        Age: registers.age,
-        GSTIN: registers.gstin,
-        PAN_NO: registers.panno,
-      })
+      .post(
+        "https://shopping-mart-react-app.herokuapp.com/api/seller/register",
+        {
+          firstname: registers.firstname,
+          lastname: registers.lastname,
+          mnfName: registers.mnfName,
+          email: registers.email,
+          password: registers.password,
+          address1: registers.address1,
+          address2: registers.address2,
+          address3: registers.address3,
+          Mobile: registers.phone,
+          GSTIN: registers.gstin,
+          PAN_NO: registers.panno,
+        }
+      )
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;
@@ -64,6 +65,10 @@ const NewSellerRegister = () => {
 
   const signIn = async (e) => {
     e.preventDefault();
+
+    const res = await axios.get(
+      "https://shopping-mart-react-app.herokuapp.com/api/seller/sellerlogin"
+    );
 
     const {
       mnfName,
@@ -78,16 +83,16 @@ const NewSellerRegister = () => {
       address3,
       phone,
     } = registers;
-    
+
     if (mnfName === "") {
       toast.error("Please Enter Your Manufacture Name");
     } else if (gstin === "") {
       toast.error("GSTIN No. is Require");
-    } else if (gstin.length === 15) {
+    } else if (gstin.length !== 15) {
       toast.error("Please Enter valid GSTIN No.");
     } else if (panno === "") {
       toast.error("PAN No. is Require");
-    } else if (panno.length === 10) {
+    } else if (panno.length !== 10) {
       toast.error("Please Enter valid PAN No.");
     } else if (firstname === "") {
       toast.error("First Name is Require");
@@ -113,32 +118,34 @@ const NewSellerRegister = () => {
       toast.error("Address3 is Required");
     } else if (phone === "") {
       toast.error("Mobile No. is Required");
-    } else if (phone.length < 5) {
-      toast.error("Plz Enter Mobile No. Must be < 5");
-    } 
-    if (registers.password !== registers.cPassword) {
+    } else if (phone.length < 5 || phone.length !== 10) {
+      toast.error("Plz Enter Mobile No. Must be 10 Digit");
+    } else if (registers.password !== registers.cPassword) {
       toast.error("Password do not match");
-    }
-
-    const res = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/seller/sellerlogin");
-
-    if (res.data.sellers.find((user) => user.GSTIN === registers.gstin)) {
+    } else if (
+      res.data.sellers.find((user) => user.GSTIN === registers.gstin)
+    ) {
       toast.error("This GST No. Already Register");
     } else if (
       res.data.sellers.find((user) => user.PAN_NO === registers.panno)
     ) {
       toast.error("This PAN No. Already Register");
-    }
-    if (res.data.sellers.find((user) => user.Mobile === registers.phone)) {
+    } else if (
+      res.data.sellers.find((user) => user.Mobile === registers.phone)
+    ) {
       toast.error("This Mobile No. Already Register");
-    }
-    if (res.data.sellers.find((user) => user.email === registers.email)) {
+    } else if (
+      res.data.sellers.find((user) => user.email === registers.email)
+    ) {
       toast.error("This Email Already Register");
+    } else if (
+      res.data.sellers.find((user) => user.mnfName === registers.mnfName)
+    ) {
+      toast.error(`This ${registers.mnfName} Name Already Register`);
+    } else {
+      sendRequest().then(() => sign("/login"));
+      toast.success("Sucessfull Register");
     }
-    if (res.data.sellers.find((user) => user.mnfName === registers.mnfName)) {
-      toast.error(`This ${registers.mnfName} Name Already Register` );
-    }
-    // sendRequest().then(() => sign("/login"));
     // localStorage.setItem("seller", JSON.stringify(registers));
   };
   const [values, setValues] = React.useState({
@@ -146,7 +153,6 @@ const NewSellerRegister = () => {
     password: "",
     weight: "",
     weightRange: "",
-    
   });
 
   const handleChange = (prop) => (event) => {
@@ -230,7 +236,6 @@ const NewSellerRegister = () => {
                     label="PAN No.:"
                     type="text"
                     variant="outlined"
-                    color={registers.panno.length === 10 ? "secondary": "success"}
                     onChange={(e) =>
                       setRegister({ ...registers, panno: e.target.value })
                     }
