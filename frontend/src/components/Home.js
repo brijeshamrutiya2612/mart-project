@@ -64,6 +64,9 @@ function Home() {
 
   return (
     <>
+        <div className="banner">
+          <h1>Welcome to MART</h1>
+        </div>
       <div className="container col-lg-8">
         <Helmet>
           <title>Welcome to MART</title>

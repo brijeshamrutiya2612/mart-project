@@ -128,12 +128,14 @@ prodRouter.get('/:id', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
-prodRouter.post("/add", addProducts);
 
+
+
+prodRouter.post("/add", addProducts);
+prodRouter.put("/update/:id", updateProducts);
 
 
 // prodRouter.get("/", getAllProducts);
-prodRouter.put("/update/:id", updateProducts);
 // prodRouter.get("/:id", getById);
 // prodRouter.delete("/:id", deleteProducts);
 
