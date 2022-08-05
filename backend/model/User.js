@@ -16,35 +16,44 @@ const UserSchema = Schema(
       type: String,
       required: true,
       unique: true,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error("Email is Invalid");
-        }
-      },
+      // validate(value){
+      //     if(!validator.isEmail(value)){
+      //         throw new Error('Email is Invalid')
+      //     }
+      // }
     },
     password: {
       type: String,
       required: true,
     },
-    address: {
+    address1: {
       type: String,
       required: true,
     },
-
-    // avatar: {
-    //   public_id: {
-    //     type: String,
-    //     required: true,
-    //   },
-    //   url: {
-    //     type: String,
-    //     required: true,
-    //   },
-    // },
-    // role: {
-    //   type: Boolean,
-    //   default: "user",
-    // },
+    address2: {
+      type: String,
+      required: true,
+    },
+    address3: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+      unique: true,
+      minlength: 10,
+      maxlength: 10,
+    },
+    age: {
+      type: Number,
+      required: true,
+      max: 100,
+    },
+    isAdmin:{
+      type: Boolean,
+      default: false,
+    }
   },
   { timestamps: true }
 );

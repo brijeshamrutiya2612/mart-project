@@ -20,7 +20,7 @@ const Payment = () => {
         if(!shippingAddress.address1){
             navigate('/shipping')
         }
-    },[shippingAddress, navigate])
+    },[shippingAddress.address1, navigate])
     const submitHandler = (e) =>{
         e.preventDefault();
         ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethodName})

@@ -18,18 +18,25 @@ const Register = () => {
     password: "",
     cPassword: "",
     address1: "",
-    avatar: "",
+    address2: "",
+    address3: "",
+    phone: "",
+    age: "",
   });
 
+  // console.log(registers);
   const sendRequest = async () => {
     const res = await axios
-      .post("https://shopping-mart-react-app.herokuapp.com/api/signup", {
+      .post("http://localhost:5000/api/signup", {
         firstname: registers.firstname,
         lastname: registers.lastname,
         email: registers.email,
         password: registers.password,
         address1: registers.address1,
-        avatar: registers.avatar,
+        address2: registers.address2,
+        address3: registers.address3,
+        phone: registers.phone,
+        age: registers.age,
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -38,7 +45,7 @@ const Register = () => {
   useEffect(() => {
     dispatch(getUserData());
   }, [dispatch]);
-
+  console.log(users.getUser);
   const signIn = async (e) => {
     e.preventDefault();
     if (registers.password !== registers.cPassword) {
@@ -59,7 +66,10 @@ const Register = () => {
       email,
       password,
       address1,
-      avatar
+      address2,
+      address3,
+      phone,
+      age,
     } = registers;
 
     if (firstname === "") {
@@ -80,18 +90,20 @@ const Register = () => {
       toast.error("Password must be Enter in 6 to 10 Character");
     } else if (address1 === "") {
       toast.error("Address1 is Required");
-    } else if (avatar === "") {
-      toast.error("avatar is Require");
+    } else if (address2 === "") {
+      toast.error("Address2 is Required");
+    } else if (address3 === "") {
+      toast.error("Address3 is Required");
+    } else if (phone === "") {
+      toast.error("Mobile No. is Required");
+    } else if (phone.length < 5) {
+      toast.error("Plz Enter Mobile No. Must be < 5");
+    } else if (age === "") {
+      toast.error("Age is Require");
     }
-    
-    if(sendRequest()){
-      localStorage.removeItem("cartItems")
-      // sign("/login")
-      toast.success("Sucessfull Register");
-    } else{
-      toast.error("Data Not Sent In Database");
-    }
-    // localStorage.setItem("user", JSON.stringify(registers));
+    toast.success("Sucessfull Register");
+    sendRequest().then(() => sign("/login"));
+    localStorage.setItem("user", JSON.stringify(registers));
   };
 
   return (
@@ -102,7 +114,7 @@ const Register = () => {
           height: "auto",
         }}
       >
-        <div className="container col-lg-7 pt-5 pb-3 justify-content-center">
+        <div className="container col-lg-6 p-5 pb-3 justify-content-center">
           <form>
             <Container className="pt-1 justify-content-center">
               <div
@@ -199,20 +211,55 @@ const Register = () => {
                 <div className="container col-md-15 justify-content-center">
                   <TextField
                     className="ml-4 col-md-11 my-3 justify-content-center"
-                    label="Profile Image"
-                    type="file"
-                    variant="standard"
+                    label="Address2"
+                    type="text"
+                    variant="outlined"
                     onChange={(e) =>
-                      setRegister({ ...registers, avatar: e.target.value })
+                      setRegister({ ...registers, address2: e.target.value })
                     }
                   />
+                </div>
+                <div className="container col-md-15 justify-content-center">
+                  <TextField
+                    className="ml-4 col-md-11 my-3 justify-content-center"
+                    label="Address3"
+                    type="text"
+                    variant="outlined"
+                    onChange={(e) =>
+                      setRegister({ ...registers, address3: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="container col-md-15 justify-content-center">
+                  <TextField
+                    className="ml-4 col-md-11 my-3 justify-content-center"
+                    label="Mobile:"
+                    type="number"
+                    variant="outlined"
+                    onChange={(e) =>
+                      setRegister({ ...registers, phone: e.target.value })
+                    }
+                  />
+                  <TextField
+                    className="ml-4 col-md-11 my-3 justify-content-center"
+                    label="Age:"
+                    type="number"
+                    variant="outlined"
+                    onChange={(e) =>
+                      setRegister({ ...registers, age: e.target.value })
+                    }
+                  />
+                  <Button className="ml-4" variant="contained" component="label">
+                    Upload
+                    <input hidden accept="image/*" multiple type="file" />
+                  </Button>
                   <div className="my-5 justify-content-center">
                     <Button
                       className="ml-4 col-md-11 justify-content-center"
                       variant="contained"
                       onClick={signIn}
                       style={{
-                        backgroundColor: "#557794",
+                        backgroundColor: "#96B5BA",
                         border: "none",
                         borderRadius: "50px",
                       }}
@@ -221,7 +268,7 @@ const Register = () => {
                     </Button>
                   </div>
                   <p>
-                    Have an account? <Link to="/Login" style={{color:"#48657c"}}>Log in</Link>
+                    Have an account? <Link to="/Login">Log in</Link>
                   </p>
                 </div>
               </div>
