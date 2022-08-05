@@ -25,7 +25,7 @@ Link{
   font-weight: bold;
 }
 
-.banner{
+/* .banner{
   background-image: linear-gradient(to right, #7692A9, #557794);
   height: 100vmin;
   display: flex;
@@ -55,4 +55,4 @@ Link{
   left: 0;
   clip-path: polygon(100% 68%, 0 100%, 100%, 100%);
   max-width: 100%;
-}
+} */

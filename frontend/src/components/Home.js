@@ -64,9 +64,9 @@ function Home() {
 
   return (
     <>
-        <div className="banner">
+        {/* <div className="banner">
           <h1>Welcome to MART</h1>
-        </div>
+        </div> */}
       <div className="container col-lg-8">
         <Helmet>
           <title>Welcome to MART</title>
