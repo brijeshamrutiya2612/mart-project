@@ -62,16 +62,16 @@ router.put(
 router.post(
   "/signup",
   expressAsyncHandler(async (req, res) => {
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "Avatars",
-      width: 150,
-      crop: "scale",
-    });
+    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //   folder: "avatars",
+    //   width: 150,
+    //   crop: "scale",
+    // });
 
     const newUser = new User({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      address1: req.body.address1,
+      address: req.body.address,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
     });
@@ -80,12 +80,12 @@ router.post(
       _id: user._id,
       firstname: user.firstname,
       lastname: user.lastname,
-      address1: user.address1,
+      address: user.address,
       email: user.email,
-      avatar: {
-        public_id: myCloud.public_id,
-        url: myCloud.secure_url,
-      },
+      // avatar: {
+      //   public_id: myCloud.public_id,
+      //   url: myCloud.secure_url,
+      // },
       token: generateToken(user),
     });
   })

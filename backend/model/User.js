@@ -25,27 +25,26 @@ const UserSchema = Schema(
     password: {
       type: String,
       required: true,
-      select: false,
     },
     address: {
       type: String,
       required: true,
     },
 
-    avatar: {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-    },
-    role: {
-      type: Boolean,
-      default: "user",
-    },
+    // avatar: {
+    //   public_id: {
+    //     type: String,
+    //     required: true,
+    //   },
+    //   url: {
+    //     type: String,
+    //     required: true,
+    //   },
+    // },
+    // role: {
+    //   type: Boolean,
+    //   default: "user",
+    // },
   },
   { timestamps: true }
 );
