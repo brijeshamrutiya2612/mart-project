@@ -25,32 +25,13 @@ const UserSchema = Schema(
     password: {
       type: String,
       required: true,
-      select:false
+      select: false,
     },
-    address1: {
+    address: {
       type: String,
       required: true,
     },
-    address2: {
-      type: String,
-      required: true,
-    },
-    address3: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-      minlength: 10,
-      maxlength: 10,
-    },
-    age: {
-      type: Number,
-      required: true,
-      max: 100,
-    },
+
     avatar: {
       public_id: {
         type: String,

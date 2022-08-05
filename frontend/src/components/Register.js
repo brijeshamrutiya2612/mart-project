@@ -18,14 +18,9 @@ const Register = () => {
     password: "",
     cPassword: "",
     address1: "",
-    address2: "",
-    address3: "",
-    phone: "",
-    age: "",
     avatar: "",
   });
 
-  // console.log(registers);
   const sendRequest = async () => {
     const res = await axios
       .post("https://shopping-mart-react-app.herokuapp.com/api/signup", {
@@ -34,10 +29,6 @@ const Register = () => {
         email: registers.email,
         password: registers.password,
         address1: registers.address1,
-        address2: registers.address2,
-        address3: registers.address3,
-        phone: registers.phone,
-        age: registers.age,
         avatar: registers.avatar,
       })
       .catch((err) => console.log(err));
@@ -47,7 +38,7 @@ const Register = () => {
   useEffect(() => {
     dispatch(getUserData());
   }, [dispatch]);
-  console.log(users.getUser);
+
   const signIn = async (e) => {
     e.preventDefault();
     if (registers.password !== registers.cPassword) {
@@ -68,10 +59,6 @@ const Register = () => {
       email,
       password,
       address1,
-      address2,
-      address3,
-      phone,
-      age,
       avatar
     } = registers;
 
@@ -93,23 +80,13 @@ const Register = () => {
       toast.error("Password must be Enter in 6 to 10 Character");
     } else if (address1 === "") {
       toast.error("Address1 is Required");
-    } else if (address2 === "") {
-      toast.error("Address2 is Required");
-    } else if (address3 === "") {
-      toast.error("Address3 is Required");
-    } else if (phone === "") {
-      toast.error("Mobile No. is Required");
-    } else if (phone.length < 5) {
-      toast.error("Plz Enter Mobile No. Must be < 5");
-    } else if (age === "") {
-      toast.error("Age is Require");
     } else if (avatar === "") {
       toast.error("avatar is Require");
     }
     
     if(sendRequest()){
       localStorage.removeItem("cartItems")
-      sign("/login")
+      // sign("/login")
       toast.success("Sucessfull Register");
     } else{
       toast.error("Data Not Sent In Database");
@@ -220,46 +197,6 @@ const Register = () => {
                   />
                 </div>
                 <div className="container col-md-15 justify-content-center">
-                  <TextField
-                    className="ml-4 col-md-11 my-3 justify-content-center"
-                    label="Address2"
-                    type="text"
-                    variant="outlined"
-                    onChange={(e) =>
-                      setRegister({ ...registers, address2: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="container col-md-15 justify-content-center">
-                  <TextField
-                    className="ml-4 col-md-11 my-3 justify-content-center"
-                    label="Address3"
-                    type="text"
-                    variant="outlined"
-                    onChange={(e) =>
-                      setRegister({ ...registers, address3: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="container col-md-15 justify-content-center">
-                  <TextField
-                    className="ml-4 col-md-11 my-3 justify-content-center"
-                    label="Mobile:"
-                    type="number"
-                    variant="outlined"
-                    onChange={(e) =>
-                      setRegister({ ...registers, phone: e.target.value })
-                    }
-                  />
-                  <TextField
-                    className="ml-4 col-md-11 my-3 justify-content-center"
-                    label="Age:"
-                    type="number"
-                    variant="outlined"
-                    onChange={(e) =>
-                      setRegister({ ...registers, age: e.target.value })
-                    }
-                  />
                   <TextField
                     className="ml-4 col-md-11 my-3 justify-content-center"
                     label="Profile Image"

@@ -26,10 +26,7 @@ export const signup = async (req, res, next) => {
     email,
     password,
     address1,
-    address2,
-    address3,
-    phone,
-    age,
+    avatar    
   } = req.body;
 
   let existingUser;
@@ -53,10 +50,7 @@ export const signup = async (req, res, next) => {
       email,
       password: hashedPassword,
       address1,
-      address2,
-      address3,
-      phone,
-      age,
+      avatar
     }, process.env.JWT_SECRET_KEY, {
       expiresIn: '30d',
     })
@@ -67,10 +61,7 @@ export const signup = async (req, res, next) => {
     email,
     password: hashedPassword,
     address1,
-    address2,
-    address3,
-    phone,
-    age,
+    avatar,
     token:generateToken(existingUser),
     UserProducts:[]
   });

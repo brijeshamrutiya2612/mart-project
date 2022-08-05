@@ -24,10 +24,6 @@ router.post(
           firstname: user.firstname,
           lastname: user.lastname,
           address1: user.address1,
-          address2: user.address2,
-          address3: user.address3,
-          phone: user.phone,
-          age: user.age,
           email: user.email,
           avatar: user.avatar,
           token: generateToken(user),
@@ -67,7 +63,7 @@ router.post(
   "/signup",
   expressAsyncHandler(async (req, res) => {
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
+      folder: "Avatars",
       width: 150,
       crop: "scale",
     });
@@ -76,10 +72,6 @@ router.post(
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       address1: req.body.address1,
-      address2: req.body.address2,
-      address3: req.body.address3,
-      phone: req.body.phone,
-      age: req.body.age,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
     });
@@ -89,10 +81,6 @@ router.post(
       firstname: user.firstname,
       lastname: user.lastname,
       address1: user.address1,
-      address2: user.address2,
-      address3: user.address3,
-      phone: user.phone,
-      age: user.age,
       email: user.email,
       avatar: {
         public_id: myCloud.public_id,

@@ -11,7 +11,6 @@ const initialState = {
 export const getUserData = createAsyncThunk("getUser/getUserData", async () => {
   try {
     const response = await axios.get("https://shopping-mart-react-app.herokuapp.com/api/users");
-    console.log(response.data.users)
     return response.data.users;
   } catch (error) {
     console.log(error);
