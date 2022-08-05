@@ -12,6 +12,7 @@ import SellerRoute from "./routes/SellerRoute.js";
 import  ratingRouter from "./routes/RatingRoute.js";
 import sellerOrderRouter from "./routes/SellerOrderRoute.js";
 import bodyParser from 'body-parser'
+import cloudinary from  'cloudinary'
 
 dotenv.config();
 
@@ -60,3 +61,9 @@ mongoose
   app.listen(process.env.PORT || 5000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
+
+  cloudinary.config({
+    cloud_name: process.env.cloud_name,
+    api_key:process.env.api_key,
+    api_secret:process.env.api_secret,
+  })

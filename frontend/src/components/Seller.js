@@ -253,7 +253,7 @@ function Seller() {
                               className="container d-flex"
                               style={{
                                 backgroundColor: "white",
-                                paddingTop: "8em",
+                                paddingTop: "5em",
                               }}
                             >
                               <div className="row">
@@ -354,6 +354,8 @@ function Seller() {
                                             Out Of Stock
                                           </Button>
                                         ) : (
+                                          <>
+                                          <p style={{color:"green",fontSize:"20px"}}><b>In Stock</b></p>
                                           <Button
                                             variant="warning"
                                             style={{
@@ -368,6 +370,7 @@ function Seller() {
                                             <FaCartArrowDown className="my-1 d-flex justify-content-center" />
                                             &#x2003; Add to Cart
                                           </Button>
+                                          </>
                                         )}
                                         <Button
                                           style={{

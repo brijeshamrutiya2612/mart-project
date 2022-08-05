@@ -1,10 +1,28 @@
+.card{
+  
+  height: 50vmin;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-top:1em
+}
+
 .card-item {
   transition: transform 0.5s;
 }
 
 .card-item:hover {
   transform: scale(1.1);
+  background: #7c99b3;
+  color:#ffffff !important
 }
+.card-item Link {
+  color:#ffffff !important
+}
+
 .icon-xl {
   width: 2rem;
   height: 1rem;
@@ -25,7 +43,7 @@ Link{
   font-weight: bold;
 }
 
-/* .banner{
+.banner{
   background-image: linear-gradient(to right, #7692A9, #557794);
   height: 100vmin;
   display: flex;
@@ -34,6 +52,7 @@ Link{
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  margin-top:1em
 }
 
 .banner > h1{
@@ -53,6 +72,6 @@ Link{
   position: absolute;
   top: 0%;
   left: 0;
-  clip-path: polygon(100% 68%, 0 100%, 100%, 100%);
+  clip-path: polygon(100% 68%, 0 100%, 100% 100%);
   max-width: 100%;
-} */
+}

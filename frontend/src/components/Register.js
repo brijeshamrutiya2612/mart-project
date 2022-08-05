@@ -22,6 +22,7 @@ const Register = () => {
     address3: "",
     phone: "",
     age: "",
+    avatar: "",
   });
 
   // console.log(registers);
@@ -37,6 +38,7 @@ const Register = () => {
         address3: registers.address3,
         phone: registers.phone,
         age: registers.age,
+        avatar: registers.avatar,
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -70,6 +72,7 @@ const Register = () => {
       address3,
       phone,
       age,
+      avatar
     } = registers;
 
     if (firstname === "") {
@@ -100,7 +103,9 @@ const Register = () => {
       toast.error("Plz Enter Mobile No. Must be < 5");
     } else if (age === "") {
       toast.error("Age is Require");
-    } else{
+    } else if (avatar === "") {
+      toast.error("avatar is Require");
+    }else{
       localStorage.removeItem("cartItems")
       sendRequest().then(() => sign("/login"));
       toast.success("Sucessfull Register");
@@ -249,6 +254,15 @@ const Register = () => {
                     variant="outlined"
                     onChange={(e) =>
                       setRegister({ ...registers, age: e.target.value })
+                    }
+                  />
+                  <TextField
+                    className="ml-4 col-md-11 my-3 justify-content-center"
+                    label="Profile Image"
+                    type="file"
+                    variant="standard"
+                    onChange={(e) =>
+                      setRegister({ ...registers, avatar: e.target.value })
                     }
                   />
                   <div className="my-5 justify-content-center">

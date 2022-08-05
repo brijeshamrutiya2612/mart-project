@@ -94,7 +94,7 @@ const Header = () => {
   };
   return (
     <AppBar
-      style={{ boxShadow: "1px 1px 10px #343A40", background: "#557794" }}
+      style={{ boxShadow: "1px 1px 10px #343A40", background: "#557794", opacity:0.5}}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
