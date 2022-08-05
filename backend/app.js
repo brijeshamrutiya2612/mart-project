@@ -13,6 +13,7 @@ import  ratingRouter from "./routes/RatingRoute.js";
 import sellerOrderRouter from "./routes/SellerOrderRoute.js";
 import bodyParser from 'body-parser'
 import cloudinary from  'cloudinary'
+import fileUpload from 'express-fileupload'
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cors()),
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.urlencoded({extended:true}));
+app.use(fileUpload());
 
 
 //{ credentials: true, origin: "https://localhost:3000"} )), app.use(cors({ credentials: true, origin: "https://shopping-mart-react-app.herokuapp.com/"} 
@@ -63,7 +65,7 @@ mongoose
   });
 
   cloudinary.config({
-    cloud_name: process.env.cloud_name,
-    api_key:process.env.api_key,
-    api_secret:process.env.api_secret,
+    cloud_name: process.env.CLOUD_NAME,
+    api_key:process.env.API_KEY,
+    api_secret:process.env.API_SECRET,
   })

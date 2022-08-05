@@ -29,6 +29,7 @@ router.post(
           phone: user.phone,
           age: user.age,
           email: user.email,
+          avatar: user.avatar,
           token: generateToken(user),
         });
         return;
@@ -65,39 +66,38 @@ router.put(
 router.post(
   "/signup",
   expressAsyncHandler(async (req, res) => {
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
+    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //   folder: "avatars",
+    //   width: 150,
+    //   crop: "scale",
+    // });
 
     const newUser = new User({
       firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      address1: req.body.address1,
-      address2: req.body.address2,
-      address3: req.body.address3,
-      phone: req.body.phone,
-      age: req.body.age,
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
-      avatar: req.body.avatar,
+      // lastname: req.body.lastname,
+      // address1: req.body.address1,
+      // address2: req.body.address2,
+      // address3: req.body.address3,
+      // phone: req.body.phone,
+      // age: req.body.age,
+      // email: req.body.email,
+      // password: bcrypt.hashSync(req.body.password),
     });
     const user = await newUser.save();
     res.send({
       _id: user._id,
       firstname: user.firstname,
-      lastname: user.lastname,
-      address1: user.address1,
-      address2: user.address2,
-      address3: user.address3,
-      phone: user.phone,
-      age: user.age,
-      email: user.email,
-      avatar: {
-        public_id: myCloud.public_id,
-        url: myCloud.secure_url,
-      },
+      // lastname: user.lastname,
+      // address1: user.address1,
+      // address2: user.address2,
+      // address3: user.address3,
+      // phone: user.phone,
+      // age: user.age,
+      // email: user.email,
+      // avatar: {
+      //   public_id: myCloud.public_id,
+      //   url: myCloud.secure_url,
+      // },
       token: generateToken(user),
     });
   })

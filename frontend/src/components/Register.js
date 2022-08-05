@@ -105,10 +105,14 @@ const Register = () => {
       toast.error("Age is Require");
     } else if (avatar === "") {
       toast.error("avatar is Require");
-    }else{
+    }
+    
+    if(sendRequest()){
       localStorage.removeItem("cartItems")
-      sendRequest().then(() => sign("/login"));
+      sign("/login")
       toast.success("Sucessfull Register");
+    } else{
+      toast.error("Data Not Sent In Database");
     }
     // localStorage.setItem("user", JSON.stringify(registers));
   };
