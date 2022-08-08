@@ -30,7 +30,7 @@ router.post(
           phone: user.phone,
           age: user.age,
           email: user.email,
-          image: user.image.map((x)=>({...x, image: x.asset_id})),
+          image: user.image,
           token: generateToken(user),
         });
         return;
