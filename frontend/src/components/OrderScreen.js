@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
-import { Card, Col, ListGroup, Row, Spinner, Table } from "react-bootstrap";
+import { Button, Card, Col, ListGroup, Row, Spinner, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { Store } from "../store/Context";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
@@ -135,7 +135,9 @@ const OrderScreen = () => {
       loadPayPalScript();
     }
   }, [order, userInfo, orderId, navigate, paypalDispatch, successPay]);
-
+  const home = () => {
+    navigate("/");
+  };
   
   return loading ? (
     <div className="container pt-5">
@@ -159,7 +161,7 @@ const OrderScreen = () => {
         <h1 className="my-3">Order {orderId}</h1>
         <Row>
           <Col md={8}>
-            <Card className="mb-3">
+            <Card style={{color:"#000000"}} className="mb-3">
               <Card.Body>
                 <Card.Title>Shipping Address</Card.Title>
                 <Card.Text>
@@ -177,7 +179,7 @@ const OrderScreen = () => {
                 )}
               </Card.Body>
             </Card>
-            <Card className="mb-3">
+            <Card style={{color:"#000000"}} className="mb-3">
               <Card.Body>
                 <Card.Title>Payment</Card.Title>
                 <Card.Text>
@@ -235,7 +237,7 @@ const OrderScreen = () => {
             </Table>
           </Col>
           <Col md={4}>
-            <Card className="">
+            <Card style={{color:"#000000"}}>
               <Card.Body>
                 <Card.Title>Order Summary</Card.Title>
                 <ListGroup variant="flush">
@@ -276,13 +278,24 @@ const OrderScreen = () => {
                           onError={onError}
                         ></PayPalButtons>
                       )}
-                      {loadingPay && (
+                      {loadingPay ? (
                         <div className="container pt-5">
                           <Spinner animation="border" role="status"></Spinner>
                         </div>
-                      )}
+                      ):<div className="container pt-5">
+                      <Spinner animation="border" role="status"></Spinner>
+                    </div>}
                     </ListGroup.Item>
                   )}
+                    <div className="pt-3">
+                              <Button
+                                variant="light"
+                                className="btn"
+                                onClick={home}
+                              >
+                                <strong>&#x2190;Continue Shopping</strong>
+                              </Button>
+                            </div>
                 </ListGroup>
               </Card.Body>
             </Card>

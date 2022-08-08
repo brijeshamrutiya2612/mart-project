@@ -55,7 +55,7 @@ function Finalpayment() {
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
-          mnfName:cartItems.mnfName,
+          mnfName: cartItems.mnfName,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,
@@ -82,20 +82,20 @@ function Finalpayment() {
   return (
     <div>
       <Helmet>
-          <title>Final Payment</title>
-        </Helmet>
+        <title>Final Payment</title>
+      </Helmet>
       <div
         style={{
           width: "auto",
           height: "auto",
         }}
       >
-         <div className='container col-lg-8 pt-3 pb-3 justify-content-center'>
-        <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
+        <div className="container col-lg-8 pt-3 pb-3 justify-content-center">
+          <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
           <h2 className="pt-3">Order Summary</h2>
           <Row>
             <Col>
-              <Card style={{color:"#000000"}} className="mb-3">
+              <Card style={{ color: "#000000" }} className="mb-3">
                 <Card.Body>
                   <Card.Title>Shipping Address</Card.Title>
                   <Card.Text>
@@ -108,7 +108,7 @@ function Finalpayment() {
                   <Link to="/shipping">Edit</Link>
                 </Card.Body>
               </Card>
-              <Card style={{color:"#000000"}} className="mb-3">
+              <Card style={{ color: "#000000" }} className="mb-3">
                 <Card.Body>
                   <Card.Title>Payment</Card.Title>
                   <Card.Text>
@@ -123,7 +123,7 @@ function Finalpayment() {
             <Col sm={8}>
               Your Cart Items {cartItems.length} and Qty{" "}
               {cartItems.reduce((a, c) => a + c.quantity, 0)}
-              <Table striped className="my-4" style={{background:"white"}}>
+              <Table striped className="my-4" style={{ background: "white" }}>
                 <thead>
                   <tr>
                     <th>Items</th>
@@ -157,7 +157,7 @@ function Finalpayment() {
                           <span className="mx-2">{item.quantity}</span>
                         </td>
                         <td style={{ textAlign: "right" }}>
-                        &#x20B9; {item.itemPrice * item.quantity}
+                          &#x20B9; {item.itemPrice * item.quantity}
                         </td>
                       </tr>
                     );
@@ -166,7 +166,7 @@ function Finalpayment() {
               </Table>
             </Col>
             <Col>
-              <Card style={{color:"#000000"}} className="mb-3">
+              <Card style={{ color: "#000000" }} className="mb-3">
                 <Card.Body>
                   <Card.Text>
                     <ListGroup variant="flush">
@@ -217,7 +217,10 @@ function Finalpayment() {
                         <div className="demo-content bg-alt">
                           <div className="text-center my-4">
                             <Button
-                              style={{background:"#6897bb",border:"1px solid #6897bb"}}
+                              style={{
+                                background: "#6897bb",
+                                border: "1px solid #6897bb",
+                              }}
                               size="md"
                               type="button"
                               onClick={handleSubmit}
