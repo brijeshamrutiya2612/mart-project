@@ -64,8 +64,3 @@ mongoose
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   });
 
-  cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key:process.env.API_KEY,
-    api_secret:process.env.API_SECRET,
-  })

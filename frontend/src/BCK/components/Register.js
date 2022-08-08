@@ -23,8 +23,26 @@ const Register = () => {
     phone: "",
     age: "",
   });
+  const [userImage, setUserImage] = useState("");
+  console.log(userImage)
 
-  // console.log(registers);
+  const handlesavedImage = (e)=>{
+    const files = e.target.files[0]
+    TransformFile(files)
+  }
+
+  const TransformFile = (files) =>{
+    const reader = new FileReader();
+
+    if(files){
+      reader.readAsDataURL(files)
+      reader.onloadend = () =>{
+        setUserImage(reader.result)      
+      }
+    } else {
+      setUserImage("");
+    }
+  }
   const sendRequest = async () => {
     const res = await axios
       .post("http://localhost:5000/api/signup", {
@@ -250,6 +268,7 @@ const Register = () => {
                       setRegister({ ...registers, age: e.target.value })
                     }
                   />
+                  <input type="file" accept="image" onChange={handlesavedImage}/>
                   <div className="my-5 justify-content-center">
                     <Button
                       className="ml-4 col-md-11 justify-content-center"

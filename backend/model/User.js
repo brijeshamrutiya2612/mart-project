@@ -50,6 +50,10 @@ const UserSchema = Schema(
       required: true,
       max: 100,
     },
+    image:{
+      type:Object,
+      required: true
+    },
     isAdmin:{
       type: Boolean,
       default: false,
