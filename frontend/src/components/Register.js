@@ -25,7 +25,7 @@ const Register = () => {
   });
 
   const [userImage, setUserImage] = useState("");
-  console.log(userImage)
+  
 
   const handlesavedImage = (e)=>{
     const files = e.target.files[0]
@@ -123,7 +123,7 @@ const Register = () => {
       toast.error("Age is Require");
     }
     toast.success("Sucessfull Register");
-    sendRequest().then(() => sign("/login"));
+    sendRequest()   //.then(() => sign("/login"));
     localStorage.setItem("user", JSON.stringify(registers));
   };
 

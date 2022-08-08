@@ -237,7 +237,7 @@ const Header = () => {
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt={userInfo.firstname}
-                      src="/static/images/avatar/2.jpg"
+                      src={userInfo.image.url}
                     />
                     
                   </IconButton>

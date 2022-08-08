@@ -39,7 +39,28 @@ const NewSellerRegister = () => {
     showPassword: false,
   });
 
-  // console.log(registers);
+  
+  const [sellerImage, setSellerImage] = useState("");
+  console.log(sellerImage)
+  const handleSevedImage = (e) =>{
+    const files = e.target.files[0]
+    TransferFile(files)
+  }
+
+  const TransferFile = (files) =>{
+    const reader = new FileReader();
+    if(files){
+      reader.readAsDataURL(files)
+      reader.onloadend = () =>{
+        setSellerImage(reader.result)
+      }
+    } else{
+      setSellerImage("");
+    }
+
+  }
+
+
   const sendRequest = async () => {
     const res = await axios
       .post(
@@ -56,6 +77,7 @@ const NewSellerRegister = () => {
           Mobile: registers.phone,
           GSTIN: registers.gstin,
           PAN_NO: registers.panno,
+          image: sellerImage
         }
       )
       .catch((err) => console.log(err));
@@ -143,7 +165,7 @@ const NewSellerRegister = () => {
     ) {
       toast.error(`This ${registers.mnfName} Name Already Register`);
     } else {
-      sendRequest().then(() => sign("/login"));
+      sendRequest()  //.then(() => sign("/login"));
       toast.success("Sucessfull Register");
     }
     // localStorage.setItem("seller", JSON.stringify(registers));
@@ -386,6 +408,21 @@ const NewSellerRegister = () => {
                     }
                   />
                 </Box>
+                <Box
+                  component="form"
+                  sx={{
+                    "& > :not(style)": { m: 3, width: "96ch" },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div className="col-lg-10 my-3 justify-content-center">
+                  <input type="file" accept="image" onChange={handleSevedImage}/>
+                    {sellerImage ? <>
+                      <img style={{width:"100px",}} src={sellerImage} alt={sellerImage}/>
+                    </> : "The selected image will appear"}
+                  </div>
+                  </Box>
                 <div className="container col-md-10 justify-content-center">
                   <div className="my-5 justify-content-center">
                     <Button
