@@ -237,7 +237,7 @@ const Header = () => {
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt={userInfo.firstname}
-                      src={userInfo.image.url}
+                      src={userInfo.image ? userInfo.image.url : userInfo.firstname}
                     />
                     
                   </IconButton>
@@ -287,7 +287,7 @@ const Header = () => {
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt={sellerInfo.firstname}
-                      src="/static/images/avatar/2.jpg"
+                      src={sellerInfo.image ? sellerInfo.image.url : sellerInfo.firstname}
                     />
                   </IconButton>
                 </Tooltip>

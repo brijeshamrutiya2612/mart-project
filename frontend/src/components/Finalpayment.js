@@ -55,6 +55,7 @@ function Finalpayment() {
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
+          mnfName:cartItems.mnfName,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,
@@ -94,7 +95,7 @@ function Finalpayment() {
           <h2 className="pt-3">Order Summary</h2>
           <Row>
             <Col>
-              <Card className="mb-3">
+              <Card style={{color:"#000000"}} className="mb-3">
                 <Card.Body>
                   <Card.Title>Shipping Address</Card.Title>
                   <Card.Text>
@@ -107,7 +108,7 @@ function Finalpayment() {
                   <Link to="/shipping">Edit</Link>
                 </Card.Body>
               </Card>
-              <Card className="mb-3">
+              <Card style={{color:"#000000"}} className="mb-3">
                 <Card.Body>
                   <Card.Title>Payment</Card.Title>
                   <Card.Text>
@@ -165,7 +166,7 @@ function Finalpayment() {
               </Table>
             </Col>
             <Col>
-              <Card className="mb-3">
+              <Card style={{color:"#000000"}} className="mb-3">
                 <Card.Body>
                   <Card.Text>
                     <ListGroup variant="flush">

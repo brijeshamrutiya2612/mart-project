@@ -84,83 +84,49 @@ const SellerManageOrder = () => {
                   </TableHead>
                   <TableBody>
                     {sellerorders.map((item, i) => {
-                      return (
-                        <TableRow
-                          key={i}
-                          sx={{
-                            "&:last-child td, &:last-child th": {
-                              border: 0,
-                            },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {i + 1}
-                          </TableCell>
-                          {item.orderItems
-                            .filter((itm) => {
-                              if (itm.mnfName === sellerInfo.mnfName) {
-                                return itm;
-                              }
-                            })
-                            .map((val, i) => {
-                              return (
-                                <>
-                                  <TableRow>
-                                    <TableCell
-                                      align="left"
-                                      style={{
-                                        width: "100px",
+                      return(
+                        <>
+                      {item.orderItems.filter((itm,)=>{
+                        if(itm.mnfName === sellerInfo.mnfName){
+                          return itm
+                        }
+                      }).map((val, i) => {
+                        return (
+                          <>
+                            <TableRow>
+                              <TableCell
+                                align="left"
+                                style={{
+                                  width: "100px",
 
-                                        marginRight: "12px",
-                                      }}
-                                    >
-                                      <p>{val.firstname}</p>
-                                      <img
-                                        style={{
-                                          minWidth: "100px",
-                                          maxWidth: "200px",
-                                          width: "100px",
-                                          height: "150px",
-                                          float: "left",
-                                          marginTop: "1em",
-                                          marginRight: "12px",
-                                        }}
-                                        className="img-fluid"
-                                        src={val.image}
-                                        alt=""
-                                      />
-                                    </TableCell>
-                                  </TableRow>
-                                  <TableRow>
-                                    <TableCell align="left">
-                                      <b>{item.itemName}</b>
-                                    </TableCell>
-                                  </TableRow>
-                                </>
-                              );
-                            })}
-                          <TableCell align="left">
-                            <span className="mx-2">
-                              {item.isDelivered
-                                ? item.deliveredAt.substring(0, 10)
-                                : "No"}
-                            </span>
-                          </TableCell>
-                          <TableCell align="left">
-                            <span className="mx-2">
-                              {item.isPaid
-                                ? item.paidAt.substring(0, 10)
-                                : "No"}
-                            </span>
-                          </TableCell>
-                          <TableCell align="left">
-                            {item.createdAt.substring(0, 10)}
-                          </TableCell>
-                          <TableCell align="right">
-                            &#x20B9; {item.totalPrice.toFixed(2)}
-                          </TableCell>
-                        </TableRow>
-                      );
+                                  marginRight: "12px",
+                                }}
+                              >
+                                <p>{val.firstname}</p>
+                                <img
+                                  style={{
+                                    minWidth: "100px",
+                                    maxWidth: "200px",
+                                    width: "100px",
+                                    height: "150px",
+                                    float: "left",
+                                    marginTop: "1em",
+                                    marginRight: "12px",
+                                  }}
+                                  className="img-fluid"
+                                  src={val.image}
+                                  alt=""
+                                />
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell align="left">
+                                <b>{item.itemName}</b>
+                              </TableCell>
+                            </TableRow>
+                          </>
+                        );
+                                })  }      </>)            
                     })}
                   </TableBody>
                 </Table>

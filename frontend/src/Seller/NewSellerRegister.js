@@ -165,7 +165,7 @@ const NewSellerRegister = () => {
     ) {
       toast.error(`This ${registers.mnfName} Name Already Register`);
     } else {
-      sendRequest()  //.then(() => sign("/login"));
+      sendRequest().then(() => sign("/login"));
       toast.success("Sucessfull Register");
     }
     // localStorage.setItem("seller", JSON.stringify(registers));

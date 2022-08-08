@@ -26,6 +26,7 @@ const productSchema = new Schema(
     mnfName: {
       type: String,
       required: true,
+      default:"MART Product"
     },
     itemUnit: {
       type: String,
