@@ -24,7 +24,27 @@ const Register = () => {
     age: "",
   });
 
-  // console.log(registers);
+  const [userImage, setUserImage] = useState("");
+  console.log(userImage)
+
+  const handlesavedImage = (e)=>{
+    const files = e.target.files[0]
+    TransformFile(files)
+  }
+
+  const TransformFile = (files) =>{
+    const reader = new FileReader();
+
+    if(files){
+      reader.readAsDataURL(files)
+      reader.onloadend = () =>{
+        setUserImage(reader.result)      
+      }
+    } else {
+      setUserImage("");
+    }
+  }
+
   const sendRequest = async () => {
     const res = await axios
       .post("http://localhost:5000/api/signup", {
@@ -37,6 +57,7 @@ const Register = () => {
         address3: registers.address3,
         phone: registers.phone,
         age: registers.age,
+        image: userImage
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -249,10 +270,12 @@ const Register = () => {
                       setRegister({ ...registers, age: e.target.value })
                     }
                   />
-                  <Button className="ml-4" variant="contained" component="label">
-                    Upload
-                    <input hidden accept="image/*" multiple type="file" />
-                  </Button>
+                  <div className="col-sm-5 my-3 justify-content-center">
+                  <input type="file" accept="image" onChange={handlesavedImage}/>
+                    {userImage ? <>
+                      <img style={{width:"100px",}} src={userImage} alt={userImage}/>
+                    </> : "The selected image will appear"}
+                  </div>
                   <div className="my-5 justify-content-center">
                     <Button
                       className="ml-4 col-md-11 justify-content-center"

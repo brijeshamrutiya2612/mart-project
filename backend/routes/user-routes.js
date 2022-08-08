@@ -8,7 +8,8 @@ import {
   signup,
 } from "../controllers/user-controller.js";
 import User from "../model/User.js";
-import { generateToken, isAuth, cloudinary } from "../utils.js";
+import { generateToken, isAuth } from "../utils.js";
+import cloudinary from "../cloudinary.js"; 
 
 const router = express.Router();
 
@@ -29,6 +30,7 @@ router.post(
           phone: user.phone,
           age: user.age,
           email: user.email,
+          image: user.image.map((x)=>({...x, image: x.asset_id})),
           token: generateToken(user),
         });
         return;
@@ -75,6 +77,7 @@ router.post(
       age,
       email,
       image,
+      password,
     } = req.body;
 
     try {
@@ -92,16 +95,17 @@ router.post(
             phone,
             age,
             email,
+            password: bcrypt.hashSync(req.body.password),
             image: uplodRes
           });
 
           const saveUserDetail = await user.save();
-          res.statusCode(200).send(saveUserDetail);
+          res.status(200).send(saveUserDetail);
         }
       }
     } catch(error) {
       console.log(error)
-      res.statusCode(500).send(error)
+      res.status(500).send(error)
     }
 
     //  const user = await newUser.save();
