@@ -48,6 +48,25 @@ function Finalpayment() {
     }
   }, [paymentMethod, navigate]);
 
+  const [mnf,setMnf] = useState([])
+  const [mnfData,setMnfData] = useState([])
+  useEffect(() => {
+    const getUnique = (arr, index) => {
+      const unique = cartItems
+        .map((e) => e[index])
+        .map((e, i, final) => final.indexOf(e) === i && i)
+        .filter((e) => arr[e])
+        .map((e) => arr[e]);
+
+      return unique;
+    };
+    setMnf(getUnique(cartItems, "mnfName"));
+  }, [cartItems]);
+
+  const mname = mnf.map((m)=>{return m.mnfName})
+  console.log(mname)
+
+
   const handleSubmit = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
@@ -55,7 +74,7 @@ function Finalpayment() {
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
-          sellerDetail:cartItems.map((m)=>{return m.mnfName}),
+          sellerDetail:mname,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,
