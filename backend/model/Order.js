@@ -41,11 +41,6 @@ const orderSchema = new Schema(
         },
       },
     ],
-    seller: {
-      type: mongoose.Types.ObjectId,
-      ref: "Seller",
-      required: true,
-    },
     shippingAddress: {
       firstname: {
         type: String,
