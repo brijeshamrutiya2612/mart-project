@@ -47,7 +47,7 @@ function Finalpayment() {
       navigate("/payment");
     }
   }, [paymentMethod, navigate]);
-
+console.log(cartItems.map((item)=>{return item.mnfName}))
   const handleSubmit = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
@@ -55,7 +55,6 @@ function Finalpayment() {
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
-          mnfName: cartItems.mnfName,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,

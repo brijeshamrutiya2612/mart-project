@@ -42,12 +42,8 @@ const orderSchema = new Schema(
       },
     ],
     seller: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
-      required: true,
-    },
-    mnfName: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "Seller",
       required: true,
     },
     shippingAddress: {
