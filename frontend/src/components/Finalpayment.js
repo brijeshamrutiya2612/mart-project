@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, {useState, useContext, useEffect, useReducer } from "react";
 import { Button, Card, Col, ListGroup, Row, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../store/Context";
@@ -47,7 +47,7 @@ function Finalpayment() {
       navigate("/payment");
     }
   }, [paymentMethod, navigate]);
-console.log(cartItems.map((item)=>{return item.mnfName}))
+
   const handleSubmit = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
@@ -55,7 +55,6 @@ console.log(cartItems.map((item)=>{return item.mnfName}))
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
-          mnfName:cartItems.map((i)=>{return i.mnfName}),
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,
