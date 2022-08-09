@@ -39,13 +39,21 @@ const orderSchema = new Schema(
           ref: "Product",
           required: true,
         },
-        shippingAddress: {
-          firstname: {
-            type: String,
-            required: true,
-          },
-          lastname: {
-            type: String,
+      },
+    ],
+    sellerDetail:[{
+      mnfName:{
+        type:String,
+        required:true,
+      }
+    }],
+    shippingAddress: {
+      firstname: {
+        type: String,
+        required: true,
+      },
+      lastname: {
+        type: String,
         required: true,
       },
       address1: {
@@ -85,8 +93,6 @@ const orderSchema = new Schema(
     paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
     deliveredAt: { type: Date },
-  },
-  ],
   },
   {
     timestamps: true,
