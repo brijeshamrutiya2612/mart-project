@@ -1,28 +1,3 @@
-.card{
-  
-  height: 50vmin;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  margin-top:1em
-}
-
-.card-item {
-  transition: transform 0.5s;
-}
-
-.card-item:hover {
-  transform: scale(1.1);
-  background: #7c99b3;
-  color:#ffffff !important
-}
-.card-item Link {
-  color:#ffffff !important
-}
-
 .icon-xl {
   width: 2rem;
   height: 1rem;

@@ -1,14 +1,11 @@
 import express from "express";
 import {
-  addProducts,
-  deleteProducts,
-  getAllProducts,
-  getById,
   updateProducts,
 } from "../controllers/products-controllers.js";
 import expressAsyncHandler from "express-async-handler";
 import Products from "../model/Products.js";
 import { isAuth } from "../utils.js";
+import {isAdmin} from '../MIddleware/auth.js'
 
 const prodRouter = express.Router();
 
@@ -131,7 +128,39 @@ prodRouter.get('/:id', async (req, res) => {
 
 
 
-prodRouter.post("/add", addProducts);
+prodRouter.post("/add", isAdmin, async (req, res, next) => {
+  const {
+    itemCategory,
+    itemName,
+    itemPrice,
+    mnfName,
+    quantity,
+    rating,
+    itemUnit,
+    itemDescription,
+    image,
+  } = req.body;
+
+  const products = new Products({
+    itemCategory,
+    itemName,
+    itemPrice,
+    mnfName,
+    quantity,
+    rating,
+    itemUnit,
+    itemDescription,
+    image,
+  });
+  try {
+    await products.save();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ products });
+});
+
+
 prodRouter.put("/update/:id", updateProducts);
 
 

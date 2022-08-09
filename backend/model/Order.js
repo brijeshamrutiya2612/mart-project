@@ -41,13 +41,11 @@ const orderSchema = new Schema(
         },
       },
     ],
-    sellerDetail:[{
-      mnfName:{
-        type:String,
-        required:true,
-      },
+
+    mnfName: {
+      type: String,
+      required: true,
     },
-  ],
     shippingAddress: {
       firstname: {
         type: String,

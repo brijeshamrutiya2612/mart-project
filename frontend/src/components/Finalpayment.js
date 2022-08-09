@@ -63,7 +63,7 @@ function Finalpayment() {
     setMnf(getUnique(cartItems, "mnfName"));
   }, [cartItems]);
 
-  const mname = mnf.map((m)=>{return m.mnfName})
+  const mname = mnf.map((m)=>{return m})
   console.log(mname)
 
 
@@ -74,7 +74,7 @@ function Finalpayment() {
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
-          sellerDetail: cartItems,
+          mnfName: cartItems,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,

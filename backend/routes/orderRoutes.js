@@ -10,7 +10,7 @@ orderRouter.post(
   expressAsyncHandler(async (req, res) => {
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
-      sellerDetail:req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+      mnfName:req.body.mnfName,
       shippingAddress: req.body.shippingAddress,
       paymentMethod: req.body.paymentMethod,
       itemPrice: req.body.itemPrice,

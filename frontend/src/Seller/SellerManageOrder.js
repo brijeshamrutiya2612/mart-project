@@ -84,6 +84,7 @@ const SellerManageOrder = () => {
                   </TableHead>
                   <TableBody>
                     {sellerorders.map((item, i) => {
+                      // console.log(item.sellerDetail)
                       return(
                         <>
                       {item.orderItems.filter((itm,)=>{

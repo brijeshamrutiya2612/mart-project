@@ -13,7 +13,7 @@ import cloudinary from "../cloudinary.js";
 
 const router = express.Router();
 
-// router.post("/users", signup);
+
 router.post(
   "/login",
   expressAsyncHandler(async (req, res, next) => {
