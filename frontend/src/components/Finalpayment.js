@@ -74,7 +74,7 @@ function Finalpayment() {
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
-          sellerDetail:mname,
+          sellerDetail: cartItems,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,
