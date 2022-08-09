@@ -55,6 +55,7 @@ console.log(cartItems.map((item)=>{return item.mnfName}))
         "https://shopping-mart-react-app.herokuapp.com/api/orders",
         {
           orderItems: cartItems,
+          mnfName:cartItems.map((i)=>{return i.mnfName}),
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
           itemPrice: cartItems.itemPrice,

@@ -41,6 +41,10 @@ const orderSchema = new Schema(
         },
       },
     ],
+    mnfName: [{
+      type: String,
+      required: true,
+    }],
     shippingAddress: {
       firstname: {
         type: String,
