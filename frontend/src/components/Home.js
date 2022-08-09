@@ -6,6 +6,7 @@ import {
   Col,
   Container,
   Form,
+  ListGroup,
   Row,
   Spinner,
 } from "react-bootstrap";
@@ -128,14 +129,7 @@ function Home() {
                         </>
                       ) : (
                         <>
-                          <Carousel
-                            fade
-                            style={{
-                              padding: "3em",
-                            }}
-                            activeIndex={index}
-                            onSelect={handleSelect}
-                          >
+                          <Carousel activeIndex={index} onSelect={handleSelect}>
                             {getProd.map((item, i) => {
                               return (
                                 <Carousel.Item

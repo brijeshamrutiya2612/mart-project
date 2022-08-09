@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import "react-toastify/dist/ReactToastify.css";
-import Seller from "./components/Seller";
+import Seller from "./components/ProductDetail.js";
 import Search from "./components/Search";
 import Addtocart from "./components/Addtocart";
 import Login from "./components/Login";
@@ -34,7 +34,7 @@ import SellerProducts from "./Seller/SellerProducts";
 import SellerEditProducts from "./Seller/SellerEditProducts";
 import SellerManageOrder from "./Seller/SellerManageOrder";
 import SellerProfile from "./Seller/SellerProfile";
-import SellerProtectedRouter from "./components/SellerProtectedRouter";
+import SellerProtectedRouter from "./Seller/SellerProtectedRouter.js"
 
 function App() {
   const { state } = useContext(Store);

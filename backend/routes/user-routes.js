@@ -1,12 +1,6 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
-import {
-  getUser,
-  login,
-  logout,
-  signup,
-} from "../controllers/user-controller.js";
 import User from "../model/User.js";
 import { generateToken, isAuth } from "../utils.js";
 import cloudinary from "../cloudinary.js"; 
@@ -123,7 +117,7 @@ router.post(
     // });
   })
 );
-router.get("/users", getUser); //verifyToken
+//router.get("/users", getUser); verifyToken
 // //router.get("/refresh",  getUser); refreshToken, verifyToken,
 // router.post("/logout", logout); //refreshToken,
 

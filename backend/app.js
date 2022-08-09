@@ -5,14 +5,13 @@ import router from "./routes/user-routes.js";
 import cors from "cors"
 import prodRouter from "./routes/products-routes.js";
 import path from 'path'
-import productRouter from "./routes/userProducts-routes.js";
 import dotenv from 'dotenv'
 import orderRouter from "./routes/orderRoutes.js";
 import SellerRoute from "./routes/SellerRoute.js";
-import  ratingRouter from "./routes/RatingRoute.js";
+import ratingRouter from "./routes/RatingRoute.js";
 import sellerOrderRouter from "./routes/SellerOrderRoute.js";
 import bodyParser from 'body-parser'
-import cloudinary from  'cloudinary'
+
 import fileUpload from 'express-fileupload'
 
 dotenv.config();

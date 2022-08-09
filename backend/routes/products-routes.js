@@ -1,7 +1,4 @@
 import express from "express";
-import {
-  updateProducts,
-} from "../controllers/products-controllers.js";
 import expressAsyncHandler from "express-async-handler";
 import Products from "../model/Products.js";
 import { isAuth } from "../utils.js";
@@ -128,7 +125,7 @@ prodRouter.get('/:id', async (req, res) => {
 
 
 
-prodRouter.post("/add", isAdmin, async (req, res, next) => {
+prodRouter.post("/add", async (req, res, next) => {
   const {
     itemCategory,
     itemName,
@@ -159,17 +156,5 @@ prodRouter.post("/add", isAdmin, async (req, res, next) => {
   }
   return res.status(200).json({ products });
 });
-
-
-prodRouter.put("/update/:id", updateProducts);
-
-
-// prodRouter.get("/", getAllProducts);
-// prodRouter.get("/:id", getById);
-// prodRouter.delete("/:id", deleteProducts);
-
-
-
-
 
 export default prodRouter;

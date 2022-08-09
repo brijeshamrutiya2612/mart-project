@@ -7,12 +7,10 @@ import {
   Container,
   Form,
   Row,
-  Spinner,
 } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
 import { FaCartArrowDown, FaCartPlus } from "react-icons/fa";
-import { getData } from "../store/ProductsSlice";
 import { Store } from "../store/Context";
 import { Rating } from "react-simple-star-rating";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
@@ -98,7 +96,6 @@ function Seller() {
   const final = useNavigate();
 
   useEffect(() => {
-    dispatch(getData());
     async function getAllStudent() {
       try {
         const student = await axios.get(
