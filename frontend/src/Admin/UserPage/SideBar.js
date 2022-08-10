@@ -21,18 +21,18 @@ const SideBar = () => {
     nav("/");
   };
   return (
+    <>
     <div
       className="row"
-      style={{ width: "100%", height: "100%", clear: "both" }}
+      style={{ width:"100%", height: "100%", clear: "both" }}
     >
-    <Box>
-      <div className="p-3 col-lg-15">
+      <div className="p-3">
         <div
           style={{
             border: "none",
-            boxShadow: "5px 5px 15px #888888",
             borderRadius: "20px",
             height: "100%",
+            width: "100%",
           }}
           className="p-4"
         >
@@ -43,10 +43,10 @@ const SideBar = () => {
             src="/static/images/avatar/2.jpg"
           />
           <Typography className="p-1" variant="h6">
-            {userInfo.firstname}
+            {userInfo.firstname} {userInfo.lastname}
           </Typography>
           <div className="ml-1">
-            <Typography style={{ paddingTop: "1em" }} variant="h6">
+          <Typography style={{ paddingTop: "1em" }} variant="h6">
               <Link
                 style={{
                   color: "black",
@@ -75,7 +75,6 @@ const SideBar = () => {
             <Typography style={{ paddingTop: "1.3em" }} variant="h6">
               <Link
                 style={{
-                  float: "right",
                   color: "black",
                   textDecorationLine:"none"
                 }}
@@ -83,7 +82,7 @@ const SideBar = () => {
               >
                 <HistoryIcon />
                 &#x2003;
-                <strong>Purchase History</strong>
+                <strong>History</strong>
               </Link>
             </Typography>
             <Typography style={{ paddingTop: "1.3em" }} variant="h6">
@@ -106,8 +105,8 @@ const SideBar = () => {
           </div>
         </div>
       </div>
-    </Box>
     </div>
+    </>
   );
 };
 

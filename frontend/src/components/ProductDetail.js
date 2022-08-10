@@ -368,58 +368,88 @@ function Seller() {
                                           <FaCartPlus className="my-1 d-flex justify-content-center" />
                                           &#x2003;&#x2003; Buy Now
                                         </Button>
-                                        <Divider className="my-4" variant="middle" />
+                                        <Divider
+                                          className="my-4"
+                                          variant="middle"
+                                        />
                                         <Typography
                                           className="mt-3"
-                                          style={{fontSize:"15px"}}
-
+                                          style={{ fontSize: "15px" }}
                                         >
-                                          <small><b>CATEGORY:</b></small>
+                                          <small>
+                                            <b>CATEGORY:</b>
+                                          </small>
                                           &#x2003;
-                                          <small><span style={{color:"#999999"}}>{getProd.itemCategory.toUpperCase()}</span></small>
+                                          <small>
+                                            <span style={{ color: "#999999" }}>
+                                              {getProd.itemCategory.toUpperCase()}
+                                            </span>
+                                          </small>
                                         </Typography>
                                         {getProd.mnfName ? (
-                                           <Typography
-                                           className="my-1"
-                                           style={{fontSize:"15px"}}
-                                         >
-                                           <small><b>
-                                            MANUFACTURE BY:</b></small>
+                                          <Typography
+                                            className="my-1"
+                                            style={{ fontSize: "15px" }}
+                                          >
+                                            <small>
+                                              <b>MANUFACTURE BY:</b>
+                                            </small>
                                             &#x2003;
-                                            <small><span style={{color:"#999999"}}>{getProd.mnfName.toUpperCase()}</span></small>
+                                            <small>
+                                              <span
+                                                style={{ color: "#999999" }}
+                                              >
+                                                {getProd.mnfName.toUpperCase()}
+                                              </span>
+                                            </small>
                                           </Typography>
                                         ) : (
                                           <>
-                                          <ShoppingBag
-                                            style={{
-                                              fontSize: "25px",
-                                              textAlign: "left",
-                                              color:"black"
-                                            }}
+                                            <ShoppingBag
+                                              style={{
+                                                fontSize: "25px",
+                                                textAlign: "left",
+                                                color: "black",
+                                              }}
                                             />
-                                          <Typography
-                                          className="my-1"
-                                          style={{fontSize:"15px"}}
-                                        >
-                                          <small><b>
-                                           MANUFACTURE BY:</b></small>
-                                           &#x2003;
-                                              
-                                              <small><span style={{color:"#999999"}}>MART Product</span></small>
-                                          </Typography>
+                                            <Typography
+                                              className="my-1"
+                                              style={{ fontSize: "15px" }}
+                                            >
+                                              <small>
+                                                <b>MANUFACTURE BY:</b>
+                                              </small>
+                                              &#x2003;
+                                              <small>
+                                                <span
+                                                  style={{ color: "#999999" }}
+                                                >
+                                                  MART Product
+                                                </span>
+                                              </small>
+                                            </Typography>
                                           </>
                                         )}
                                         <Typography
                                           className="my-1"
-                                          style={{fontSize:"15px"}}
+                                          style={{ fontSize: "15px" }}
                                         >
-                                          <small><b>DESCRIPTION:</b></small>
+                                          <small>
+                                            <b>DESCRIPTION:</b>
+                                          </small>
                                           &#x2003;
-                                          <small><span style={{color:"#999999"}}>{getProd.itemDescription}</span></small>
+                                          <small>
+                                            <span style={{ color: "#999999" }}>
+                                              {getProd.itemDescription}
+                                            </span>
+                                          </small>
                                         </Typography>
                                       </>
                                     )}
-                                    <Divider className="my-4" variant="middle" />
+                                    <Divider
+                                      className="my-4"
+                                      variant="middle"
+                                    />
                                     <div className="my-4">
                                       <Row>
                                         <Col>
@@ -513,8 +543,13 @@ function Seller() {
                               </div>
                             </div>
                             <div className="col-lg-15 p-5">
-                              <Typography variant="h4">
-                                Customer Review
+                              <Typography
+                                variant="h5"
+                                className="pt-5 pb-5 pl-5 text-center"
+                              >
+                                <small>
+                                  <b>CUSTMOR REVIEW</b>
+                                </small>
                               </Typography>
                               <>
                                 {loading ? (
@@ -550,76 +585,96 @@ function Seller() {
                                 ) : (
                                   <>
                                     {getRating
-                                    .filter((item) => {
-                                      if (item.productRating === getProd._id) {
-                                        return item;
-                                      }
-                                    })
-                                    .map((val, i) => {
-                                      return (
-                                        <>
-                                          {val ? (
-                                            <>
-                                              <div key={i} className="p-4">
+                                      .filter((item) => {
+                                        if (
+                                          item.productRating === getProd._id
+                                        ) {
+                                          return item;
+                                        }
+                                      })
+                                      .map((val, i) => {
+                                        return (
+                                          <>
+                                            {val ? (
+                                              <>
+                                                <div key={i} className="p-4">
                                                   <>
-                                                {user
-                                                  .filter((t) => {
-                                                    if (t._id === val.user) {
-                                                      return t;
+                                                    {user
+                                                      .filter((t) => {
+                                                        if (
+                                                          t._id === val.user
+                                                        ) {
+                                                          return t;
+                                                        }
+                                                      })
+                                                      .map((g, i) => {
+                                                        return (
+                                                          <>
+                                                            <Avatar
+                                                              key={i}
+                                                              className="mr-2"
+                                                              sx={{
+                                                                background:
+                                                                  "black",
+                                                                float: "left",
+                                                              }}
+                                                              alt={g.firstname}
+                                                              src="/static/images/avatar/2.jpg"
+                                                            />
+                                                          </>
+                                                        );
+                                                      })}
+                                                  </>
+
+                                                  <Typography
+                                                    className="p-1"
+                                                    variant="h6"
+                                                  >
+                                                    {user
+                                                      .filter((t) => {
+                                                        if (
+                                                          t._id === val.user
+                                                        ) {
+                                                          return t;
+                                                        }
+                                                      })
+                                                      .map((g) => {
+                                                        return (
+                                                          g.firstname +
+                                                          " " +
+                                                          g.lastname
+                                                        );
+                                                      })}
+                                                  </Typography>
+                                                  <Rating
+                                                    style={{
+                                                      textAlign: "left",
+                                                      color: "black",
+                                                      marginLeft: "3em",
+                                                    }}
+                                                    ratingValue={
+                                                      val.rating * 20
                                                     }
-                                                  })
-                                                  .map((g, i) => {
-                                                    return (
-                                                      <>
-                                                      <Avatar
-                                                        key={i}
-                                                        className="mr-2"
-                                                        sx={{
-                                                          background: "black",
-                                                          float: "left",
-                                                        }}
-                                                        alt={g.firstname}
-                                                        src="/static/images/avatar/2.jpg"
-                                                      />
-                                                      </>
-                                                    )})}
-                                                    </>                                               
-                                                  
-                                                <Typography
-                                                  className="p-1"
-                                                  variant="h6"
-                                                >
-                                                  {user
-                                                    .filter((t) => {
-                                                      if (t._id === val.user) {
-                                                        return t;
-                                                      }
-                                                    })
-                                                    .map((g) => {
-                                                      return (
-                                                        g.firstname +
-                                                        " " +
-                                                        g.lastname
-                                                      );
-                                                    })}
-                                                </Typography>
-                                                <Rating
-                                                style={{marginLeft:"3em"}}
-                                                  ratingValue={val.rating * 20}
-                                                  size="20"
-                                                />
-                                                <Typography style={{marginLeft:"3em"}} className="p-1">
-                                                  {val.comment}
-                                                </Typography>
-                                              </div>
-                                              <Divider variant="middle" />
-                                            </>
-                                          ) : (
-                                            "No Coustomer Review Yet"
-                                          )}
-                                        </>
-                                      );
-                                    })}
+                                                    fillColor="#F68773"
+                                                    size={15}
+                                                  />
+                                                  <Typography
+                                                    style={{
+                                                      marginLeft: "3em",
+                                                    }}
+                                                    className="p-1"
+                                                  >
+                                                    {val.comment}
+                                                  </Typography>
+                                                </div>
+                                                <Divider variant="middle" />
+                                              </>
+                                            ) : (
+                                              "No Coustomer Review Yet"
+                                            )}
+                                          </>
+                                        );
+                                      })}
                                   </>
                                 )}
                               </>

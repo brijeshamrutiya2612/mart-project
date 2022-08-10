@@ -44,7 +44,8 @@ function App() {
       <div
         style={{
           margin: "auto",
-          maxWidth:"100%"
+          minxWidth:"100%",
+          maxWidth:"100%",
         }}
       >
         <ToastContainer position="top-center" limit={1} />
@@ -53,7 +54,14 @@ function App() {
             <Header />
           </Container>
         </header>
-        <main className="pt-5">
+        <main className="pt-5" style={{
+          margin: "auto",
+          width:"100%",
+          height:"100%",
+          minxWidth:"100%",
+          maxWidth:"100%",
+          position:"relative"
+        }}>
           <Routes>
             {/* User part */}
             <Route index path="/" element={<Home />}></Route>
@@ -196,9 +204,14 @@ function App() {
             ></Route>
           </Routes>
         </main>
-        <header>
+        <footer style={{
+          width:"100%",
+          minxWidth:"100%",
+          maxWidth:"100%",
+          position:"absolute"
+        }}>
           <Footer />
-        </header>
+        </footer>
       </div>
     </React.Fragment>
   );

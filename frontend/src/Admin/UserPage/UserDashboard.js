@@ -87,13 +87,13 @@ const Userdashboard = () => {
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <div className="my-5">
+        <div className="col-lg-10 my-5">
           <Row>
             <Col md={2}>
               <SideBar></SideBar>
             </Col>
             <Col lg={10}>
-              <div className="col-lg-11">
+              <div className="container col-lg-11">
                 <Typography variant="h4">Dashboard</Typography>
                 <Typography variant="h5" className="my-4">
                   Profile Summary

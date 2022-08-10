@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
-import { AppBar, Skeleton, Stack, Typography } from "@mui/material";
+import { AppBar, Divider, Skeleton, Stack, Typography } from "@mui/material";
 import { Helmet } from "react-helmet";
 import Loading from "./Loading";
 import { Rating } from "react-simple-star-rating";
@@ -66,10 +66,7 @@ function Home() {
 
   return (
     <>
-      <div className="banner">
-        <h1>Welcome to MART</h1>
-      </div>
-      <div className="container col-lg-8">
+      <div className="container col-lg-12">
         <Helmet>
           <title>Welcome to MART</title>
         </Helmet>
@@ -141,15 +138,18 @@ function Home() {
                                   <Link key={i} to={`/Seller/${item._id}`}>
                                     <img
                                       className="d-block pb-5 w-10 mx-auto text-center"
-                                      style={{ height: "350px" }}
+                                      style={{
+                                        minWidth: "100px",
+                                        maxWidth: "500px",
+                                        height: "350px",
+                                      }}
                                       src={item.image}
                                       alt={item.itemCategory}
                                     />
                                     <Carousel.Caption
                                       style={{ color: "black" }}
                                     >
-                                      <h3>{item.itemName}</h3>
-                                      <h3>{item.itemCategory.toUpperCase()}</h3>
+                                      <Typography>{item.itemName}</Typography>
                                     </Carousel.Caption>
                                   </Link>
                                 </Carousel.Item>
@@ -158,6 +158,15 @@ function Home() {
                           </Carousel>
                         </>
                       )}
+                      <Divider className="my-5" variant="middle" />
+                      <div className="ml-5 my-5">
+                        <Typography
+                          style={{ textAlign: "center" }}
+                          variant="h3"
+                        >
+                          PRODUCTS
+                        </Typography>
+                      </div>
                       <div className="ml-5 my-5">
                         <Typography
                           style={{ textAlign: "center" }}
@@ -217,11 +226,10 @@ function Home() {
                                               <Card.Img
                                                 src={val.image}
                                                 style={{
-                                                  height: "150px",
-                                                  minHeight: "170px",
-                                                  width: "150px",
-                                                  maxHeight: "550px",
-                                                  maxWidth: "200px",
+                                                  width: "auto",
+                                                  height:"220px",
+                                                  maxWidth: "500px",
+                                                  minWidth: "100px",
                                                   textAlign: "center",
                                                 }}
                                               />
@@ -259,16 +267,16 @@ function Home() {
                                                         .toUpperCase()
                                                         .substring(0, 20)}
                                                     </Typography>
-                                                  <Rating
-                                                  style={{
-                                                    textAlign: "left",
-                                                  }}
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  fillColor="#F68773"
-                                                  size={15}
-                                                  />
+                                                    <Rating
+                                                      style={{
+                                                        textAlign: "left",
+                                                      }}
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      fillColor="#F68773"
+                                                      size={15}
+                                                    />
                                                   </Card.Title>
                                                   <Card.Title
                                                     style={{
@@ -280,7 +288,9 @@ function Home() {
                                                       style={{
                                                         fontSize: "15px",
                                                       }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
+                                                    >
+                                                      &#x20B9; {val.itemPrice}
+                                                    </Typography>
                                                   </Card.Title>
                                                   <Card.Text
                                                     style={{
@@ -304,6 +314,7 @@ function Home() {
                           </div>
                         </>
                       )}
+                      <Divider className="my-4" variant="middle" />
                       <div className="ml-5 my-5">
                         <Typography
                           style={{ textAlign: "center" }}
@@ -363,10 +374,8 @@ function Home() {
                                               <Card.Img
                                                 src={val.image}
                                                 style={{
-                                                  height: "150px",
-                                                  minHeight: "170px",
+                                                  height:"220px",
                                                   width: "150px",
-                                                  maxHeight: "550px",
                                                   maxWidth: "200px",
                                                   textAlign: "center",
                                                 }}
@@ -405,17 +414,17 @@ function Home() {
                                                         .toUpperCase()
                                                         .substring(0, 20)}
                                                     </Typography>
-                                                  <Rating
-                                                  style={{
-                                                    textAlign: "left",
-                                                    color: "black",
-                                                  }}
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  fillColor="#F68773"
-                                                  size={15}
-                                                  />
+                                                    <Rating
+                                                      style={{
+                                                        textAlign: "left",
+                                                        color: "black",
+                                                      }}
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      fillColor="#F68773"
+                                                      size={15}
+                                                    />
                                                   </Card.Title>
                                                   <Card.Title
                                                     style={{
@@ -427,7 +436,9 @@ function Home() {
                                                       style={{
                                                         fontSize: "15px",
                                                       }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
+                                                    >
+                                                      &#x20B9; {val.itemPrice}
+                                                    </Typography>
                                                   </Card.Title>
                                                   <Card.Text
                                                     style={{
@@ -451,6 +462,7 @@ function Home() {
                           </div>
                         </>
                       )}
+                      <Divider className="my-4" variant="middle" />
                       <div className="ml-5 my-5">
                         <Typography
                           style={{ textAlign: "center" }}
@@ -510,10 +522,8 @@ function Home() {
                                               <Card.Img
                                                 src={val.image}
                                                 style={{
-                                                  height: "150px",
-                                                  minHeight: "170px",
+                                                  height:"220px",
                                                   width: "150px",
-                                                  maxHeight: "550px",
                                                   maxWidth: "200px",
                                                   textAlign: "center",
                                                 }}
@@ -552,17 +562,17 @@ function Home() {
                                                         .toUpperCase()
                                                         .substring(0, 20)}
                                                     </Typography>
-                                                  <Rating
-                                                  style={{
-                                                    textAlign: "left",
-                                                    color: "black",
-                                                  }}
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  fillColor="#F68773"
-                                                  size={15}
-                                                  />
+                                                    <Rating
+                                                      style={{
+                                                        textAlign: "left",
+                                                        color: "black",
+                                                      }}
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      fillColor="#F68773"
+                                                      size={15}
+                                                    />
                                                   </Card.Title>
                                                   <Card.Title
                                                     style={{
@@ -574,7 +584,9 @@ function Home() {
                                                       style={{
                                                         fontSize: "15px",
                                                       }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
+                                                    >
+                                                      &#x20B9; {val.itemPrice}
+                                                    </Typography>
                                                   </Card.Title>
                                                   <Card.Text
                                                     style={{
@@ -598,6 +610,7 @@ function Home() {
                           </div>
                         </>
                       )}
+                      <Divider className="my-4" variant="middle" />
                       <div className="ml-5 my-5">
                         <Typography
                           style={{ textAlign: "center" }}
@@ -648,7 +661,7 @@ function Home() {
                                               style={{
                                                 height: "130px",
                                                 minHeight: "170px",
-                                                width: "250px",
+                                                width: "350px",
                                                 maxHeight: "550px",
                                                 marginTop: "1em",
                                                 textAlign: "center",
@@ -657,10 +670,8 @@ function Home() {
                                               <Card.Img
                                                 src={val.image}
                                                 style={{
-                                                  height: "150px",
-                                                  minHeight: "170px",
-                                                  width: "150px",
-                                                  maxHeight: "550px",
+                                                  height:"220px",
+                                                  width: "350px",
                                                   maxWidth: "200px",
                                                   textAlign: "center",
                                                 }}
@@ -699,17 +710,17 @@ function Home() {
                                                         .toUpperCase()
                                                         .substring(0, 20)}
                                                     </Typography>
-                                                  <Rating
-                                                  style={{
-                                                    textAlign: "left",
-                                                    color: "black",
-                                                  }}
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  fillColor="#F68773"
-                                                  size={15}
-                                                  />
+                                                    <Rating
+                                                      style={{
+                                                        textAlign: "left",
+                                                        color: "black",
+                                                      }}
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      fillColor="#F68773"
+                                                      size={15}
+                                                    />
                                                   </Card.Title>
                                                   <Card.Title
                                                     style={{
@@ -721,7 +732,9 @@ function Home() {
                                                       style={{
                                                         fontSize: "15px",
                                                       }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
+                                                    >
+                                                      &#x20B9; {val.itemPrice}
+                                                    </Typography>
                                                   </Card.Title>
                                                   <Card.Text
                                                     style={{
@@ -745,6 +758,7 @@ function Home() {
                           </div>
                         </>
                       )}
+                      <Divider className="my-4" variant="middle" />
                       <div className="ml-5 my-5">
                         <Typography
                           style={{ textAlign: "center" }}
@@ -804,10 +818,8 @@ function Home() {
                                               <Card.Img
                                                 src={val.image}
                                                 style={{
-                                                  height: "150px",
-                                                  minHeight: "170px",
+                                                  height:"220px",
                                                   width: "150px",
-                                                  maxHeight: "550px",
                                                   maxWidth: "200px",
                                                   textAlign: "center",
                                                 }}
@@ -846,17 +858,17 @@ function Home() {
                                                         .toUpperCase()
                                                         .substring(0, 20)}
                                                     </Typography>
-                                                  <Rating
-                                                  style={{
-                                                    textAlign: "left",
-                                                    color: "black",
-                                                  }}
-                                                  fillColor="#F68773"
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  size={15}
-                                                  />
+                                                    <Rating
+                                                      style={{
+                                                        textAlign: "left",
+                                                        color: "black",
+                                                      }}
+                                                      fillColor="#F68773"
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      size={15}
+                                                    />
                                                   </Card.Title>
                                                   <Card.Title
                                                     style={{
@@ -868,7 +880,9 @@ function Home() {
                                                       style={{
                                                         fontSize: "15px",
                                                       }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
+                                                    >
+                                                      &#x20B9; {val.itemPrice}
+                                                    </Typography>
                                                   </Card.Title>
                                                   <Card.Text
                                                     style={{
@@ -892,6 +906,7 @@ function Home() {
                           </div>
                         </>
                       )}
+                      <Divider className="my-4" variant="middle" />
                       <div className="ml-5 my-5">
                         <Typography
                           style={{ textAlign: "center" }}
@@ -951,10 +966,8 @@ function Home() {
                                               <Card.Img
                                                 src={val.image}
                                                 style={{
-                                                  height: "150px",
-                                                  minHeight: "170px",
-                                                  width: "150px",
-                                                  maxHeight: "550px",
+                                                  height:"120px",
+                                                  width: "auto",
                                                   maxWidth: "200px",
                                                   textAlign: "center",
                                                 }}
@@ -993,17 +1006,17 @@ function Home() {
                                                         .toUpperCase()
                                                         .substring(0, 20)}
                                                     </Typography>
-                                                  <Rating
-                                                  style={{
-                                                    textAlign: "left",
-                                                    color: "black",
-                                                  }}
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  fillColor="#F68773"
-                                                  size={15}
-                                                  />
+                                                    <Rating
+                                                      style={{
+                                                        textAlign: "left",
+                                                        color: "black",
+                                                      }}
+                                                      ratingValue={
+                                                        val.rating * 20
+                                                      }
+                                                      fillColor="#F68773"
+                                                      size={15}
+                                                    />
                                                   </Card.Title>
                                                   <Card.Title
                                                     style={{
@@ -1015,7 +1028,9 @@ function Home() {
                                                       style={{
                                                         fontSize: "15px",
                                                       }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
+                                                    >
+                                                      &#x20B9; {val.itemPrice}
+                                                    </Typography>
                                                   </Card.Title>
                                                   <Card.Text
                                                     style={{
@@ -1095,10 +1110,8 @@ function Home() {
                                             <Card.Img
                                               src={val.image}
                                               style={{
-                                                height: "150px",
-                                                minHeight: "170px",
+                                                height:"220px",
                                                 width: "150px",
-                                                maxHeight: "550px",
                                                 maxWidth: "200px",
                                                 textAlign: "center",
                                               }}
@@ -1106,74 +1119,76 @@ function Home() {
                                           </Col>
                                         </Row>
                                         <Row className="mt-5">
-                                            <Col
-                                              style={{
-                                                height: "200px",
-                                                textAlign: "left",
-                                              }}
+                                          <Col
+                                            style={{
+                                              height: "200px",
+                                              textAlign: "left",
+                                            }}
+                                          >
+                                            <Link
+                                              key={i}
+                                              to={`/Seller/${val._id}`}
                                             >
-                                              <Link
-                                                key={i}
-                                                to={`/Seller/${val._id}`}
+                                              <Card.Body
+                                                style={{
+                                                  textAlign: "left",
+                                                  color: "black",
+                                                }}
                                               >
-                                                <Card.Body
+                                                <Card.Title
                                                   style={{
                                                     textAlign: "left",
                                                     color: "black",
                                                   }}
                                                 >
-                                                  <Card.Title
+                                                  <Typography
+                                                    style={{
+                                                      fontSize: "15px",
+                                                    }}
+                                                  >
+                                                    {val.itemName
+                                                      .toUpperCase()
+                                                      .substring(0, 20)}
+                                                  </Typography>
+                                                  <Rating
                                                     style={{
                                                       textAlign: "left",
                                                       color: "black",
                                                     }}
-                                                  >
-                                                    <Typography
-                                                      style={{
-                                                        fontSize: "15px",
-                                                      }}
-                                                    >
-                                                      {val.itemName
-                                                        .toUpperCase()
-                                                        .substring(0, 20)}
-                                                    </Typography>
-                                                  <Rating
+                                                    ratingValue={
+                                                      val.rating * 20
+                                                    }
+                                                    fillColor="#F68773"
+                                                    size={15}
+                                                  />
+                                                </Card.Title>
+                                                <Card.Title
                                                   style={{
                                                     textAlign: "left",
                                                     color: "black",
                                                   }}
-                                                  ratingValue={
-                                                    val.rating * 20
-                                                  }
-                                                  fillColor="#F68773"
-                                                  size={15}
-                                                  />
-                                                  </Card.Title>
-                                                  <Card.Title
+                                                >
+                                                  <Typography
                                                     style={{
-                                                      textAlign: "left",
-                                                      color: "black",
+                                                      fontSize: "15px",
                                                     }}
                                                   >
-                                                    <Typography
-                                                      style={{
-                                                        fontSize: "15px",
-                                                      }}
-                                                    >&#x20B9; {val.itemPrice}</Typography>
-                                                  </Card.Title>
-                                                  <Card.Text
-                                                    style={{
-                                                      textAlign: "left",
-                                                      color: "tomato",
-                                                    }}
-                                                  >
-                                                    <small>ADD TO CART</small>{" "}
-                                                    &#x2192;
-                                                  </Card.Text>
-                                                </Card.Body>
-                                              </Link>
-                                            </Col>
-                                          </Row>
+                                                    &#x20B9; {val.itemPrice}
+                                                  </Typography>
+                                                </Card.Title>
+                                                <Card.Text
+                                                  style={{
+                                                    textAlign: "left",
+                                                    color: "tomato",
+                                                  }}
+                                                >
+                                                  <small>ADD TO CART</small>{" "}
+                                                  &#x2192;
+                                                </Card.Text>
+                                              </Card.Body>
+                                            </Link>
+                                          </Col>
+                                        </Row>
                                       </Container>
                                     </Card>
                                   </div>

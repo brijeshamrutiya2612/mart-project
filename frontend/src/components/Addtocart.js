@@ -63,7 +63,7 @@ const Addtocart = () => {
           <title>Your Cart</title>
         </Helmet>
       <CheckOutSteps step1></CheckOutSteps>
-      <div className="pl-5 pr-5">
+      <div className="container col-lg-10" style={{maxHeight:"100%",minHeight:"100%"}}>
         <div className="pt-3">
           <Button variant="light" className="btn" onClick={home}>
             <strong>&#x2190;Continue Shopping</strong>
@@ -72,7 +72,7 @@ const Addtocart = () => {
 
         <h2 style={{ textAlign: "center" }} className="pt-3 pb-5">
           <ShoppingBagIcon style={{ fontSize: "50px" }} />{" "}
-          Your Cart
+          Shopping Cart
         </h2>
 
         {cartItems.length === 0 ? (

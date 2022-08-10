@@ -131,8 +131,42 @@ expressAsyncHandler(async(req, res, next)=>{
    return res.status(200).json({ users });
 }));
 
-// //router.get("/refresh",  getUser); refreshToken, verifyToken,
-// router.post("/logout", logout); //refreshToken,
+router.put("/update/:id",
+expressAsyncHandler(async (req, res, next) => {
+  const { firstname, lastname, email, address, mobile } = req.body;
+  const userId = req.params.id;
+  let users;
+  try {
+    users = await User.findByIdAndUpdate(userId, {
+      firstname,
+      lastname,
+      email,
+      address,
+      mobile,
+    });
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!users) {
+    return res.status(500).json({ message: "Unable Update User Data" });
+  }
+  return res.status(200).json({ users });
+}))
+
+router.delete(
+  "/:id",
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      await user.remove();
+      res.send({ message: "User Deleted" });
+    } else {
+      res
+        .status(404)
+        .send({ message: "Some problems are occured in Deletion" });
+    }
+  })
+);
 
 export default router;
-//module.exports = router;
+

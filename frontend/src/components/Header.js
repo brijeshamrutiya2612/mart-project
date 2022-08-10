@@ -94,7 +94,7 @@ const Header = () => {
   };
   return (
     <AppBar
-      style={{ boxShadow: "1px 1px 10px #343A40", background: "#557794", opacity:0.5}}
+      style={{ background: "#FFFFFF",color:"#000000"}}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -228,14 +228,15 @@ const Header = () => {
             {userInfo ? (
               <>
                 <Link to="/addToCart" className="pr-2">
-                  <ShoppingCartOutlinedIcon style={{ color: "#FFFFFF" }} />
-                  <span style={{ color: "#FFFFFF" }}>
+                  <ShoppingCartOutlinedIcon style={{ color: "#000000" }} />
+                  <span style={{ color: "#000000" }}>
                     {cart.cartItems.length}
                   </span>
                 </Link>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
+                    style={{ backgroundColor: "#000000" }}
                       alt={userInfo.firstname}
                       src={userInfo.image ? userInfo.image.url : userInfo.firstname}
                     />
