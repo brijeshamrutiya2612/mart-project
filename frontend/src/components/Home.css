@@ -11,10 +11,10 @@
   height: 1rem;
   color: #ffffff;
 }
-Link{
-    background-color:darkgreen
+Link {
+  background-color: darkgreen;
 }
-.checkout-steps > div{
+.checkout-steps > div {
   border-radius: 0.2rem solid #a0a0aa;
   color: #a0a0aa;
 }
@@ -22,12 +22,12 @@ Link{
 .checkout-steps > div.active {
   border-bottom: 0.2rem solid #557794;
 }
-.text-bold{
+.text-bold {
   font-weight: bold;
 }
 
-.banner{
-  background-image: linear-gradient(to right, #7692A9, #557794);
+.banner {
+  background-image: linear-gradient(to right, #7692a9, #557794);
   height: 100vmin;
   display: flex;
   flex-direction: column;
@@ -35,19 +35,19 @@ Link{
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  margin-top:1em
+  margin-top: 1em;
 }
 
-.banner > h1{
+.banner > h1 {
   margin: 5vmax;
   font: 600 2.5vmax "Roboto";
 }
 
-.banner > p{
+.banner > p {
   font: 300 1.4vmax "Lucida Sans";
 }
 
-.banner::after{
+.banner::after {
   content: "";
   width: 100vw;
   height: 100vmin;

@@ -117,7 +117,20 @@ router.post(
     // });
   })
 );
-//router.get("/users", getUser); verifyToken
+router.get("/users", 
+expressAsyncHandler(async(req, res, next)=>{
+  let users;
+  try{
+    users = await User.find();
+  } catch (err){
+    console.log(err);
+  }
+  if(!users){
+     return res.status(404).json({ message: "User not Found" });
+   }
+   return res.status(200).json({ users });
+}));
+
 // //router.get("/refresh",  getUser); refreshToken, verifyToken,
 // router.post("/logout", logout); //refreshToken,
 

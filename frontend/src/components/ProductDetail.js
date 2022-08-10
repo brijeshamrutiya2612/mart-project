@@ -1,13 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Row,
-} from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
 import { FaCartArrowDown, FaCartPlus } from "react-icons/fa";
@@ -113,7 +106,7 @@ function Seller() {
         setAll(all.data);
         const Product = all.data;
         const newProduct = Product.filter((p) => {
-          if(p._id !== student.data._id){
+          if (p._id !== student.data._id) {
             return p.itemCategory === student.data.itemCategory;
           }
         });
@@ -229,7 +222,7 @@ function Seller() {
           </div>
         </AppBar>
         <>
-          <div>
+          <div className="container col-lg-10 mt-5">
             <>
               <div>
                 <div
@@ -243,7 +236,7 @@ function Seller() {
                   <div style={{ marginTop: "4em" }} />
                   <div className="my-4 mt-3">
                     <div>
-                      <div className="container col-lg-12 mt-5">
+                      <div>
                         {search == "" ? (
                           <>
                             <div
@@ -310,63 +303,56 @@ function Seller() {
                                       </div>
                                     ) : (
                                       <>
-                                        <h2>
-                                          <u>{getProd.itemName}</u>
-                                        </h2>
                                         <Rating
+                                          style={{
+                                            textAlign: "left",
+                                            color: "black",
+                                          }}
                                           ratingValue={getProd.rating * 20}
-                                          size={20}
+                                          fillColor="#F68773"
+                                          size={15}
                                         />
                                         ({getProd.rating})
-                                        <h5>
-                                          Price: &#x20B9;{getProd.itemPrice}
-                                        </h5>
-                                        <h5>
-                                          Category:{" "}
-                                          {getProd.itemCategory.toUpperCase()}
-                                        </h5>
-                                        {getProd.mnfName ? (
-                                          <h5>
-                                            Manufacture By:{" "}
-                                            {getProd.mnfName.toUpperCase()}
-                                          </h5>
-                                        ) : (
-                                          <h5>
-                                            Manufacture By:{" "}
-                                            <ShoppingBag
-                                              style={{
-                                                fontSize: "25px",
-                                                textAlign: "center",
-                                              }}
-                                            />{" "}
-                                            MART Product
-                                          </h5>
-                                        )}
-                                        <p>
-                                          <b>Description:</b>{" "}
-                                          {getProd.itemDescription}
-                                        </p>
+                                        <Typography
+                                          className="my-3"
+                                          variant="h5"
+                                        >
+                                          <b>{getProd.itemName}</b>
+                                        </Typography>
+                                        <Typography
+                                          className="my-3"
+                                          variant="h5"
+                                        >
+                                          &#x20B9;{getProd.itemPrice}
+                                        </Typography>
                                         {getProd.itemQty === 0 ? (
                                           <Button variant="light" disabled>
                                             Out Of Stock
                                           </Button>
                                         ) : (
                                           <>
-                                          <p style={{color:"green",fontSize:"20px"}}><b>In Stock</b></p>
-                                          <Button
-                                            variant="warning"
-                                            style={{
-                                              backgroundColor: "#F7CA00",
-                                              border: "none",
-                                              borderRadius: "50px",
-                                              maxWidth: "150px",
-                                            }}
-                                            className="col mb-2 d-flex justify-content-center"
-                                            onClick={send}
-                                          >
-                                            <FaCartArrowDown className="my-1 d-flex justify-content-center" />
-                                            &#x2003; Add to Cart
-                                          </Button>
+                                            <p
+                                              style={{
+                                                color: "green",
+                                                fontSize: "20px",
+                                              }}
+                                            >
+                                              <b>In Stock</b>
+                                            </p>
+                                            <Button
+                                              variant="warning"
+                                              style={{
+                                                backgroundColor: "#F7CA00",
+                                                border: "none",
+                                                borderRadius: "50px",
+                                                maxWidth: "150px",
+                                              }}
+                                              className="col mb-2 d-flex justify-content-center"
+                                              onClick={send}
+                                            >
+                                              <FaCartArrowDown className="my-1 d-flex justify-content-center" />
+                                              &#x2003; Add to Cart
+                                            </Button>
                                           </>
                                         )}
                                         <Button
@@ -376,14 +362,64 @@ function Seller() {
                                             borderRadius: "50px",
                                             maxWidth: "150px",
                                           }}
-                                          className="col d-flex justify-content-center"
+                                          className="col d-flex justify-content-center mb-3"
                                           onClick={finalBuy}
                                         >
                                           <FaCartPlus className="my-1 d-flex justify-content-center" />
                                           &#x2003;&#x2003; Buy Now
                                         </Button>
+                                        <Divider className="my-4" variant="middle" />
+                                        <Typography
+                                          className="mt-3"
+                                          style={{fontSize:"15px"}}
+
+                                        >
+                                          <small><b>CATEGORY:</b></small>
+                                          &#x2003;
+                                          <small><span style={{color:"#999999"}}>{getProd.itemCategory.toUpperCase()}</span></small>
+                                        </Typography>
+                                        {getProd.mnfName ? (
+                                           <Typography
+                                           className="my-1"
+                                           style={{fontSize:"15px"}}
+                                         >
+                                           <small><b>
+                                            MANUFACTURE BY:</b></small>
+                                            &#x2003;
+                                            <small><span style={{color:"#999999"}}>{getProd.mnfName.toUpperCase()}</span></small>
+                                          </Typography>
+                                        ) : (
+                                          <>
+                                          <ShoppingBag
+                                            style={{
+                                              fontSize: "25px",
+                                              textAlign: "left",
+                                              color:"black"
+                                            }}
+                                            />
+                                          <Typography
+                                          className="my-1"
+                                          style={{fontSize:"15px"}}
+                                        >
+                                          <small><b>
+                                           MANUFACTURE BY:</b></small>
+                                           &#x2003;
+                                              
+                                              <small><span style={{color:"#999999"}}>MART Product</span></small>
+                                          </Typography>
+                                          </>
+                                        )}
+                                        <Typography
+                                          className="my-1"
+                                          style={{fontSize:"15px"}}
+                                        >
+                                          <small><b>DESCRIPTION:</b></small>
+                                          &#x2003;
+                                          <small><span style={{color:"#999999"}}>{getProd.itemDescription}</span></small>
+                                        </Typography>
                                       </>
                                     )}
+                                    <Divider className="my-4" variant="middle" />
                                     <div className="my-4">
                                       <Row>
                                         <Col>
@@ -480,35 +516,40 @@ function Seller() {
                               <Typography variant="h4">
                                 Customer Review
                               </Typography>
-                                <>
-                                                {loading ? (
-                                                  <>
-                                                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                                  <Box sx={{ margin: 1 }}>
-                                                    <Skeleton variant="circular">
-                                                      <Avatar />
-                                                    </Skeleton>
-                                                </Box>
-                                                <Box sx={{ width: '100%' }}>
-                                                    <Skeleton width="10%">
-                                                      <Typography>.</Typography>
-                                                    </Skeleton>
-                                                </Box>
-                                                </Box>
-                                                <Box sx={{ width: '100%',ml:7 }}>
-                                                    <Skeleton width="10%">
-                                                      <Typography>.</Typography>
-                                                    </Skeleton>
-                                                </Box>
-                                                <Box sx={{ width: '100%',ml:7 }}>
-                                                    <Skeleton width="10%">
-                                                      <Typography>.</Typography>
-                                                    </Skeleton>
-                                                </Box>
-                                                </>
-                                                ) : (
-                                                  <> 
-                                  {getRating
+                              <>
+                                {loading ? (
+                                  <>
+                                    <Box
+                                      sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <Box sx={{ margin: 1 }}>
+                                        <Skeleton variant="circular">
+                                          <Avatar />
+                                        </Skeleton>
+                                      </Box>
+                                      <Box sx={{ width: "100%" }}>
+                                        <Skeleton width="10%">
+                                          <Typography>.</Typography>
+                                        </Skeleton>
+                                      </Box>
+                                    </Box>
+                                    <Box sx={{ width: "100%", ml: 7 }}>
+                                      <Skeleton width="10%">
+                                        <Typography>.</Typography>
+                                      </Skeleton>
+                                    </Box>
+                                    <Box sx={{ width: "100%", ml: 7 }}>
+                                      <Skeleton width="10%">
+                                        <Typography>.</Typography>
+                                      </Skeleton>
+                                    </Box>
+                                  </>
+                                ) : (
+                                  <>
+                                    {getRating
                                     .filter((item) => {
                                       if (item.productRating === getProd._id) {
                                         return item;
@@ -579,62 +620,235 @@ function Seller() {
                                         </>
                                       );
                                     })}
-                                    </>
-                                    )}
-                                </>
+                                  </>
+                                )}
+                              </>
                             </div>
 
                             <div
                               className="col-lg-15 mt-5"
                               style={{ zIndex: 1 }}
                             >
-                              <h3 className="d-flex pt-5 pb-5 pl-5">
-                                Related Products
-                              </h3>
+                              <Typography
+                                variant="h5"
+                                className="pt-5 pb-5 pl-5 text-center"
+                              >
+                                <small>
+                                  <b>RELATED PRODUCT</b>
+                                </small>
+                              </Typography>
                               <div className="row pl-5">
-                              {loading ? (
-                        <>
-                          <Stack spacing={1}>
-                            <Skeleton
-                              variant="rectangular"
-                              width={250}
-                              height={418}
-                            />
-                          </Stack>
-                        </>
-                      ) : error ? (
-                        <div className="container pt-5">{error}</div>
-                      ) : (
-                        <>
-                                {all.length !== 0
-                                  ? 
+                                {loading ? (
                                   <>
-                                  {all.map((val, i) => {
-                                    return (
+                                    <Stack spacing={1}>
+                                      <Skeleton
+                                        variant="rectangular"
+                                        width={250}
+                                        height={418}
+                                      />
+                                    </Stack>
+                                  </>
+                                ) : error ? (
+                                  <div className="container pt-5">{error}</div>
+                                ) : (
+                                  <>
+                                    {all.length !== 0 ? (
                                       <>
-                                        <div
-                                          key={i}
-                                          className="col-lg-15 ml-5 my-3 d-flex justify-content-center"
-                                        >
-                                          <Link to={`/Seller/${val._id}`}>
+                                        {all.map((val, i) => {
+                                          return (
+                                            <>
+                                              <div className="col-lg-15 ml-5 my-5">
+                                                <Card
+                                                  className="card card-item"
+                                                  key={i}
+                                                  style={{
+                                                    overflow: "hidden",
+                                                    width: "300px",
+                                                    maxWidth: "500px",
+                                                    transitionDuration: "1s",
+                                                    border: "none",
+                                                  }}
+                                                >
+                                                  <Container>
+                                                    <Row>
+                                                      <Col
+                                                        style={{
+                                                          height: "130px",
+                                                          minHeight: "170px",
+                                                          width: "250px",
+                                                          maxHeight: "550px",
+                                                          marginTop: "1em",
+                                                          textAlign: "center",
+                                                        }}
+                                                      >
+                                                        <Card.Img
+                                                          src={val.image}
+                                                          style={{
+                                                            height: "150px",
+                                                            minHeight: "170px",
+                                                            width: "150px",
+                                                            maxHeight: "550px",
+                                                            maxWidth: "200px",
+                                                            textAlign: "center",
+                                                          }}
+                                                        />
+                                                      </Col>
+                                                    </Row>
+                                                    <Row className="mt-5">
+                                                      <Col
+                                                        style={{
+                                                          height: "200px",
+                                                          textAlign: "left",
+                                                        }}
+                                                      >
+                                                        <Link
+                                                          key={i}
+                                                          to={`/Seller/${val._id}`}
+                                                        >
+                                                          <Card.Body
+                                                            style={{
+                                                              textAlign: "left",
+                                                              color: "black",
+                                                            }}
+                                                          >
+                                                            <Card.Title
+                                                              style={{
+                                                                textAlign:
+                                                                  "left",
+                                                                color: "black",
+                                                              }}
+                                                            >
+                                                              <Typography
+                                                                style={{
+                                                                  fontSize:
+                                                                    "15px",
+                                                                }}
+                                                              >
+                                                                {val.itemName
+                                                                  .toUpperCase()
+                                                                  .substring(
+                                                                    0,
+                                                                    20
+                                                                  )}
+                                                              </Typography>
+                                                              <Rating
+                                                                style={{
+                                                                  textAlign:
+                                                                    "left",
+                                                                  color:
+                                                                    "black",
+                                                                }}
+                                                                ratingValue={
+                                                                  val.rating *
+                                                                  20
+                                                                }
+                                                                fillColor="#F68773"
+                                                                size={15}
+                                                              />
+                                                            </Card.Title>
+                                                            <Card.Title
+                                                              style={{
+                                                                textAlign:
+                                                                  "left",
+                                                                color: "black",
+                                                              }}
+                                                            >
+                                                              <Typography
+                                                                style={{
+                                                                  fontSize:
+                                                                    "15px",
+                                                                }}
+                                                              >
+                                                                &#x20B9;{" "}
+                                                                {val.itemPrice}
+                                                              </Typography>
+                                                            </Card.Title>
+                                                            <Card.Text
+                                                              style={{
+                                                                textAlign:
+                                                                  "left",
+                                                                color: "tomato",
+                                                              }}
+                                                            >
+                                                              <small>
+                                                                ADD TO CART
+                                                              </small>{" "}
+                                                              &#x2192;
+                                                            </Card.Text>
+                                                          </Card.Body>
+                                                        </Link>
+                                                      </Col>
+                                                    </Row>
+                                                  </Container>
+                                                </Card>
+                                              </div>
+                                            </>
+                                          );
+                                        })}
+                                      </>
+                                    ) : (
+                                      <div className="container">
+                                        <Typography variant="h5">
+                                          No Any Found Related Product
+                                        </Typography>
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                            <div
+                              style={{
+                                marginTop: "2rem",
+                                marginBottom: "2rem",
+                              }}
+                            ></div>
+                            <div className="my-5" style={{ zIndex: 0 }}>
+                              <Typography
+                                variant="h5"
+                                className="pt-5 pb-5 pl-5 text-center"
+                              >
+                                <small>
+                                  <b>ALSO MAY YOU LIKE</b>
+                                </small>
+                              </Typography>
+                              <div className="row pl-5 pb-5">
+                                {loading ? (
+                                  <>
+                                    <Stack spacing={1}>
+                                      <Skeleton
+                                        variant="rectangular"
+                                        width={250}
+                                        height={418}
+                                      />
+                                    </Stack>
+                                  </>
+                                ) : error ? (
+                                  <div className="container pt-5">{error}</div>
+                                ) : (
+                                  <>
+                                    {product.map((val, i) => {
+                                      return (
+                                        <>
+                                          <div className="col-lg-15 ml-5 my-5">
                                             <Card
                                               className="card card-item"
+                                              key={i}
                                               style={{
                                                 overflow: "hidden",
-                                                width: "250px",
+                                                width: "300px",
                                                 maxWidth: "500px",
-                                                background: "#FFFFFF",
                                                 transitionDuration: "1s",
-                                                border: "5px solid #BFD3E2",
+                                                border: "none",
                                               }}
                                             >
                                               <Container>
                                                 <Row>
                                                   <Col
                                                     style={{
-                                                      height: "200px",
+                                                      height: "130px",
                                                       minHeight: "170px",
-                                                      width: "150px",
+                                                      width: "250px",
                                                       maxHeight: "550px",
                                                       marginTop: "1em",
                                                       textAlign: "center",
@@ -643,9 +857,10 @@ function Seller() {
                                                     <Card.Img
                                                       src={val.image}
                                                       style={{
-                                                        maxHeight: "250px",
-                                                        height: "auto",
-                                                        width: "auto",
+                                                        height: "150px",
+                                                        minHeight: "170px",
+                                                        width: "150px",
+                                                        maxHeight: "550px",
                                                         maxWidth: "200px",
                                                         textAlign: "center",
                                                       }}
@@ -656,102 +871,115 @@ function Seller() {
                                                   <Col
                                                     style={{
                                                       height: "200px",
-                                                      textAlign: "center",
+                                                      textAlign: "left",
                                                     }}
                                                   >
-                                                    <Card.Body
-                                                      style={{
-                                                        textAlign: "center",
-                                                        color: "black",
-                                                      }}
+                                                    <Link
+                                                      key={i}
+                                                      to={`/Seller/${val._id}`}
                                                     >
-                                                      <Card.Title
+                                                      <Card.Body
                                                         style={{
-                                                          textAlign: "center",
+                                                          textAlign: "left",
                                                           color: "black",
                                                         }}
                                                       >
-                                                        {val.itemName.substring(
-                                                          0,
-                                                          20
-                                                        )}
-                                                      </Card.Title>
-                                                      <Card.Title
-                                                        style={{
-                                                          textAlign: "center",
-                                                          color: "black",
-                                                        }}
-                                                      >
-                                                        &#x20B9;{" "}
-                                                        {val.itemPrice}
-                                                      </Card.Title>
-                                                      <Card.Text
-                                                        style={{
-                                                          textAlign: "center",
-                                                          color: "black",
-                                                        }}
-                                                      >
-                                                        {val.itemCategory.toUpperCase()}
-                                                      </Card.Text>
-                                                      <Button
-                                                        className="btn-sm btn-c"
-                                                        variant="dark"
-                                                      >
-                                                        Shop now &#x2192;
-                                                      </Button>
-                                                    </Card.Body>
+                                                        <Card.Title
+                                                          style={{
+                                                            textAlign: "left",
+                                                            color: "black",
+                                                          }}
+                                                        >
+                                                          <Typography
+                                                            style={{
+                                                              fontSize: "15px",
+                                                            }}
+                                                          >
+                                                            {val.itemName
+                                                              .toUpperCase()
+                                                              .substring(0, 20)}
+                                                          </Typography>
+                                                          <Rating
+                                                            style={{
+                                                              textAlign: "left",
+                                                              color: "black",
+                                                            }}
+                                                            ratingValue={
+                                                              val.rating * 20
+                                                            }
+                                                            fillColor="#F68773"
+                                                            size={15}
+                                                          />
+                                                        </Card.Title>
+                                                        <Card.Title
+                                                          style={{
+                                                            textAlign: "left",
+                                                            color: "black",
+                                                          }}
+                                                        >
+                                                          <Typography
+                                                            style={{
+                                                              fontSize: "15px",
+                                                            }}
+                                                          >
+                                                            &#x20B9;{" "}
+                                                            {val.itemPrice}
+                                                          </Typography>
+                                                        </Card.Title>
+                                                        <Card.Text
+                                                          style={{
+                                                            textAlign: "left",
+                                                            color: "tomato",
+                                                          }}
+                                                        >
+                                                          <small>
+                                                            ADD TO CART
+                                                          </small>{" "}
+                                                          &#x2192;
+                                                        </Card.Text>
+                                                      </Card.Body>
+                                                    </Link>
                                                   </Col>
                                                 </Row>
                                               </Container>
                                             </Card>
-                                          </Link>
-                                        </div>
-                                      </>
-                                    );
-                                  })}
+                                          </div>
+                                        </>
+                                      );
+                                    })}
                                   </>
-                                  : 
-                                  <div className="container">
-                                    <Typography variant="h5">No Any Found Related Product</Typography>
-                                  </div>
-                                }
-                                    </>
-                                    )}
+                                )}
                               </div>
                             </div>
-                            <div
-                              style={{
-                                marginTop: "2rem",
-                                marginBottom: "2rem",
-                              }}
-                            ></div>
-                            <div className="my-5" style={{ zIndex: 0 }}>
-                              <h3 className="d-flex pt-5 pb-5 pl-5">
-                                Also may you like
-                              </h3>
-                              <div className="row pl-5 pb-5">
-                              {loading ? (
-                        <>
-                          <Stack spacing={1}>
-                            <Skeleton
-                              variant="rectangular"
-                              width={250}
-                              height={418}
-                            />
-                          </Stack>
-                        </>
-                      ) : error ? (
-                        <div className="container pt-5">{error}</div>
-                      ) : (
-                        <>
-                                {product.map((val, i) => {
-                                  return (
-                                    <>
-                                      <div
-                                        key={i}
-                                        className="col-lg-15 ml-5 my-3 d-flex justify-content-center"
-                                      >
-                                        <Link to={`/Seller/${val._id}`}>
+                          </>
+                        ) : (
+                          <div className="row pt-5">
+                            {product
+                              .filter((itm) => {
+                                if (search == "") {
+                                  return itm;
+                                } else if (
+                                  itm.itemName
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
+                                ) {
+                                  let final = [{ itm }];
+                                  return final;
+                                } else if (
+                                  itm.itemCategory
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())
+                                ) {
+                                  let final = [{ itm }];
+                                  return final;
+                                }
+                              })
+                              .map((val, i) => {
+                                return (
+                                  <>
+                                    {val ? (
+                                      <>
+                                        <div className="col-lg-15 ml-5 my-5">
                                           <Card
                                             className="card card-item"
                                             key={i}
@@ -759,9 +987,8 @@ function Seller() {
                                               overflow: "hidden",
                                               width: "250px",
                                               maxWidth: "500px",
-                                              background: "#FFFFFF",
                                               transitionDuration: "1s",
-                                              border: "5px solid #BFD3E2",
+                                              border: "none",
                                             }}
                                           >
                                             <Container>
@@ -795,133 +1022,9 @@ function Seller() {
                                                     textAlign: "center",
                                                   }}
                                                 >
-                                                  <Card.Body
-                                                    style={{
-                                                      textAlign: "center",
-                                                      color: "black",
-                                                    }}
-                                                  >
-                                                    <Card.Title
-                                                      style={{
-                                                        textAlign: "center",
-                                                        color: "black",
-                                                      }}
-                                                    >
-                                                      {val.itemName.substring(
-                                                        0,
-                                                        20
-                                                      )}
-                                                    </Card.Title>
-                                                    <Card.Title
-                                                      style={{
-                                                        textAlign: "center",
-                                                        color: "black",
-                                                      }}
-                                                    >
-                                                      &#x20B9; {val.itemPrice}
-                                                    </Card.Title>
-                                                    <Card.Text
-                                                      style={{
-                                                        textAlign: "center",
-                                                        color: "black",
-                                                      }}
-                                                    >
-                                                      {val.itemCategory.toUpperCase()}
-                                                    </Card.Text>
-                                                    <Button
-                                                      className="btn-sm btn-c"
-                                                      variant="dark"
-                                                    >
-                                                      Shop now &#x2192;
-                                                    </Button>
-                                                  </Card.Body>
-                                                </Col>
-                                              </Row>
-                                            </Container>
-                                          </Card>
-                                        </Link>
-                                      </div>
-                                    </>
-                                  );
-                                })}
-                                </>)}
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="row pt-5">
-                            {product
-                              .filter((itm) => {
-                                if (search == "") {
-                                  return itm;
-                                } else if (
-                                  itm.itemName
-                                    .toLowerCase()
-                                    .includes(search.toLowerCase())
-                                ) {
-                                  let final = [{ itm }];
-                                  return final;
-                                } else if (
-                                  itm.itemCategory
-                                    .toLowerCase()
-                                    .includes(search.toLowerCase())
-                                ) {
-                                  let final = [{ itm }];
-                                  return final;
-                                }
-                              })
-                              .map((val, i) => {
-                                return (
-                                  <>
-                                    {val ? (
-                                      <>
-                                        <div className="col-lg-15 ml-5 my-3 d-flex justify-content-center">
-                                          <Link
-                                            key={i}
-                                            to={`/Seller/${val._id}`}
-                                          >
-                                            <Card
-                                              className="card card-item"
-                                              key={i}
-                                              style={{
-                                                overflow: "hidden",
-                                                width: "250px",
-                                                maxWidth: "500px",
-                                                background: "#FFFFFF",
-                                                transitionDuration: "1s",
-                                                border: "5px solid #BFD3E2",
-                                              }}
-                                            >
-                                              <Container>
-                                                <Row>
-                                                  <Col
-                                                    style={{
-                                                      height: "200px",
-                                                      minHeight: "170px",
-                                                      width: "150px",
-                                                      maxHeight: "550px",
-                                                      marginTop: "1em",
-                                                      textAlign: "center",
-                                                    }}
-                                                  >
-                                                    <Card.Img
-                                                      src={val.image}
-                                                      style={{
-                                                        maxHeight: "250px",
-                                                        height: "auto",
-                                                        width: "auto",
-                                                        maxWidth: "200px",
-                                                        textAlign: "center",
-                                                      }}
-                                                    />
-                                                  </Col>
-                                                </Row>
-                                                <Row className="mt-5">
-                                                  <Col
-                                                    style={{
-                                                      height: "200px",
-                                                      textAlign: "center",
-                                                    }}
+                                                  <Link
+                                                    key={i}
+                                                    to={`/Seller/${val._id}`}
                                                   >
                                                     <Card.Body
                                                       style={{
@@ -931,18 +1034,17 @@ function Seller() {
                                                     >
                                                       <Card.Title
                                                         style={{
-                                                          textAlign: "center",
+                                                          textAlign: "left",
                                                           color: "black",
                                                         }}
                                                       >
-                                                        {val.itemName.substring(
-                                                          0,
-                                                          20
-                                                        )}
+                                                        {val.itemName
+                                                          .toUpperCase()
+                                                          .substring(0, 20)}
                                                       </Card.Title>
                                                       <Card.Title
                                                         style={{
-                                                          textAlign: "center",
+                                                          textAlign: "left",
                                                           color: "black",
                                                         }}
                                                       >
@@ -950,24 +1052,21 @@ function Seller() {
                                                       </Card.Title>
                                                       <Card.Text
                                                         style={{
-                                                          textAlign: "center",
-                                                          color: "black",
+                                                          textAlign: "left",
+                                                          color: "tomato",
                                                         }}
                                                       >
-                                                        {val.itemCategory.toUpperCase()}
+                                                        <small>
+                                                          ADD TO CART
+                                                        </small>{" "}
+                                                        &#x2192;
                                                       </Card.Text>
-                                                      <Button
-                                                        className="btn-sm btn-c"
-                                                        variant="dark"
-                                                      >
-                                                        Shop now &#x2192;
-                                                      </Button>
                                                     </Card.Body>
-                                                  </Col>
-                                                </Row>
-                                              </Container>
-                                            </Card>
-                                          </Link>
+                                                  </Link>
+                                                </Col>
+                                              </Row>
+                                            </Container>
+                                          </Card>
                                         </div>
                                       </>
                                     ) : (
