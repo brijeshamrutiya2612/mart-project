@@ -1,12 +1,13 @@
 import jwt, { decode } from "jsonwebtoken";
 
+
 export const generateToken = (user) => {
   return jwt.sign(
     {
       _id: user._id,
-      firstname:user.firstname,
+      firstname: user.firstname,
       email: user.email,
-      isAdmin:user.isAdmin
+      isAdmin: user.isAdmin,
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -14,6 +15,7 @@ export const generateToken = (user) => {
     }
   );
 };
+
 export const generateSellerToken = (seller) => {
   return jwt.sign(
     {
@@ -43,4 +45,3 @@ export const isAuth = (req, res, next) => {
     res.status(401).send({ message: "No Token" });
   }
 };
-

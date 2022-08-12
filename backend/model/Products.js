@@ -41,16 +41,11 @@ const productSchema = new Schema(
       required: true,
 
     },    
-  //  [{
-  //     public_id: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     url: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //   }],
+    Product_Seller:{
+      type:mongoose.Schema.ObjectId,
+      ref:"Seller",
+      required:true
+    }
   },
   {
     timestamps: true,

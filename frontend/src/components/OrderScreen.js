@@ -37,7 +37,7 @@ const OrderScreen = () => {
   const { state } = useContext(Store);
   const {
     // eslint-disable-next-line
-    cart,
+    cart:{cartItems},
     userInfo,
   } = state;
   const params = useParams();
@@ -69,6 +69,23 @@ const OrderScreen = () => {
   }
   function onApprove(data, action) {
     return action.order.capture().then(async function (details) {
+      try {
+        dispatch({ type: "PAY_REQUEST" });
+        const { data } = await axios.put(
+          `https://shopping-mart-react-app.herokuapp.com/api/orders/${order._id}/pay`,
+          details,
+          {
+            headers: {
+              authorization: `Bearer ${userInfo.token}`
+            },
+          }
+        );
+        dispatch({ type: "PAY_SUCESS", payload: data });
+        toast.success("Order is Paid");
+      } catch (err) {
+        dispatch({ type: "PAY_FAIL", payload: err });
+        toast.error(err);
+      }
       try {
         dispatch({ type: "PAY_REQUEST" });
         const { data } = await axios.put(

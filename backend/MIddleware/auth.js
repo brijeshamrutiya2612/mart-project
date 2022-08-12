@@ -8,7 +8,7 @@ export const auth = (req, res, next) =>{
     try{
 
         const secretKey = process.env.JWT_SECRET_KEY;
-        const user = jwt.verify(token, secretKey)
+        const user = jwt.verify(token, MY_SECRET)
         req.user = user
 
         next();

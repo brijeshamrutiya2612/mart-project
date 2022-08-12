@@ -39,7 +39,7 @@ const Addtocart = () => {
   };
   const removeCartItems = (item,quantity) => {
     ctxDispatch({type:'CART_REMOVE_ITEM', payload: {...item, quantity},})
-    toast.error(item.itemName + "remove from cart")
+    toast.error(item.itemName + " " + "remove from cart")
   };
   const cartClear = (item, quantity) => {
     ctxDispatch({type:'CART_CLEAR', payload: {...item, quantity}})

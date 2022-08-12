@@ -50,16 +50,26 @@ const UserSchema = Schema(
       required: true,
       max: 100,
     },
-    image:{
-      type:Object,
-      required: true
+    image: {
+      type: Object,
+      required: true,
     },
-    isAdmin:{
+    isAdmin: {
       type: Boolean,
       default: false,
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
   },
   { timestamps: true }
 );
+
+UserSchema.pre("save", async function(next){
+  if(!this.isModified("password")){
+    next();
+  }
+
+  this.password = await bcrypt.hash(this.password, 10)
+})
 
 export default mongoose.model("User", UserSchema);

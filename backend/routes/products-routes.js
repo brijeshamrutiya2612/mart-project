@@ -2,26 +2,26 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Products from "../model/Products.js";
 import { isAuth } from "../utils.js";
-import {isAdmin} from '../MIddleware/auth.js'
+import { isAdmin } from "../MIddleware/auth.js";
+
 
 const prodRouter = express.Router();
 
-
-prodRouter.get('/', async (req, res) => {
+prodRouter.get("/", async (req, res) => {
   const products = await Products.find();
   res.send(products);
 });
 
 prodRouter.delete(
-  '/:id',
+  "/:id",
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const product = await Products.findById(req.params.id);
     if (product) {
       await product.remove();
-      res.send({ message: 'Product Deleted' });
+      res.send({ message: "Product Deleted" });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: "Product Not Found" });
     }
   })
 );
@@ -29,29 +29,30 @@ prodRouter.delete(
 const PAGE_SIZE = 8;
 
 prodRouter.get(
-  '/search',
+  "/search",
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const pageSize = query.pageSize || PAGE_SIZE;
     const page = query.page || 1;
-    const itemCategory = query.itemCategory || '';
-    const itemPrice = query.itemPrice || '';
-    const rating = query.rating || '';
-    const order = query.order || '';
-    const searchQuery = query.itemName || query.itemCategory || '';
+    const itemCategory = query.itemCategory || "";
+    const itemPrice = query.itemPrice || "";
+    const rating = query.rating || "";
+    const order = query.order || "";
+    const searchQuery = query.itemName || query.itemCategory || "";
 
     const queryFilter =
-      searchQuery && searchQuery !== 'all'
+      searchQuery && searchQuery !== "all"
         ? {
             name: {
               $regex: searchQuery,
-              $options: 'i',
+              $options: "i",
             },
           }
         : {};
-    const categoryFilter = itemCategory && itemCategory !== 'all' ? { itemCategory } : {};
+    const categoryFilter =
+      itemCategory && itemCategory !== "all" ? { itemCategory } : {};
     const ratingFilter =
-      rating && rating !== 'all'
+      rating && rating !== "all"
         ? {
             rating: {
               $gte: Number(rating),
@@ -59,25 +60,25 @@ prodRouter.get(
           }
         : {};
     const priceFilter =
-      itemPrice && itemPrice !== 'all'
+      itemPrice && itemPrice !== "all"
         ? {
             // 1-50
             itemPrice: {
-              $gte: Number(itemPrice.split('-')[0]),
-              $lte: Number(itemPrice.split('-')[1]),
+              $gte: Number(itemPrice.split("-")[0]),
+              $lte: Number(itemPrice.split("-")[1]),
             },
           }
         : {};
     const sortOrder =
-      order === 'featured'
+      order === "featured"
         ? { featured: -1 }
-        : order === 'lowest'
+        : order === "lowest"
         ? { itemPrice: 1 }
-        : order === 'highest'
+        : order === "highest"
         ? { itemPrice: -1 }
-        : order === 'toprated'
+        : order === "toprated"
         ? { rating: -1 }
-        : order === 'newest'
+        : order === "newest"
         ? { createdAt: -1 }
         : { _id: -1 };
 
@@ -107,54 +108,29 @@ prodRouter.get(
 );
 
 prodRouter.get(
-  '/categories',
+  "/categories",
   expressAsyncHandler(async (req, res) => {
-    const categories = await Products.find().distinct('itemCategory');
+    const categories = await Products.find().distinct("itemCategory");
     res.send(categories);
   })
 );
 
-prodRouter.get('/:id', async (req, res) => {
+prodRouter.get("/:id", async (req, res) => {
   const product = await Products.findById(req.params.id);
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product Not Found' });
+    res.status(404).send({ message: "Product Not Found" });
   }
 });
 
-
-
-prodRouter.post("/add", async (req, res, next) => {
-  const {
-    itemCategory,
-    itemName,
-    itemPrice,
-    mnfName,
-    quantity,
-    rating,
-    itemUnit,
-    itemDescription,
-    image,
-  } = req.body;
-
-  const products = new Products({
-    itemCategory,
-    itemName,
-    itemPrice,
-    mnfName,
-    quantity,
-    rating,
-    itemUnit,
-    itemDescription,
-    image,
-  });
-  try {
-    await products.save();
-  } catch (err) {
-    return console.log(err);
-  }
-  return res.status(200).json({ products });
-});
+prodRouter.post("/add", expressAsyncHandler(async (req,res,next)=>{
+  req.body.Product_Seller = req.body.id;
+const product = await Products.create(req.body);
+res.status(201).json({
+  success:true,
+  product
+})
+}));
 
 export default prodRouter;
