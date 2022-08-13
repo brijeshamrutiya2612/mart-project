@@ -55,7 +55,7 @@ function App() {
             <Header />
           </Container>
         </header>
-        <main className="pt-5" style={{
+        <main className="pt-5 pb-5" style={{
           margin: "auto",
           width:"100%",
           height:"100%",

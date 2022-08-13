@@ -888,7 +888,7 @@ function Home() {
                           </Col>
                         </Row>
                       </div>
-                      <Divider className="my-4 pt-5 pb-5" variant="middle" />
+                      <Divider className="my-4 pb-5" variant="middle" />
                     </>
                   ) : (
                     <div className="row">
