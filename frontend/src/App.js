@@ -35,6 +35,7 @@ import SellerEditProducts from "./Seller/SellerEditProducts";
 import SellerManageOrder from "./Seller/SellerManageOrder";
 import SellerProfile from "./Seller/SellerProfile";
 import SellerProtectedRouter from "./Seller/SellerProtectedRouter.js"
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   const { state } = useContext(Store);
@@ -71,6 +72,7 @@ function App() {
             )}{" "}
             {/* Public part */}
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/search" element={<Search />}></Route>
             <Route path="/addToCart" element={<Addtocart />}></Route>
@@ -205,10 +207,11 @@ function App() {
           </Routes>
         </main>
         <footer style={{
-          width:"100%",
-          minxWidth:"100%",
-          maxWidth:"100%",
-          position:"absolute"
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+          right: 0,
+          height:"8%",
         }}>
           <Footer />
         </footer>

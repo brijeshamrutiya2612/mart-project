@@ -7,7 +7,7 @@ import axios from "axios";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import { Store } from "../store/Context";
 import { toast } from "react-toastify";
-import login from "../Images/Lovepik_com-450071336-create account vector illustration.png"
+import forgot from "../Images/Lovepik_com-450092369-illustration of forgot password flat design.png"
 
 const Login = () => {
   const { search } = useLocation();
@@ -117,7 +117,7 @@ const Login = () => {
                   className="text-center justify-content-center pt-5"
                   variant="h4"
                 >
-                  <img style={{width:"100%"}} src={login} alt="login"/>
+                  <img style={{width:"100%"}} src={forgot} alt="login"/>
                 </Typography>
               </Col>
               <Col
@@ -128,7 +128,7 @@ const Login = () => {
               >
                 <div className="container p-5">
                   <Typography className="my-4" variant="h4">
-                    Sign In
+                    Forgot Password
                   </Typography>
                   <TextField
                     className="my-3 col-md-12 justify-content-center"
@@ -139,25 +139,6 @@ const Login = () => {
                       setEmail({ ...emails, email: e.target.value })
                     }
                   />
-                  <br />
-                  <TextField
-                    className="my-3 col-md-12 justify-content-center"
-                    type="password"
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                    onChange={(e) =>
-                      setEmail({ ...emails, password: e.target.value })
-                    }
-                  />
-                  <Typography className="text-right" style={{fontSize:"12px"}}>
-                    <Link
-                      to={`/forgotpassword`}
-                      style={{ color: "tomato", textAlign: "right" }}
-                    >
-                      Forgot Password?
-                    </Link>
-                  </Typography>
                   <div className="my-5 justify-content-center">
                     <Button
                       className="col-md-12 justify-content-center"
@@ -165,27 +146,9 @@ const Login = () => {
                       style={{backgroundColor:"#FE6684",border:"#FE6684",color:"#FFFFFF",borderRadius:"0px",borderBlockColor:"#FE6684"}}
                       onClick={handleSubmit}
                     >
-                      LOGIN
+                      SUBMIT
                     </Button>
                   </div>
-                  <p>
-                    Not a member?{" "}
-                    <Link
-                      to={`/register?redirect=${redirect}`}
-                      style={{ color: "tomato" }}
-                    >
-                      Create Your Account
-                    </Link>
-                  </p>
-                  <p>
-                    You want sell your Product?{" "}
-                    <Link
-                      to={`/NewSellerRegister?redirect=${redirect}`}
-                      style={{ color: "tomato" }}
-                    >
-                      Create Seller Account
-                    </Link>
-                  </p>
                 </div>
               </Col>
             </Row>

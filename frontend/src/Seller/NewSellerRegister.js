@@ -196,7 +196,7 @@ const NewSellerRegister = () => {
       <div
         style={{
           width: "auto",
-          height: "auto",
+          height: "100%",
         }}
       >
         <div className="container col-lg-7 pt-5 pb-3 justify-content-center">
@@ -207,9 +207,7 @@ const NewSellerRegister = () => {
                 style={{
                   backgroundColor: "white",
                   overflow: "hidden",
-                  boxShadow: "1px 1px 15px #343A40",
-                  borderRadius: "20px",
-                  opacity: 0.8,
+                  boxShadow: "-18px -6px 35px -2px #B7BBBF",
                 }}
               >
                 <h2 className="container pt-4 ml-4 col-md-11">
@@ -429,10 +427,7 @@ const NewSellerRegister = () => {
                       className="ml-4 col-md-11 justify-content-center"
                       variant="contained"
                       onClick={signIn}
-                      style={{
-                        border: "none",
-                        borderRadius: "50px",
-                      }}
+                      style={{backgroundColor:"#FE6684",border:"#FE6684",color:"#FFFFFF",borderRadius:"0px",borderBlockColor:"#FE6684"}}
                     >
                       Register
                     </Button>

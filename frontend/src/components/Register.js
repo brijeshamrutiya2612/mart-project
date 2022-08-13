@@ -143,8 +143,8 @@ const Register = () => {
                 style={{
                   backgroundColor: "white",
                   overflow: "hidden",
-                  boxShadow: "1px 1px 15px #343A40",
-                  borderRadius: "20px",
+                  boxShadow: "0px 0px 35px 10px #B7BBBF",
+                  borderRadius: "0px",
                   opacity: 0.8,
                 }}
               >
@@ -281,11 +281,7 @@ const Register = () => {
                       className="ml-4 col-md-11 justify-content-center"
                       variant="contained"
                       onClick={signIn}
-                      style={{
-                        backgroundColor: "#96B5BA",
-                        border: "none",
-                        borderRadius: "50px",
-                      }}
+                      style={{backgroundColor:"#FE6684",border:"#FE6684",color:"#FFFFFF",borderRadius:"0px",borderBlockColor:"#FE6684"}}
                     >
                       Register
                     </Button>

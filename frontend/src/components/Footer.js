@@ -26,7 +26,7 @@ function Footer() {
       >
         <Navbar
           expand="lg"
-          style={{ boxShadow: "-1px -7px 18px -6px #343A40" }}
+          style={{ boxShadow: "-1px -7px 18px -6px #B7BBBF" }}
         >
           <Container>
             <Navbar.Brand className="container d-flex justify-content-center">

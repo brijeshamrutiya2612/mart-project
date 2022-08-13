@@ -178,6 +178,8 @@ const Header = () => {
           </Typography>
           
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          {userInfo ? (
+            <>
             <Tooltip title="Show Products">
               <Button
                 aria-label="account of current user"
@@ -190,6 +192,7 @@ const Header = () => {
                 <Typography textAlign="center">Products</Typography>
               </Button>
             </Tooltip>
+            </>):null}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -334,7 +337,7 @@ const Header = () => {
                   value="products"
                 >
                   <Typography textAlign="center">
-                    <Link style={{ color: "#FFFFFF" }} to="/login">
+                    <Link style={{ color: "#000000" }} to="/login">
                       Login
                     </Link>
                   </Typography>
