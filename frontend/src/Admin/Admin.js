@@ -10,15 +10,15 @@ function Admin() {
   const goAddproducts = () =>{
     nav("/productview");
   }
-  const goUsers = () =>{
-    nav("/User");
+  const goAccounts = () =>{
+    nav("/Accounts");
   }
 
   return (
     <div style={{height:"auto",background:"cover",width:"auto"}} className="container col-lg-6 my-4 justify-content-center">
       <Button className="col-lg-3 mr-3 my-2" variant="success" onClick={goDashboard}>Dashboard</Button>
       <Button className="col-lg-4 mr-3 my-2" variant="success" onClick={goAddproducts}>Products</Button>
-      <Button className="col-lg-3 mr-3 my-2" variant="success" onClick={goUsers}>Users</Button>
+      <Button className="col-lg-3 mr-3 my-2" variant="success" onClick={goAccounts}>Accounts</Button>
     </div>
   );
 }

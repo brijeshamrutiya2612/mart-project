@@ -390,7 +390,7 @@ function Home() {
                               All Items are available for WOMEN
                             </Typography>
                             <Typography className="my-3" variant="h6">
-                              Like, Shirts, Pents, T-Shirts, Watch, More
+                              Like, Dresses, Kurtis, Saree, More
                             </Typography>
                             <Typography className="my-3" variant="h6">
                               Branded Clothes and More

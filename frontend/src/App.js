@@ -15,7 +15,7 @@ import Footer from "./components/Footer";
 import Admin from "./Admin/Admin";
 import Dashboard from "./Admin/Pages/Dashboard";
 import AddProducts from "./Admin/Pages/AddProducts";
-import User from "./Admin/Pages/User";
+import Accounts from "./Admin/Pages/Accounts";
 import UserDashboard from "./Admin/UserPage/UserDashboard";
 import UserPurchase from "./Admin/UserPage/UserPurchase";
 import { Container } from "react-bootstrap";
@@ -179,7 +179,7 @@ function App() {
               }
             ></Route>
             {/* ProtectedRouter for user Dashboard */}
-            <Route path="/user" element={<User />}></Route>
+            <Route path="/Accounts" element={<Accounts />}></Route>
             <Route
               path="/ud/:id"
               element={

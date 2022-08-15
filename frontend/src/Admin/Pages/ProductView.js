@@ -190,7 +190,7 @@ function ProductView() {
                                     {getProd
                                       .filter((itm) => {
                                         if (
-                                          itm.itemCategory === "men's clothing"
+                                          itm.itemCategory === "men"
                                         ) {
                                           return itm;
                                         }
@@ -345,7 +345,7 @@ function ProductView() {
                                       .filter((itm) => {
                                         if (
                                           itm.itemCategory ===
-                                          "women's clothing"
+                                          "women"
                                         ) {
                                           return itm;
                                         }

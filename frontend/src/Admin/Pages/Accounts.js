@@ -24,6 +24,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "../../store/userSlice";
+import { getSellerData } from "../../store/sellerSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Admin from "../Admin";
@@ -58,12 +59,14 @@ function User() {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const user = useSelector((state) => state.user);
+  const seller = useSelector((state) => state.seller);
+  console.log(seller)
     const [open, setOpen] = useState(false);
   useEffect(() => {
     dispatch(getUserData())
+    dispatch(getSellerData())
   }, []);
-   
-  console.log(user)
+  
   const handleClickOpen = (id) => {
     setOpen(true);
   };
@@ -99,6 +102,14 @@ function User() {
                   <strong>{user.getUser.length}</strong>
                 </TableCell>
               </TableRow>
+              <TableRow>
+                <TableCell>
+                  <strong>Total Seller</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>{user.getSeller}</strong>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -109,9 +120,10 @@ function User() {
             <TableHead>
               <TableRow>
                 <TableCell>No.</TableCell>
+                <TableCell>Username</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>Mobile</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Status</TableCell>
                 <TableCell colSpan={2}>Action</TableCell>
               </TableRow>
             </TableHead>
@@ -129,15 +141,10 @@ function User() {
                       style={{ verticalAlign: "top" }}
                     >
                       <TableCell align="left">{i + 1}</TableCell>
+                      <TableCell align="left">{item.firstname}</TableCell>
                       <TableCell align="left">{item.email}</TableCell>
-                      <TableCell align="left">
-                        {item.address1}
-                        <br />
-                        {item.address2}
-                        <br />
-                        {item.address3}
-                      </TableCell>
-                      <TableCell align="left">{item.phone}</TableCell>
+                      <TableCell align="left">{item.isAdmin === false ? "User" : "Admin"}</TableCell>
+                      <TableCell align="left">{item.isAdmin === false ? "User" : "Admin"}</TableCell>
                       <TableCell align="left">
                         <DeleteIcon onClick={() => userDelet(item._id)} style={{ color: "red" }} />
                       </TableCell>

@@ -4,45 +4,45 @@ import axios from "axios";
 const baseUrl = "https://shopping-mart-react-app.herokuapp.com/api";
 
 const initialState = {
-  getUser: [],
+  getSeller: [],
   UserStatus: "",
   UserError: "",
   SellerStatus: "",
   SellerError: "",
 };
 
-export const getUserData = createAsyncThunk("getUser/getUserData", async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/users`);
-    return response.data.users;
+export const getSellerData = createAsyncThunk("getSeller/getSellerData", async () =>{
+  try{
+    const response = await axios.get(`${baseUrl}/seller/`)
+    console.log(response.data);
+    return response.data.sellers;
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return error.response.data;
   }
-});
+})
 
-
-export const userSlice = createSlice({
-  name: "getUser",
+export const SellerSlice = createSlice({
+  name: "getSeller",
   initialState,
   reducers: {},
   extraReducers: {
-    [getUserData.pending]: (state, action) => {
+    [getSellerData.pending]: (state, action) => {
       return {
         ...state,
         UserStatus: "pending",
         UserError: "",
       };
     },
-    [getUserData.fulfilled]: (state, action) => {
+    [getSellerData.fulfilled]: (state, action) => {
       return {
         ...state,
-        getUser: action.payload,
+        getSeller: action.payload,
         UserStatus: "success",
         UserError: "",
       };
     },
-    [getUserData.rejected]: (state, action) => {
+    [getSellerData.rejected]: (state, action) => {
       return {
         ...state,
         UserStatus: "rejected",
@@ -53,5 +53,5 @@ export const userSlice = createSlice({
 });
 
 // export const prodActions = prodSlice.actions;
-export default userSlice.reducer;
+export default SellerSlice.reducer;
 

@@ -98,7 +98,15 @@ const Userdashboard = () => {
                 <Typography variant="h5" className="my-4">
                   Profile Summary
                 </Typography>
-                <TableContainer component={Paper} className="container">
+                <TableContainer
+                  component={Paper}
+                  className="container"
+                  style={{
+                    backgroundColor: "white",
+                    overflow: "hidden",
+                    boxShadow: "0px 0px 35px -6px #B7BBBF",
+                  }}
+                >
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableBody>
                       <TableRow
@@ -135,59 +143,61 @@ const Userdashboard = () => {
                           <TableCell>Product Price</TableCell>
                         </TableRow>
                       </TableHead>
-                        <TableBody>
-                          {orders
-                            .slice(
-                              page * rowsPerPage,
-                              page * rowsPerPage + rowsPerPage
-                            )
-                            .map((row, i) => {
-                              return (
-                                <>
-                                    {row.orderItems.map((item, i) => {
-                                      return (
-                                        <>
-                                          <TableRow>
-                                          <TableCell
-                                              style={{ borderBottom: "none" }}
-                                            >{i+1}</TableCell>
-                                          
-                                            <TableCell
-                                              style={{ borderBottom: "none" }}
-                                            >
-                                              <img
-                                                style={{
-                                                  width: "100px",
-                                                }}
-                                                src={item.image}
-                                              />
-                                            </TableCell>
-                                            <TableCell
-                                                style={{
-                                                  borderBottom: "none",
-                                                }}
-                                              >
-                                                <Typography>
-                                                  {item.itemName}
-                                                </Typography>
-                                              </TableCell>
-                                              <TableCell
-                                                style={{
-                                                  borderBottom: "none",
-                                                }}
-                                              >
-                                                <Typography>
-                                                  &#x20B9; {item.itemPrice}
-                                                </Typography>
-                                              </TableCell>
-                                          </TableRow>
-                                        </>
-                                      );
-                                    })}
-                                 </>
-                              );
-                            })}
-                        </TableBody>
+                      <TableBody>
+                        {orders
+                          .slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                          )
+                          .map((row, i) => {
+                            return (
+                              <>
+                                {row.orderItems.map((item, i) => {
+                                  return (
+                                    <>
+                                      <TableRow>
+                                        <TableCell
+                                          style={{ borderBottom: "none" }}
+                                        >
+                                          {i + 1}
+                                        </TableCell>
+
+                                        <TableCell
+                                          style={{ borderBottom: "none" }}
+                                        >
+                                          <img
+                                            style={{
+                                              width: "100px",
+                                            }}
+                                            src={item.image}
+                                          />
+                                        </TableCell>
+                                        <TableCell
+                                          style={{
+                                            borderBottom: "none",
+                                          }}
+                                        >
+                                          <Typography>
+                                            {item.itemName}
+                                          </Typography>
+                                        </TableCell>
+                                        <TableCell
+                                          style={{
+                                            borderBottom: "none",
+                                          }}
+                                        >
+                                          <Typography>
+                                            &#x20B9; {item.itemPrice}
+                                          </Typography>
+                                        </TableCell>
+                                      </TableRow>
+                                    </>
+                                  );
+                                })}
+                              </>
+                            );
+                          })}
+                      </TableBody>
                     </Table>
                   </TableContainer>
                   <TablePagination

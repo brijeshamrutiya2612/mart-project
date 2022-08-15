@@ -99,8 +99,8 @@ function AddProducts() {
               </MenuItem>
               <MenuItem value="Food">Food</MenuItem>
               <MenuItem value="electronics">Electronics</MenuItem>
-              <MenuItem value="men's clothing">Men's Clothing</MenuItem>
-              <MenuItem value="women's clothing">Women's Clothing</MenuItem>
+              <MenuItem value="men">Men's Clothing</MenuItem>
+              <MenuItem value="women">Women's Clothing</MenuItem>
               <MenuItem value="jewelery">Jewelery</MenuItem>
               <MenuItem value="Sports">Sports</MenuItem>
             </Select>

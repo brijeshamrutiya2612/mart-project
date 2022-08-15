@@ -128,4 +128,18 @@ SellerRoute.post(
   })
 );
 
+SellerRoute.get("/sellerUser", 
+expressAsyncHandler(async(req, res, next)=>{
+  let sellers;
+  try{
+    sellers = await Seller.find();
+  } catch (err){
+    console.log(err);
+  }
+  if(!sellers){
+     return res.status(404).json({ message: "Selleruser not Found" });
+   }
+   return res.status(200).json({ sellers });
+}));
+
 export default SellerRoute;
