@@ -41,11 +41,11 @@ const productSchema = new Schema(
       required: true,
 
     },    
-    Product_Seller:{
-      type:mongoose.Schema.ObjectId,
-      ref:"Seller",
-      required:true
-    }
+    // Product_Seller:{
+    //   type:mongoose.Schema.ObjectId,
+    //   ref:"Seller",
+    //   required:true
+    // }
   },
   {
     timestamps: true,

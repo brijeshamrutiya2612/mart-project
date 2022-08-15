@@ -207,7 +207,7 @@ const NewSellerRegister = () => {
                 style={{
                   backgroundColor: "white",
                   overflow: "hidden",
-                  boxShadow: "-18px -6px 35px -2px #B7BBBF",
+                  boxShadow: "0px 0px 35px 10px #B7BBBF",
                 }}
               >
                 <h2 className="container pt-4 ml-4 col-md-11">
