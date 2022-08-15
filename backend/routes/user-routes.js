@@ -7,6 +7,7 @@ import cloudinary from "../cloudinary.js";
 
 const router = express.Router();
 
+// User Login
 
 router.post(
   "/login",
@@ -33,6 +34,9 @@ router.post(
     res.status(401).send({ message: "Invaild email or password" });
   })
 );
+
+//Update User Profile(Data)
+
 router.put(
   "/profile",
   isAuth,
@@ -58,6 +62,10 @@ router.put(
     }
   })
 );
+
+//Register User Data
+
+
 router.post(
   "/signup",
   expressAsyncHandler(async (req, res) => {
@@ -102,23 +110,13 @@ router.post(
       res.status(500).send(error)
     }
 
-    //  const user = await newUser.save();
-    // res.send({
-    //   _id: user._id,
-    //   firstname: user.firstname,
-    //   lastname: user.lastname,
-    //   address1: user.address1,
-    //   address2: user.address2,
-    //   address3: user.address3,
-    //   phone: user.phone,
-    //   age: user.age,
-    //   email: user.email,
-    //   token: generateToken(user),
-    // });
   })
-);
-router.get("/users", 
-expressAsyncHandler(async(req, res, next)=>{
+  );
+  
+  // Get All User's Data
+  
+  router.get("/users", 
+  expressAsyncHandler(async(req, res, next)=>{
   let users;
   try{
     users = await User.find();
@@ -131,27 +129,8 @@ expressAsyncHandler(async(req, res, next)=>{
    return res.status(200).json({ users });
 }));
 
-router.put("/update/:id",
-expressAsyncHandler(async (req, res, next) => {
-  const { firstname, lastname, email, address, mobile } = req.body;
-  const userId = req.params.id;
-  let users;
-  try {
-    users = await User.findByIdAndUpdate(userId, {
-      firstname,
-      lastname,
-      email,
-      address,
-      mobile,
-    });
-  } catch (err) {
-    return console.log(err);
-  }
-  if (!users) {
-    return res.status(500).json({ message: "Unable Update User Data" });
-  }
-  return res.status(200).json({ users });
-}))
+
+ // Delete User By Id
 
 router.delete(
   "/:id",
@@ -166,7 +145,82 @@ router.delete(
         .send({ message: "Some problems are occured in Deletion" });
     }
   })
-);
+  );
+
+
+  //Forgot Password
+
+const forgotPassword = expressAsyncHandler(async(req,res,next)=>{
+  const user = await User.findOne({
+    email:req.body.email
+  })
+
+  if(!user){
+    return next().send({message: "User Not Found"}, 404)
+  }
+
+  // Get ResetPassword Token 
+
+
+})
 
 export default router;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  const user = await newUser.save();
+// res.send({
+//   _id: user._id,
+//   firstname: user.firstname,
+//   lastname: user.lastname,
+//   address1: user.address1,
+//   address2: user.address2,
+//   address3: user.address3,
+//   phone: user.phone,
+//   age: user.age,
+//   email: user.email,
+//   token: generateToken(user),
+// });
+
+// router.put("/update/:id",
+// expressAsyncHandler(async (req, res, next) => {
+//   const { firstname, lastname, email, address, mobile } = req.body;
+//   const userId = req.params.id;
+//   let users;
+//   try {
+//     users = await User.findByIdAndUpdate(userId, {
+//       firstname,
+//       lastname,
+//       email,
+//       address,
+//       mobile,
+//     });
+//   } catch (err) {
+//     return console.log(err);
+//   }
+//   if (!users) {
+//     return res.status(500).json({ message: "Unable Update User Data" });
+//   }
+//   return res.status(200).json({ users });
+// }))

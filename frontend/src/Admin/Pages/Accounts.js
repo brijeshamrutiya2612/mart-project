@@ -85,7 +85,7 @@ function User() {
     const res = await axios.delete(
       `https://shopping-mart-react-app.herokuapp.com/api/seller/${id}`
     );
-    const updateView = user.getSeller.filter((seller) => {
+    const updateView = seller.getSeller.filter((seller) => {
       return seller._id !== id;
     });
     dispatch(getSellerData());
@@ -223,7 +223,7 @@ function User() {
                           </TableCell>
                           <TableCell align="left">
                             <DeleteIcon
-                              onClick={() => userDelet(item._id)}
+                              onClick={() => sellerDelete(item._id)}
                               style={{ color: "red" }}
                             />
                           </TableCell>
