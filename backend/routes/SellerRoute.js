@@ -142,4 +142,18 @@ expressAsyncHandler(async(req, res, next)=>{
    return res.status(200).json({ sellers });
 }));
 
+SellerRoute.delete(
+  "/:id",
+  expressAsyncHandler(async (req, res) => {
+    const seller = await Seller.findById(req.params.id);
+    if (seller) {
+      await seller.remove();
+      res.send({ message: "Seller Deleted" });
+    } else {
+      res
+        .status(404)
+        .send({ message: "Some problems are occured in Deletion" });
+    }
+  })
+);
 export default SellerRoute;

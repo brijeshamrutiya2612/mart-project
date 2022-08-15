@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseUrl = "https://shopping-mart-react-app.herokuapp.com/api";
+const baseUrl = "https://shopping-mart-react-app.herokuapp.com/api/seller/sellerUser";
 
 const initialState = {
   getSeller: [],
@@ -13,8 +13,7 @@ const initialState = {
 
 export const getSellerData = createAsyncThunk("getSeller/getSellerData", async () =>{
   try{
-    const response = await axios.get(`${baseUrl}/seller/`)
-    console.log(response.data);
+    const response = await axios.get(`${baseUrl}`)
     return response.data.sellers;
   } catch (error) {
     console.log(error)

@@ -44,29 +44,26 @@ const reducer = (state, action) => {
   }
 };
 
-
 function User() {
-  const [{ loading, error, getProd, getRating }] = useReducer(
-    reducer,
-    {
-      getProd: [],
-      getRating: [],
-      loading: true,
-      error: "",
-    }
-  );
+  const [{ loading, error, getProd, getRating }] = useReducer(reducer, {
+    getProd: [],
+    getRating: [],
+    loading: true,
+    error: "",
+  });
 
   const dispatch = useDispatch();
   const nav = useNavigate();
   const user = useSelector((state) => state.user);
   const seller = useSelector((state) => state.seller);
-  console.log(seller)
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [displayUserDetail, setDisplayUserDetail] = useState(false);
+  const [displaySellerDetail, setDisplaySellerDetail] = useState(false);
   useEffect(() => {
-    dispatch(getUserData())
-    dispatch(getSellerData())
+    dispatch(getUserData());
+    dispatch(getSellerData());
   }, []);
-  
+
   const handleClickOpen = (id) => {
     setOpen(true);
   };
@@ -75,44 +72,77 @@ function User() {
   };
 
   const userDelet = async (id) => {
-    const res = await axios.delete(`https://shopping-mart-react-app.herokuapp.com/api/${id}`);
+    const res = await axios.delete(
+      `https://shopping-mart-react-app.herokuapp.com/api/${id}`
+    );
     const updateView = user.getUser.filter((user) => {
       return user._id !== id;
     });
-    dispatch(getUserData())
+    dispatch(getUserData());
   };
-
+  
+  const sellerDelete = async (id) => {
+    const res = await axios.delete(
+      `https://shopping-mart-react-app.herokuapp.com/api/seller/${id}`
+    );
+    const updateView = user.getSeller.filter((seller) => {
+      return seller._id !== id;
+    });
+    dispatch(getSellerData());
+  };
+  
+  const DisplayUserDetail = () =>{
+    if(displaySellerDetail === true){
+      setDisplaySellerDetail(false)
+      setDisplayUserDetail(true)
+    } else {
+      setDisplayUserDetail(true)
+    }
+  }
+  const closeDisplayUserDetail = () =>{
+    setDisplayUserDetail(false)
+  }
+  const DisplaySellerDetail = () =>{
+    if(displayUserDetail === true){
+      setDisplayUserDetail(false)
+      setDisplaySellerDetail(true)
+    } else {
+      setDisplaySellerDetail(true)
+    }
+  }
+  const closeDisplaySellerDetail = () =>{
+    setDisplaySellerDetail(false)
+  }
   return (
-    <div className="col-lg-15 my-4">
-      <Admin></Admin>
-      <div className="container">
-        <Typography variant="h5" className="my-3">
-          Mart's User's Detail
-        </Typography>
-      </div>
-      <div className="container my-4">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <strong>Total User</strong>
-                </TableCell>
-                <TableCell>
-                  <strong>{user.getUser.length}</strong>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <strong>Total Seller</strong>
-                </TableCell>
-                <TableCell>
-                  <strong>{user.getSeller}</strong>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+    <div className="container col-lg-15 my-4">
+      <div className="my-4 text-center">
+        <div className="container text-left">
+          <Admin></Admin>
+        </div>
+        {displayUserDetail !== true ?
+        <Button
+        className="m-2 text-center"
+        onClick={DisplayUserDetail}
+        >
+          <strong>Total User</strong> (<strong>{user.getUser.length}</strong>)
+        </Button>:<Button
+        className="m-2 text-center"
+        variant="danger"
+        onClick={closeDisplayUserDetail}
+        >
+          <strong>Total User</strong> (<strong>{user.getUser.length}</strong>)
+        </Button>
+        }
+        {displaySellerDetail !== true ?
+        <Button onClick={DisplaySellerDetail}>
+          <strong>Total Seller</strong> (
+          <strong>{seller.getSeller.length}</strong>)
+        </Button>:
+        <Button variant="danger" onClick={closeDisplaySellerDetail}>
+        <strong>Total Seller</strong> (
+        <strong>{seller.getSeller.length}</strong>)
+      </Button>
+    }
       </div>
       <div className="container my-4">
         <TableContainer component={Paper}>
@@ -133,33 +163,83 @@ function User() {
       ) : error ? (
         <div>{error}</div>
       ) : ( <> */}
-              {user.getUser.map((item, i) => {
-                return (
-                  <>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                      style={{ verticalAlign: "top" }}
-                    >
-                      <TableCell align="left">{i + 1}</TableCell>
-                      <TableCell align="left">{item.firstname}</TableCell>
-                      <TableCell align="left">{item.email}</TableCell>
-                      <TableCell align="left">{item.isAdmin === false ? "User" : "Admin"}</TableCell>
-                      <TableCell align="left">{item.isAdmin === false ? "User" : "Admin"}</TableCell>
-                      <TableCell align="left">
-                        <DeleteIcon onClick={() => userDelet(item._id)} style={{ color: "red" }} />
-                      </TableCell>
-                      <TableCell align="left">
-                        <EditIcon
-                          onClick={handleClickOpen}
-                          style={{ color: "green" }}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  </>
-                );
-              })}
-              {/* </>
-              )} */}
+              {displayUserDetail === true && (
+                <>
+                  {user.getUser.map((item, i) => {
+                    return (
+                      <>
+                        <TableRow
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                          style={{ verticalAlign: "top" }}
+                        >
+                          <TableCell align="left">{i + 1}</TableCell>
+                          <TableCell align="left">{item.firstname}</TableCell>
+                          <TableCell align="left">{item.email}</TableCell>
+                          <TableCell align="left">
+                            {item.isAdmin === false ? "User" : "Admin"}
+                          </TableCell>
+                          <TableCell align="left">
+                            {item.isAdmin === false ? "User" : "Admin"}
+                          </TableCell>
+                          <TableCell align="left">
+                            <DeleteIcon
+                              onClick={() => userDelet(item._id)}
+                              style={{ color: "red" }}
+                            />
+                          </TableCell>
+                          <TableCell align="left">
+                            <EditIcon
+                              onClick={handleClickOpen}
+                              style={{ color: "green" }}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      </>
+                    );
+                  })}
+                </>
+              )}
+              {displaySellerDetail === true && (
+                <>
+                  {seller.getSeller.map((item, i) => {
+                    return (
+                      <>
+                        <TableRow
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                          style={{ verticalAlign: "top" }}
+                        >
+                          <TableCell align="left">{i + 1}</TableCell>
+                          <TableCell align="left">{item.firstname}</TableCell>
+                          <TableCell align="left">{item.email}</TableCell>
+                          <TableCell align="left">
+                            {item.isAdmin === false ? "Seller" : "Admin"}
+                          </TableCell>
+                          <TableCell align="left">
+                            {item.isAdmin === false ? "Seller" : "Admin"}
+                          </TableCell>
+                          <TableCell align="left">
+                            <DeleteIcon
+                              onClick={() => userDelet(item._id)}
+                              style={{ color: "red" }}
+                            />
+                          </TableCell>
+                          <TableCell align="left">
+                            <EditIcon
+                              onClick={handleClickOpen}
+                              style={{ color: "green" }}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      </>
+                    );
+                  })}
+                </>
+              )}
+              
             </TableBody>
           </Table>
         </TableContainer>
@@ -189,9 +269,13 @@ function User() {
             </FormControl>
           </DialogContent>
           <DialogActions>
-          <Button variant="danger" onClick={handleClose}>Close</Button>
-          <Button variant="success" onClick={handleClose}>SET</Button>
-        </DialogActions>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="success" onClick={handleClose}>
+              SET
+            </Button>
+          </DialogActions>
         </Dialog>
       </div>
     </div>

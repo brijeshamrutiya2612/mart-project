@@ -36,6 +36,7 @@ import SellerManageOrder from "./Seller/SellerManageOrder";
 import SellerProfile from "./Seller/SellerProfile";
 import SellerProtectedRouter from "./Seller/SellerProtectedRouter.js"
 import ForgotPassword from "./components/ForgotPassword";
+import Orders from "./Admin/Pages/Orders";
 
 function App() {
   const { state } = useContext(Store);
@@ -117,6 +118,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />}></Route>
             <Route path="/addproducts" element={<AddProducts />}></Route>
             <Route path="/productview" element={<ProductView />}></Route>
+            <Route path="/Orders" element={<Orders />}></Route>
             <Route
               path="/productAction/:id"
               element={<ProductAction />}
