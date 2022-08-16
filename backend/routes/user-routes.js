@@ -95,7 +95,7 @@ router.post(
         httpOnly: true,
       })
 
-      req.status(200).json({
+      res.status(200).json({
         success:true,
         message:"Logged Out"
       })
