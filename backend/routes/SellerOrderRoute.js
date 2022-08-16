@@ -1,7 +1,7 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import SellerOrder from "../model/SellerOrder.js";
-import { isAuth } from "../utils.js";
+import { isAuth } from "../utils/utils.js";
 
 const sellerOrderRouter = express.Router();
 sellerOrderRouter.post(

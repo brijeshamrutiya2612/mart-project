@@ -152,7 +152,7 @@ const Search = () => {
           <div>{error}</div>
         ) : ( */}
           <>
-            <div className="container col-lg-10">
+            <div className="col-lg-15">
               <div
                 style={{
                   backgroundRepeat: "no-repeat",
@@ -187,7 +187,7 @@ const Search = () => {
                 </div>
                 <div className="my-4">
                   <div>
-                    <div className="col-lg-12">
+                    <div className="col-lg-10">
                       <Row style={{ width: "100%" }}>
                         <Col
                           lg={2}
@@ -499,7 +499,7 @@ const Search = () => {
                                     </Col>
                                   </Row>
                                   <Row>
-                                    <Col>
+                                    <Col lg={15}>
                                       <div
                                         className="row"
                                         style={{ width: "100%" }}
@@ -516,7 +516,7 @@ const Search = () => {
                                                   key={i}
                                                   style={{
                                                     overflow: "hidden",
-                                                    width: "300px",
+                                                    width: "280px",
                                                     maxWidth: "500px",
                                                     transitionDuration: "1s",
                                                     border: "none",

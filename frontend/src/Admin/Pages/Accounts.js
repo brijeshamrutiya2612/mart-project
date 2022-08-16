@@ -73,7 +73,7 @@ function User() {
 
   const userDelet = async (id) => {
     const res = await axios.delete(
-      `https://shopping-mart-react-app.herokuapp.com/api/${id}`
+      `https://shopping-mart-react-app.herokuapp.com/api/users/${id}`
     );
     const updateView = user.getUser.filter((user) => {
       return user._id !== id;

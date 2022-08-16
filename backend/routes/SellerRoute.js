@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
-import { generateSellerToken } from "../utils.js";
+import { generateSellerToken } from "../utils/utils.js";
 import Seller from "../model/Seller.js";
 import cloudinary from "../cloudinary.js";
 

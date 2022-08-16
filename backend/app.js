@@ -17,6 +17,8 @@ import fileUpload from 'express-fileupload'
 dotenv.config();
 
 const app = express();
+app.use(cookieParser());
+app.use(express.json());
 app.use(cors()),
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -30,8 +32,6 @@ app.get('/api/keys/paypal', (req, res)=>{
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
 })
 
-app.use(cookieParser());
-app.use(express.json());
 app.use("/api", router);
 app.use("/api/products", prodRouter);
 app.use("/api/seller", SellerRoute);

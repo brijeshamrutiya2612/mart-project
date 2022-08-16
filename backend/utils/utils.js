@@ -11,7 +11,7 @@ export const generateToken = (user) => {
     },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: "30d",
+      expiresIn: "1d",
     }
   );
 };
@@ -24,7 +24,7 @@ export const generateSellerToken = (seller) => {
     },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: "30d",
+      expiresIn: "1d",
     }
   );
 };

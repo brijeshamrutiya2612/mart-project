@@ -1,16 +1,44 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Products from "../model/Products.js";
-import { isAuth } from "../utils.js";
-import { isAdmin } from "../MIddleware/auth.js";
+import { isAuth } from "../utils/utils.js";
+
 
 
 const prodRouter = express.Router();
+
+///  ========  All Product View =========
 
 prodRouter.get("/", async (req, res) => {
   const products = await Products.find();
   res.send(products);
 });
+
+///  ========  Product View By Id =========
+
+prodRouter.get("/:id", async (req, res) => {
+  const product = await Products.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
+///  ========  Add Product View By Id =========
+
+prodRouter.post("/add", expressAsyncHandler(async (req,res,next)=>{
+  req.body.Product_Seller = req.body.id;
+  const product = await Products.create(req.body);
+  res.status(201).json({
+    success:true,
+    product
+  })
+}));
+
+
+///  ========  Product Delete By Id =========
+
 
 prodRouter.delete(
   "/:id",
@@ -25,6 +53,9 @@ prodRouter.delete(
     }
   })
 );
+
+
+//  =========== Searching And Pagination ==============
 
 const PAGE_SIZE = 8;
 
@@ -115,22 +146,6 @@ prodRouter.get(
   })
 );
 
-prodRouter.get("/:id", async (req, res) => {
-  const product = await Products.findById(req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
 
-prodRouter.post("/add", expressAsyncHandler(async (req,res,next)=>{
-  req.body.Product_Seller = req.body.id;
-const product = await Products.create(req.body);
-res.status(201).json({
-  success:true,
-  product
-})
-}));
 
 export default prodRouter;

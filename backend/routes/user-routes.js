@@ -2,12 +2,62 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
 import User from "../model/User.js";
-import { generateToken, isAuth } from "../utils.js";
-import cloudinary from "../cloudinary.js"; 
+import { generateToken, isAuth } from "../utils/utils.js";
+import cloudinary from "../cloudinary.js";
+import { sendToken } from "../utils/jwtToken.js";
 
 const router = express.Router();
 
-// User Login
+//Register User Data
+
+router.post(
+  "/signup",
+  expressAsyncHandler(async (req, res) => {
+    const {
+      firstname,
+      lastname,
+      address1,
+      address2,
+      address3,
+      phone,
+      age,
+      email,
+      // image,
+      password,
+    } = req.body;
+
+    try {
+      // if (image) {
+      //   const uplodRes = await cloudinary.uploader.upload(image, {
+      //     upload_preset: "Mart_Shop",
+      //   });
+      //   if (uplodRes) {
+      const user = new User({
+        firstname,
+        lastname,
+        address1,
+        address2,
+        address3,
+        phone,
+        age,
+        email,
+        password: bcrypt.hashSync(req.body.password),
+        //image: uplodRes,
+      });
+
+      const saveUserDetail = await user.save();
+      sendToken(user, 201, res);
+      res.status(200).send(saveUserDetail);
+      //  }
+      //}
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  })
+);
+
+// ================  User Login ====================
 
 router.post(
   "/login",
@@ -33,7 +83,26 @@ router.post(
     }
     res.status(401).send({ message: "Invaild email or password" });
   })
-);
+  );
+
+  // ================  User LogOut ====================
+
+  router.get(
+    "/logout",
+    expressAsyncHandler(async (req, res, next) => {
+      res.cookie("token",null,{
+        expries: new Date(Date.now()),
+        httpOnly: true,
+      })
+
+      req.status(200).json({
+        success:true,
+        message:"Logged Out"
+      })
+    }))
+  
+
+
 
 //Update User Profile(Data)
 
@@ -63,77 +132,28 @@ router.put(
   })
 );
 
-//Register User Data
+// Get All User's Data
 
-
-router.post(
-  "/signup",
-  expressAsyncHandler(async (req, res) => {
-    const {
-      firstname,
-      lastname,
-      address1,
-      address2,
-      address3,
-      phone,
-      age,
-      email,
-      image,
-      password,
-    } = req.body;
-
+router.get(
+  "/users",
+  expressAsyncHandler(async (req, res, next) => {
+    let users;
     try {
-      if (image) {
-        const uplodRes = await cloudinary.uploader.upload(image, {
-          upload_preset: "Mart_Shop",
-        });
-        if (uplodRes) {
-          const user = new User({
-            firstname,
-            lastname,
-            address1,
-            address2,
-            address3,
-            phone,
-            age,
-            email,
-            password: bcrypt.hashSync(req.body.password),
-            image: uplodRes
-          });
-
-          const saveUserDetail = await user.save();
-          res.status(200).send(saveUserDetail);
-        }
-      }
-    } catch(error) {
-      console.log(error)
-      res.status(500).send(error)
+      users = await User.find();
+    } catch (err) {
+      console.log(err);
     }
-
+    if (!users) {
+      return res.status(404).json({ message: "User not Found" });
+    }
+    return res.status(200).json({ users });
   })
-  );
-  
-  // Get All User's Data
-  
-  router.get("/users", 
-  expressAsyncHandler(async(req, res, next)=>{
-  let users;
-  try{
-    users = await User.find();
-  } catch (err){
-    console.log(err);
-  }
-  if(!users){
-     return res.status(404).json({ message: "User not Found" });
-   }
-   return res.status(200).json({ users });
-}));
+);
 
-
- // Delete User By Id
+// Delete User By Id
 
 router.delete(
-  "/:id",
+  "/users/:id",
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -145,49 +165,23 @@ router.delete(
         .send({ message: "Some problems are occured in Deletion" });
     }
   })
-  );
+);
 
+//Forgot Password
 
-  //Forgot Password
-
-const forgotPassword = expressAsyncHandler(async(req,res,next)=>{
+const forgotPassword = expressAsyncHandler(async (req, res, next) => {
   const user = await User.findOne({
-    email:req.body.email
-  })
+    email: req.body.email,
+  });
 
-  if(!user){
-    return next().send({message: "User Not Found"}, 404)
+  if (!user) {
+    return next().send({ message: "User Not Found" }, 404);
   }
 
-  // Get ResetPassword Token 
-
-
-})
+  // Get ResetPassword Token
+});
 
 export default router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //  const user = await newUser.save();
 // res.send({

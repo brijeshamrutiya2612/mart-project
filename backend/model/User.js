@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
 
 const Schema = mongoose.Schema;
 
@@ -50,10 +53,10 @@ const UserSchema = Schema(
       required: true,
       max: 100,
     },
-    image: {
-      type: Object,
-      required: true,
-    },
+    // image: {
+    //   type: Object,
+    //   required: true,
+    // },
     isAdmin: {
       type: Boolean,
       default: false,
@@ -72,10 +75,12 @@ UserSchema.pre("save", async function(next){
   this.password = await bcrypt.hash(this.password, 10)
 })
 
-// Compare Password
 
-UserSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+// JWt TOKEN
+UserSchema.methods.getJWTToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
 };
 
 // Generating Password Reset Token
