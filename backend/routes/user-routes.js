@@ -91,7 +91,7 @@ router.post(
     "/logout",
     expressAsyncHandler(async (req, res, next) => {
       res.cookie("token",null,{
-        expries: new Date(Date.now()),
+        expires: new Date(Date.now()),
         httpOnly: true,
       })
 
