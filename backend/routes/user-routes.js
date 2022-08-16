@@ -75,7 +75,7 @@ router.post(
           phone: user.phone,
           age: user.age,
           email: user.email,
-          image: user.image,
+          // image: user.image,
           token: generateToken(user),
         });
         return;
