@@ -62,28 +62,29 @@ router.post(
 router.post(
   "/login",
   expressAsyncHandler(async (req, res, next) => {
-    const user = await User.findOne({ email: req.body.email });
-    if (user) {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.send({
-          _id: user._id,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          address1: user.address1,
-          address2: user.address2,
-          address3: user.address3,
-          phone: user.phone,
-          age: user.age,
-          email: user.email,
-          // image: user.image,
-          token: generateToken(user),
-        });
-        return;
-      }
+    const { email, password } = req.body;
+  
+    // checking if user has given password and email both
+  
+    if (!email || !password) {
+      return next(new ErrorHander("Please Enter Email & Password", 400));
     }
-    res.status(401).send({ message: "Invaild email or password" });
+  
+    const user = await User.findOne({ email }).select("+password");
+  
+    if (!user) {
+      return next(new ErrorHander("Invalid email or password", 401));
+    }
+  
+    const isPasswordMatched = await user.comparePassword(password);
+  
+    if (!isPasswordMatched) {
+      return next(new ErrorHander("Invalid email or password", 401));
+    }
+  
+    sendToken(user, 200, res);
   })
-  );
+)
 
   // ================  User LogOut ====================
 
