@@ -13,8 +13,16 @@ const router = express.Router();
 
 router.post(
   "/signup",
-  expressAsyncHandler(async (req, res) => {
-    const {
+  expressAsyncHandler(async (req, res, next) => {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    const { name, email, password } = req.body;
+
+    const user = await User.create({
       firstname,
       lastname,
       address1,
@@ -23,40 +31,57 @@ router.post(
       phone,
       age,
       email,
-      // image,
-      password,
-    } = req.body;
+      password: bcrypt.hashSync(req.body.password),
+    });
 
-    try {
-      // if (image) {
-      //   const uplodRes = await cloudinary.uploader.upload(image, {
-      //     upload_preset: "Mart_Shop",
-      //   });
-      //   if (uplodRes) {
-      const user = new User({
-        firstname,
-        lastname,
-        address1,
-        address2,
-        address3,
-        phone,
-        age,
-        email,
-        password: bcrypt.hashSync(req.body.password),
-        //image: uplodRes,
-      });
-
-      const saveUserDetail = await user.save();
-      sendToken(user, 201, res);
-      res.status(200).send(saveUserDetail);
-      //  }
-      //}
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
-    }
+    sendToken(user, 201, res);
   })
 );
+
+//   (async (req, res) => {
+//     const {
+//       firstname,
+//       lastname,
+//       address1,
+//       address2,
+//       address3,
+//       phone,
+//       age,
+//       email,
+//       // image,
+//       password,
+//     } = req.body;
+
+//     try {
+//       // if (image) {
+//       //   const uplodRes = await cloudinary.uploader.upload(image, {
+//       //     upload_preset: "Mart_Shop",
+//       //   });
+//       //   if (uplodRes) {
+//       const user = new User({
+//         firstname,
+//         lastname,
+//         address1,
+//         address2,
+//         address3,
+//         phone,
+//         age,
+//         email,
+//         password: bcrypt.hashSync(req.body.password),
+//         //image: uplodRes,
+//       });
+
+//       const saveUserDetail = await user.save();
+//       sendToken(user, 201, res);
+//       res.status(200).send(saveUserDetail);
+//       //  }
+//       //}
+//     } catch (error) {
+//       console.log(error);
+//       res.status(500).send(error);
+//     }
+//   })
+// );
 
 // ================  User Login ====================
 
@@ -64,47 +89,45 @@ router.post(
   "/login",
   expressAsyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
-  
+
     // checking if user has given password and email both
-  
+
     if (!email || !password) {
       return next(new ErrorHandler("Please Enter Email & Password", 400));
     }
-  
+
     const user = await User.findOne({ email }).select("+password");
-  
+
     if (!user) {
       return next(new ErrorHandler("Invalid email or password", 401));
     }
-  
+
     const isPasswordMatched = await user.comparePassword(password);
-  
+
     if (!isPasswordMatched) {
       return next(new ErrorHandler("Invalid email or password", 401));
     }
-  
+
     sendToken(user, 200, res);
   })
-  );
+);
 
-  // ================  User LogOut ====================
+// ================  User LogOut ====================
 
-  router.get(
-    "/logout",
-    expressAsyncHandler(async (req, res, next) => {
-      res.cookie("token",null,{
-        expires: new Date(Date.now()),
-        httpOnly: true,
-      })
+router.get(
+  "/logout",
+  expressAsyncHandler(async (req, res, next) => {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    });
 
-      res.status(200).json({
-        success:true,
-        message:"Logged Out"
-      })
-    }))
-  
-
-
+    res.status(200).json({
+      success: true,
+      message: "Logged Out",
+    });
+  })
+);
 
 //Update User Profile(Data)
 
