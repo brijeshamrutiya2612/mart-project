@@ -5,6 +5,7 @@ import User from "../model/User.js";
 import { generateToken, isAuth } from "../utils/utils.js";
 import cloudinary from "../cloudinary.js";
 import { sendToken } from "../utils/jwtToken.js";
+import { ErrorHandler } from "../utils/errorhader.js";
 
 const router = express.Router();
 
@@ -67,19 +68,19 @@ router.post(
     // checking if user has given password and email both
   
     if (!email || !password) {
-      return next(new ErrorHander("Please Enter Email & Password", 400));
+      return next(new ErrorHandler("Please Enter Email & Password", 400));
     }
   
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email });
   
     if (!user) {
-      return next(new ErrorHander("Invalid email or password", 401));
+      return next(new ErrorHandler("Invalid email or password", 401));
     }
   
     const isPasswordMatched = await user.comparePassword(password);
   
     if (!isPasswordMatched) {
-      return next(new ErrorHander("Invalid email or password", 401));
+      return next(new ErrorHandler("Invalid email or password", 401));
     }
   
     sendToken(user, 200, res);
