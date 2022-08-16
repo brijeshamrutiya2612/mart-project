@@ -28,6 +28,7 @@ const UserSchema = Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     address1: {
       type: String,

@@ -71,7 +71,7 @@ router.post(
       return next(new ErrorHandler("Please Enter Email & Password", 400));
     }
   
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
   
     if (!user) {
       return next(new ErrorHandler("Invalid email or password", 401));
