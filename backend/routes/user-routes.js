@@ -5,7 +5,6 @@ import User from "../model/User.js";
 import { generateToken, isAuth } from "../utils/utils.js";
 import cloudinary from "../cloudinary.js";
 import { sendToken } from "../utils/jwtToken.js";
-import { ErrorHandler } from "../utils/errorhader.js";
 
 const router = express.Router();
 
@@ -13,16 +12,8 @@ const router = express.Router();
 
 router.post(
   "/signup",
-  expressAsyncHandler(async (req, res, next) => {
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
-
-    const { name, email, password } = req.body;
-
-    const user = await User.create({
+  expressAsyncHandler(async (req, res) => {
+    const {
       firstname,
       lastname,
       address1,
@@ -31,103 +22,87 @@ router.post(
       phone,
       age,
       email,
-      password: bcrypt.hashSync(req.body.password),
-    });
+      // image,
+      password,
+    } = req.body;
 
-    sendToken(user, 201, res);
+    try {
+      // if (image) {
+      //   const uplodRes = await cloudinary.uploader.upload(image, {
+      //     upload_preset: "Mart_Shop",
+      //   });
+      //   if (uplodRes) {
+      const user = new User({
+        firstname,
+        lastname,
+        address1,
+        address2,
+        address3,
+        phone,
+        age,
+        email,
+        password: bcrypt.hashSync(req.body.password),
+        //image: uplodRes,
+      });
+
+      const saveUserDetail = await user.save();
+      sendToken(user, 201, res);
+      res.status(200).send(saveUserDetail);
+      //  }
+      //}
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
   })
 );
-
-//   (async (req, res) => {
-//     const {
-//       firstname,
-//       lastname,
-//       address1,
-//       address2,
-//       address3,
-//       phone,
-//       age,
-//       email,
-//       // image,
-//       password,
-//     } = req.body;
-
-//     try {
-//       // if (image) {
-//       //   const uplodRes = await cloudinary.uploader.upload(image, {
-//       //     upload_preset: "Mart_Shop",
-//       //   });
-//       //   if (uplodRes) {
-//       const user = new User({
-//         firstname,
-//         lastname,
-//         address1,
-//         address2,
-//         address3,
-//         phone,
-//         age,
-//         email,
-//         password: bcrypt.hashSync(req.body.password),
-//         //image: uplodRes,
-//       });
-
-//       const saveUserDetail = await user.save();
-//       sendToken(user, 201, res);
-//       res.status(200).send(saveUserDetail);
-//       //  }
-//       //}
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).send(error);
-//     }
-//   })
-// );
 
 // ================  User Login ====================
 
 router.post(
   "/login",
   expressAsyncHandler(async (req, res, next) => {
-    const { email, password } = req.body;
-
-    // checking if user has given password and email both
-
-    if (!email || !password) {
-      return next(new ErrorHandler("Please Enter Email & Password", 400));
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        res.send({
+          _id: user._id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          address1: user.address1,
+          address2: user.address2,
+          address3: user.address3,
+          phone: user.phone,
+          age: user.age,
+          email: user.email,
+          image: user.image,
+          token: generateToken(user),
+        });
+        return;
+      }
     }
-
-    const user = await User.findOne({ email }).select("+password");
-
-    if (!user) {
-      return next(new ErrorHandler("Invalid email or password", 401));
-    }
-
-    const isPasswordMatched = await user.comparePassword(password);
-
-    if (!isPasswordMatched) {
-      return next(new ErrorHandler("Invalid email or password", 401));
-    }
-
-    sendToken(user, 200, res);
+    res.status(401).send({ message: "Invaild email or password" });
   })
-);
+  );
 
-// ================  User LogOut ====================
+  // ================  User LogOut ====================
 
-router.get(
-  "/logout",
-  expressAsyncHandler(async (req, res, next) => {
-    res.cookie("token", null, {
-      expires: new Date(Date.now()),
-      httpOnly: true,
-    });
+  router.get(
+    "/logout",
+    expressAsyncHandler(async (req, res, next) => {
+      res.cookie("token",null,{
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      })
 
-    res.status(200).json({
-      success: true,
-      message: "Logged Out",
-    });
-  })
-);
+      res.status(200).json({
+        success:true,
+        message:"Logged Out"
+      })
+    }))
+  
+
+
 
 //Update User Profile(Data)
 
