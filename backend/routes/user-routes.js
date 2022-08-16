@@ -46,7 +46,7 @@ router.post(
       });
 
       const saveUserDetail = await user.save();
-      sendToken(user, 201, res);
+      // sendToken(user, 201, res);
       res.status(200).send(saveUserDetail);
       //  }
       //}
