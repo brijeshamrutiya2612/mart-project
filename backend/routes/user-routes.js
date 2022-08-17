@@ -6,6 +6,7 @@ import { generateToken, isAuth } from "../utils/utils.js";
 import cloudinary from "../cloudinary.js";
 import { sendToken } from "../utils/jwtToken.js";
 import ErrorHander from "../utils/errorhader.js";
+import catchAsyncErrors from "../MIddleware/catchAsyncErrors.js";
 
 const router = express.Router();
 
@@ -62,7 +63,7 @@ router.post(
 
 router.post(
   "/loginuser",
-  expressAsyncHandler(async (req, res, next) => {
+  catchAsyncErrors(async (req, res, next) => {
     const { email, password } = req.body;
   
     // checking if user has given password and email both
