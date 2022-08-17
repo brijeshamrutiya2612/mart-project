@@ -37,9 +37,12 @@ router.post(
           email,
           password,
     })
+
+    const token = user.getJWTToken();
+
     res.status(201).json({
       success: true,
-      user,
+      token,
     })
     // try {
     //   // if (image) {
@@ -88,7 +91,12 @@ router.post(
       return next(new ErrorHander("Invalid email or password", 401));
     }
   
-    sendToken(user, 200, res);
+    const token = user.getJWTToken();
+
+    res.status(201).json({
+      success: true,
+      token,
+    })
   })
 )
 
