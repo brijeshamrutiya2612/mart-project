@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     minLength: [8, "Password should be greater than 8 characters"],
     select: false,
   },
+  phone: {
+    type: Number,
+    required: [true, "Please Enter Your Mobile No."],
+    minLength: [10, "Please Enter Valid Mobile No.(must be 10 Number)"],
+  },
   avatar: {
     public_id: {
       type: String,
