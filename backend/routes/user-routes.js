@@ -13,37 +13,27 @@ const router = express.Router();
 router.post(
   "/signup",
   expressAsyncHandler(async (req, res, next) => {
-    const {
-      firstname,
-      lastname,
-      address1,
-      address2,
-      address3,
-      phone,
-      age,
-      email,
-      // image,
-      password,
-    } = req.body;
-
+    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //   folder: "avatars",
+    //   width: 150,
+    //   crop: "scale",
+    // });
+  
+    const { name, email, password, address } = req.body;
+  
     const user = await User.create({
-          firstname,
-          lastname,
-          address1,
-          address2,
-          address3,
-          phone,
-          age,
-          email,
-          password,
-    })
-
-    const token = user.getJWTToken();
-
-    res.status(201).json({
-      success: true,
-      token,
-    })
+      name,
+      email,
+      password,
+      address,
+      avatar: {
+        public_id: "this is a sample id",
+        url: "this is a sample url",
+      },
+    });
+  
+    sendToken(user, 201, res);
+  
     // try {
     //   // if (image) {
     //   //   const uplodRes = await cloudinary.uploader.upload(image, {
