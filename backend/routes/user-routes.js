@@ -5,7 +5,7 @@ import User from "../model/User.js";
 import { generateToken, isAuth } from "../utils/utils.js";
 import cloudinary from "../cloudinary.js";
 import { sendToken } from "../utils/jwtToken.js";
-import ErrorHander from "../utils/errorhander.js";
+import ErrorHander from "../utils/errorhader.js";
 
 const router = express.Router();
 
