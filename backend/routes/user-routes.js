@@ -69,7 +69,7 @@ router.post(
 // ================  User Login ====================
 
 router.post(
-  "/login",
+  "/loginuser",
   expressAsyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
   
@@ -92,7 +92,7 @@ router.post(
     }
   
     const token = user.getJWTToken();
-
+    console.log(token)
     res.status(201).json({
       success: true,
       token,
