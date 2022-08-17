@@ -34,11 +34,11 @@ router.post(
         url: "this is a sample url",
       },
     });
-  
+    
     sendToken(user, 201, res);
-  
+    
     // try {
-    //   // if (image) {
+      //   // if (image) {
     //   //   const uplodRes = await cloudinary.uploader.upload(image, {
     //   //     upload_preset: "Mart_Shop",
     //   //   });
@@ -53,10 +53,10 @@ router.post(
     //   //  }
     //   //}
     // } catch (error) {
-    //   console.log(error);
-    //   res.status(500).send(error);
-    // }
-  })
+      //   console.log(error);
+      //   res.status(500).send(error);
+      // }
+    })
 );
 
 // ================  User Login ====================
@@ -69,25 +69,26 @@ router.post(
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
           _id: user._id,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          address1: user.address1,
-          address2: user.address2,
-          address3: user.address3,
-          phone: user.phone,
-          age: user.age,
+          name: user.name,
           email: user.email,
+          address: user.address,
+          phone: user.phone,
+          avatar: {
+            public_id: user.public_id,
+            url: user.url,
+          },
           token: generateToken(user),
         });
         return;
       }
+      sendToken(user, 200, res);
     }
     res.status(401).send({ message: "Invaild email or password" });
   })
-)
-
+  )
+  
   // ================  User LogOut ====================
-
+  
   router.get(
     "/logout",
     expressAsyncHandler(async (req, res, next) => {
@@ -109,7 +110,7 @@ router.post(
 
 router.put(
   "/profile",
-  // isAuth,
+  isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
