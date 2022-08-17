@@ -4,9 +4,7 @@ import expressAsyncHandler from "express-async-handler";
 import User from "../model/User.js";
 import { generateToken, isAuth } from "../utils/utils.js";
 import cloudinary from "../cloudinary.js";
-import  {sendToken}  from "../utils/jwtToken.js";
-import ErrorHander from "../utils/errorhader.js";
-import catchAsyncErrors from "../MIddleware/catchAsyncErrors.js";
+import { sendToken } from "../utils/jwtToken.js";
 
 const router = express.Router();
 
@@ -14,81 +12,79 @@ const router = express.Router();
 
 router.post(
   "/signup",
-  expressAsyncHandler(async (req, res, next) => {
-    // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //   folder: "avatars",
-    //   width: 150,
-    //   crop: "scale",
-    // });
-  
-    const { name, email, password, phone, address } = req.body;
-  
-    const user = await User.create({
-      name,
-      email,
-      password,
-      address,
+  expressAsyncHandler(async (req, res) => {
+    const {
+      firstname,
+      lastname,
+      address1,
+      address2,
+      address3,
       phone,
-      avatar: {
-        public_id: "this is a sample id",
-        url: "this is a sample url",
-      },
-    });
-    
-    sendToken(user, 201, res);
-    
-    // try {
-      //   // if (image) {
-    //   //   const uplodRes = await cloudinary.uploader.upload(image, {
-    //   //     upload_preset: "Mart_Shop",
-    //   //   });
-    //   //   if (uplodRes) {
-    //   const user = new User({
-    //     //image: uplodRes,
-    //   });
+      age,
+      email,
+      // image,
+      password,
+    } = req.body;
 
-    //   const saveUserDetail = await user.save();
-    //   sendToken(saveUserDetail, 201, res);
-    //   // res.status(200).send(saveUserDetail);
-    //   //  }
-    //   //}
-    // } catch (error) {
-      //   console.log(error);
-      //   res.status(500).send(error);
-      // }
-    })
+    try {
+      // if (image) {
+      //   const uplodRes = await cloudinary.uploader.upload(image, {
+      //     upload_preset: "Mart_Shop",
+      //   });
+      //   if (uplodRes) {
+      const user = new User({
+        firstname,
+        lastname,
+        address1,
+        address2,
+        address3,
+        phone,
+        age,
+        email,
+        password: bcrypt.hashSync(req.body.password),
+        //image: uplodRes,
+      });
+
+      const saveUserDetail = await user.save();
+       res.status(200).send(saveUserDetail);
+      //  }
+      //}
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  })
 );
 
 // ================  User Login ====================
 
 router.post(
-  "/loginuser",
+  "/login",
   expressAsyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         res.send({
           _id: user._id,
-          name: user.name,
-          email: user.email,
-          address: user.address,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          address1: user.address1,
+          address2: user.address2,
+          address3: user.address3,
           phone: user.phone,
-          avatar: {
-            public_id: user.public_id,
-            url: user.url,
-          },
+          age: user.age,
+          email: user.email,
           token: generateToken(user),
         });
         return;
       }
-      sendToken(user, 200, res);
     }
     res.status(401).send({ message: "Invaild email or password" });
   })
-  )
-  
+);
+
   // ================  User LogOut ====================
-  
+
   router.get(
     "/logout",
     expressAsyncHandler(async (req, res, next) => {
