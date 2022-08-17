@@ -4,7 +4,7 @@ import expressAsyncHandler from "express-async-handler";
 import User from "../model/User.js";
 import { generateToken, isAuth } from "../utils/utils.js";
 import cloudinary from "../cloudinary.js";
-import { sendToken } from "../utils/jwtToken.js";
+import  {sendToken}  from "../utils/jwtToken.js";
 import ErrorHander from "../utils/errorhader.js";
 import catchAsyncErrors from "../MIddleware/catchAsyncErrors.js";
 
@@ -63,28 +63,26 @@ router.post(
 
 router.post(
   "/loginuser",
-  catchAsyncErrors(async (req, res, next) => {
-    const { email, password } = req.body;
-  
-    // checking if user has given password and email both
-  
-    if (!email || !password) {
-      return next(new ErrorHander("Please Enter Email & Password", 400));
+  expressAsyncHandler(async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        res.send({
+          _id: user._id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          address1: user.address1,
+          address2: user.address2,
+          address3: user.address3,
+          phone: user.phone,
+          age: user.age,
+          email: user.email,
+          token: generateToken(user),
+        });
+        return;
+      }
     }
-  
-    const user = await User.findOne({ email }).select("+password");
-  
-    if (!user) {
-      return next(new ErrorHander("Invalid email or password", 401));
-    }
-  
-    const isPasswordMatched = await user.comparePassword(password);
-  
-    if (!isPasswordMatched) {
-      return next(new ErrorHander("Invalid email or password", 401));
-    }
-  
-    sendToken(user, 200, res);
+    res.status(401).send({ message: "Invaild email or password" });
   })
 )
 
@@ -111,7 +109,7 @@ router.post(
 
 router.put(
   "/profile",
-  isAuth,
+  // isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
