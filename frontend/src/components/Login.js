@@ -60,7 +60,7 @@ const Login = () => {
     if (checkUserEmail) {
       try {
         const res = await axios.post(
-          "https://shopping-mart-react-app.herokuapp.com/api/login",
+          "https://shopping-mart-react-app.herokuapp.com/api/loginuser",
           {
             email: emails.email,
             password: emails.password,
