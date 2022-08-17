@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post(
   "/signup",
-  expressAsyncHandler(async (req, res) => {
+  expressAsyncHandler(async (req, res, next) => {
     const {
       firstname,
       lastname,
@@ -26,34 +26,40 @@ router.post(
       password,
     } = req.body;
 
-    try {
-      // if (image) {
-      //   const uplodRes = await cloudinary.uploader.upload(image, {
-      //     upload_preset: "Mart_Shop",
-      //   });
-      //   if (uplodRes) {
-      const user = new User({
-        firstname,
-        lastname,
-        address1,
-        address2,
-        address3,
-        phone,
-        age,
-        email,
-        password: bcrypt.hashSync(req.body.password),
-        //image: uplodRes,
-      });
+    const user = await User.create({
+          firstname,
+          lastname,
+          address1,
+          address2,
+          address3,
+          phone,
+          age,
+          email,
+          password,
+    })
+    res.status(201).json({
+      success: true,
+      user,
+    })
+    // try {
+    //   // if (image) {
+    //   //   const uplodRes = await cloudinary.uploader.upload(image, {
+    //   //     upload_preset: "Mart_Shop",
+    //   //   });
+    //   //   if (uplodRes) {
+    //   const user = new User({
+    //     //image: uplodRes,
+    //   });
 
-      const saveUserDetail = await user.save();
-      sendToken(saveUserDetail, 201, res);
-      // res.status(200).send(saveUserDetail);
-      //  }
-      //}
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
-    }
+    //   const saveUserDetail = await user.save();
+    //   sendToken(saveUserDetail, 201, res);
+    //   // res.status(200).send(saveUserDetail);
+    //   //  }
+    //   //}
+    // } catch (error) {
+    //   console.log(error);
+    //   res.status(500).send(error);
+    // }
   })
 );
 

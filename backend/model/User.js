@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
 const Schema = mongoose.Schema;
 
 const UserSchema = Schema(
@@ -68,14 +67,13 @@ const UserSchema = Schema(
   { timestamps: true }
 );
 
-UserSchema.pre("save", async function(next){
-  if(!this.isModified("password")){
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     next();
   }
 
-  this.password = await bcrypt.hash(this.password, 10)
-})
-
+  this.password = await bcrypt.hash(this.password, 10);
+});
 
 // JWt TOKEN
 UserSchema.methods.getJWTToken = function () {
@@ -90,13 +88,11 @@ UserSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-
 // Generating Password Reset Token
 
 UserSchema.methods.getResetPasswordToken = function () {
-  
   // Generating Token
-  
+
   const resetToken = crypto.randomBytes(20).toString("hex");
 
   // Hashing and adding resetPasswordToken to UserSchema
